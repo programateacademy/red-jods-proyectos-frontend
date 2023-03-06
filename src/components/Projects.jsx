@@ -1,5 +1,5 @@
 import React from 'react'
-import projects from '/Projects.png'
+//import projects from '/Projects.png'
 import Box from '@mui/material/Box';
 import Decoración from '/Decoración.png'
 
