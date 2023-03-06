@@ -16,6 +16,15 @@ a:active {
     font-size: large;
 }
 
+:root {
+    --bg-color: #EDF5FC;
+    --primary-color: #558AF2;
+    --second-color: #FD5E53;
+    --Btn-color: #5CA84D;
+    --color-text: #0F0E0E;
+  }
+
+
 h1 {
     font-family: 'Poppins', sans-serif;
 }
