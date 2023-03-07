@@ -10,8 +10,6 @@ import NewAdmin from './components/Admins/NewAdmin'
 import EditAdmin from './components/Admins/EditAdmin'
 import EditProject from './components/EditProject/EditProject'
 
-
-
 function App() {
 
   const router=createBrowserRouter(
