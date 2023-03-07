@@ -1,14 +1,14 @@
 import './App.css';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Root from './components/Root'
-import Home from './components/Home'
-import SignIn from './components/SignIn';
-import Projects from './components/Projects'
-import NewProject from './components/NewProject'
-import Admins from './components/Admins'
-import NewAdmin from './components/NewAdmin'
-import EditAdmin from './components/EditAdmin'
-import EditProject from './components/EditProject'
+import Home from './components/Home/Home'
+import SignIn from './components/SignIn/SignIn';
+import Projects from './components/Projects/Projects'
+import NewProject from './components/NewProject/NewProject'
+import Admins from './components/Admins/Admins'
+import NewAdmin from './components/Admins/NewAdmin'
+import EditAdmin from './components/Admins/EditAdmin'
+import EditProject from './components/EditProject/EditProject'
 
 
 

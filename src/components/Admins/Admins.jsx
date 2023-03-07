@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/Decoración.png'
-import users from "../apis";
+import users from "../../apis/index";
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';

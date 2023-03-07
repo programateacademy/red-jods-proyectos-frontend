@@ -11,6 +11,8 @@ export default function Home() {
                 <h1 style={{ padding: "40px 40px 0px 40px" }}>¡Hola Súper Administrador!</h1>
                 <img src={Decoración} alt="" style={{padding: "0 0 40px 40px"}}/>
             </Box>
+
+    
             
             {/* This elements are displayed when screen is small */}
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
