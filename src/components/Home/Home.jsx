@@ -1,5 +1,4 @@
 import React from 'react'
-import home from '/Home.png'
 import Box from '@mui/material/Box';
 import Decoración from '/Decoración.png'
 import Card from '@mui/material/Card';
@@ -7,7 +6,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { ODS } from './Data';
+import './Home.css'
 
 
 export default function Home() {
@@ -26,27 +26,27 @@ export default function Home() {
                 <h1 style={{ padding: "10px 10px 0px 10px" }}>¡Hola Súper Administrador!</h1>
                 <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
             </Box>
+            <div className="cardBox">
+                {ODS.map (item => {return (
 
-            <Card sx={{ maxWidth: 345 }}>
-                <CardMedia
-                    sx={{ height: 140 }}
-                    image="/static/images/cards/contemplative-reptile.jpg"
-                    title="green iguana"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-             </Card>
+                <Card id='Card' sx={{ maxWidth: 300 }}>
+                    <CardMedia
+                        sx={{ height: 300}}
+                        image={item.img}
+                        title={item.Name}
+                    />
+                    <CardContent>
+                        <h2>{item.Name}</h2>
+                        <h3>{item.ODS}</h3>
+                    </CardContent>
+                    <CardActions>
+                        <Button id='Btn1' variant="contained">Ver Proyecto</Button>
+                        <Button id='Btn2' variant="outlined">Editar</Button>
+                    </CardActions>
+                </Card>
+    
+                )})}
+            </div>
         </div>
     )
 }
