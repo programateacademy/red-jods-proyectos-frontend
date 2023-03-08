@@ -137,11 +137,6 @@ export const ODS = [
         img: alianza
     }
 
-    
-
-
-
-
 ]
 
 

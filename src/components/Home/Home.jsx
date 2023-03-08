@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/Decoración.png'
 import Card from '@mui/material/Card';
@@ -6,20 +5,14 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import { ODS } from './Data';
 import './Home.css'
-import Pagination from '@mui/material/Pagination';
+import AppPagination from './pagination/pagination';
+import { useState } from 'react';
 
 
 export default function Home() {
 
-    const [page, setPage] = useState (1)
-
-
-    const handleChange = (e, p) => {
-        console.log(e,p)
-        setPage(p)
-    }
+    const [card, setCard] = useState([]);
 
     return (
         <div>
@@ -37,12 +30,12 @@ export default function Home() {
                 <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
             </Box>
             <div className="cardBox">
-                {ODS.map(item => {
+                {card.map(item => {
                     return (
 
-                        <Card id='Card' sx={{ maxWidth: 300 }}>
+                        <Card id='Card' sx={{ maxWidth: 280 }}>
                             <CardMedia
-                                sx={{ height: 300 }}
+                                sx={{ height: 280 }}
                                 image={item.img}
                                 title={item.Name}
                             />
@@ -60,9 +53,7 @@ export default function Home() {
                 })}
             </div>
 
-            <h1>Current page is {page}</h1>
-            
-            <Pagination count={10} onChange={handleChange} color="primary" />
+            <AppPagination setCard={(p) => setCard(p)}/>
               
             
         </div>
