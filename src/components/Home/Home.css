@@ -51,3 +51,6 @@ inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
     box-shadow: none;
   }
 
+  #actionsBox{
+    backdrop-filter: blur(15px);
+  }
