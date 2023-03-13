@@ -1,7 +1,7 @@
 import React from 'react'
-import newproject from '/CrearProyecto.png'
+import newproject from '/src/assets/img//CrearProyecto.png'
 import Box from '@mui/material/Box';
-import Decoración from '/Decoración.png'
+import Decoración from '/src/assets/img//Decoración.png'
 
 export default function NewProject() {
     return (
@@ -17,7 +17,7 @@ export default function NewProject() {
                 <h1 style={{ padding: "10px 10px 0px 10px" }}>Crear Proyecto</h1>
                 <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
             </Box>
-            <img src={newproject} alt="" style={{ maxWidth: "100vw" }} />
+            {/* <img src={newproject} alt="" style={{ maxWidth: "100vw" }} /> */}
         </div>
     )
 }
