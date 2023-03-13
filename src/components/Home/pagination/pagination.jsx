@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import service from "../services/services";
 
-const pageSize = 4; //How many cards it going to show
+const pageSize = 6; //How many cards it going to show
 
 export default function AppPagination ({setCard}) {
 
