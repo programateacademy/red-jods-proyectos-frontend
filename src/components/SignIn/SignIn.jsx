@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import logo from '/logo.svg'
+import logo from '/src/assets/img/logo.svg'
 import { Link as LINK } from 'react-router-dom'
 
 

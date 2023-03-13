@@ -10,10 +10,10 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import logo from '/logo.svg'
+import logo from '/src/assets/img/logo.svg'
 import { Link } from 'react-router-dom'
-import UserLogo from '/User.png'
-import Decoración from '/Decoración.png'
+import UserLogo from '/src/assets/img/User.png'
+import Decoración from '/src/assets/img/Decoración.png'
 
 const pages=[
     {

@@ -1,7 +1,7 @@
 import React from 'react'
 //import projects from '/Projects.png'
 import Box from '@mui/material/Box';
-import Decoración from '../../../public/Decoración.png'
+import Decoración from '/src/assets/img//Decoración.png'
 
 export default function Projects() {
     return (

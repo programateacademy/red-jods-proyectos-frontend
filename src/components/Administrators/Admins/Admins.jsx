@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import Box from '@mui/material/Box';
-import Decoración from '/Decoración.png'
-import users from "../../apis/index";
+import Decoración from '/src/assets/img/Decoración.png'
+import users from "../../../apis/index";
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { esES } from '@mui/material/locale';
-import EditButton from '/EditButton.svg'
-import DeleteButton from '/DeleteButton.svg'
+import EditButton from '/src/assets/img/EditButton.svg'
+import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
 
 

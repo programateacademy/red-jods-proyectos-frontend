@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import Decoración from '/Decoración.png'
+import Decoración from '../../assets/img/Decoración.png'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -33,7 +33,7 @@ export default function Home() {
                 {card.map(item => {
                     return (
 
-                        <Card id='Card' sx={{ maxWidth: 280 }}>
+                        <Card key={item.id} id='Card' sx={{ maxWidth: 280 }}>
                             <CardMedia
                                 sx={{ height: 280 }}
                                 image={item.img}
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
 
             <AppPagination setCard={(p) => setCard(p)}/>
-              
+            
             
         </div>
     )

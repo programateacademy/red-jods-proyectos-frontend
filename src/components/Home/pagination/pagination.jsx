@@ -7,18 +7,18 @@ const pageSize = 6; //How many cards it going to show
 
 export default function AppPagination ({setCard}) {
 
-   const [pagination, setPagination] = useState ({
+    const [pagination, setPagination] = useState ({
         count: 0,
         from: 0,
         to: pageSize
-   });
+    });
 
-   const handlePageChange = (Event, page) => {
+    const handlePageChange = (Event, page) => {
     const from = (page - 1) * pageSize;
     const to = (page - 1) * pageSize + pageSize;
 
     setPagination ({...pagination, from: from, to: to})
-   }
+    }
 
     useEffect(()=> {
         service.getData({from: pagination.from, to:pagination.to}).then(response => {
