@@ -33,7 +33,7 @@ export default function Home() {
                 {card.map(item => {
                     return (
 
-                        <Card id='Card' sx={{ maxWidth: 280 }}>
+                        <Card key={item.id} id='Card' sx={{ maxWidth: 280 }}>
                             <CardMedia
                                 sx={{ height: 280 }}
                                 image={item.img}
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
 
             <AppPagination setCard={(p) => setCard(p)}/>
-              
+            
             
         </div>
     )
