@@ -7,13 +7,22 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
+import { useState } from "react";
+
 
 export default function FormPart2() {
-  const [tituloProyecto, setTituloProyecto] = useState("");
-  const [responsable, setResponsable] = useState("");
-  const [selectedItems, setSelectedItems] = useState([]);
-
+  const [tituloProyecto, setTituloProyecto] = useState(" ");
+  const [responsable, setResponsable] = useState(" ");
+  const [selectedItems, setSelectedItems] = useState([""]);
+  const [description, setDescripcion] = useState(" ");
+  const [indicadores, setIndicadores] = useState(" ");
+  const [objetivos, setObjetivos] = useState(" ");
+  const [answer, setAnswer] = useState('');
+  const [opciones, setOpciones] = useState(['finDeLaPobreza', 'hambreCero', 'saludYBienestar', 'educacionDeCalidad', 'igualdadDeGenero', 'aguaLImpiaySaneamiento', 'energiaAsequible', 'trabajoDecente', 'industriaInnovacion', 'reduccionDeLasDesigualdades', 'ciudadesyComunidades', 'producionyConsumo', 'accionPorElAgua', 'vidaSubmarina', 'vidaDeEcosistemasTerrestres', 'pazJusticia', 'alianzasParaLograrObjetivos']);
+  
+ 
   const handletituloProyectoChange = (event) => {
     setTituloProyecto(event.target.value);
   };
@@ -27,32 +36,64 @@ export default function FormPart2() {
     setSelectedItems(value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(`Titulo del Proyecto: ${tituloProyecto}`);
-    console.log(`Reponsable: ${responsable}`);
-    console.log(`Selected items: ${selectedItems}`);
+  const handleOpcionesChange = (event) =>{
+    const {value} = event.target;
+    setOpciones(value);
   };
 
+  const handDescripcion = (event) => {
+    setDescripcion(event.target.value);
+  };
+
+  const handIndicadores = (event) => {
+    setIndicadores(event.target.value);
+  };
+
+  const handObjetivos = (event) => {
+    setObjetivos(event.target.value);
+  };
+
+  const handleChange = (event) => {
+    setAnswer(event.target.value);
+  };
+
+  const handleClick = () => {
+    console.log(answer);
+  };
 
   return (
     <div>
       <div className="Form2Container">
-        <form  onSubmit={handleSubmit}>
+        <form type="text" value={answer} onChange={handleChange}>
+        
           <div className="part1">
             <div>
-              <TextField value={tituloProyecto} onChange={handletituloProyectoChange} label="Titulo del Proyecto" />
+              <TextField
+                onClick={handleClick}
+                value={tituloProyecto}
+                onChange={handletituloProyectoChange}
+                label="Titulo del Proyecto"
+                
+              />
             </div>
             <div>
-              <TextField  value={responsable}  onChange={handleResponsableChange} label="Responsable" />
+              <TextField
+                onClick={handleClick}
+                value={responsable}
+                onChange={handleResponsableChange}
+                label="Responsable"
+              />
             </div>
 
-            <FormControl className="formControl" variant="outlined" multiple>
+            <FormControl >
               <InputLabel id="select-outlined-label">Ejes</InputLabel>
-              <Select multiple value={selectedItems} onChange={handleItemsChange}
-                labelId="select-outlined-label-ejes"
-                id="select-outlined"
-                label="Intereses"
+              <Select
+                
+                multiple
+                value={selectedItems}
+                onClick={handleClick}
+                onChange={handleItemsChange}
+                label="selectedItems"
               >
                 <MenuItem value="personas">Personas</MenuItem>
                 <MenuItem value="prosperidad">Prosperidad</MenuItem>
@@ -61,12 +102,14 @@ export default function FormPart2() {
                 <MenuItem value="alianzas">Alianzas</MenuItem>
               </Select>
             </FormControl>
-            <FormControl variant="outlined" multiple className="formControl">
+            <FormControl>
               <InputLabel id="select-outlined-label">ODS</InputLabel>
               <Select
-                labelId="select-outlined-label-ods"
-                id="select-outlined"
-                label="Intereses"
+                multiple
+                value={opciones}
+                onClick={handleClick}
+                onChange={handleOpcionesChange}
+                label="selectedItems"
               >
                 <MenuItem value="finDeLaPobreza">Fin de la Pobreza</MenuItem>
                 <MenuItem value="hambreCero">Hambre Cero</MenuItem>
@@ -111,10 +154,34 @@ export default function FormPart2() {
             </FormControl>
           </div>
           <div className="part2">
-            <div><TextField id="description" label="Descripción" /></div>
-            <div><TextField label="Indicadores" /></div>
-            <div><TextField label="Objetivos" /></div>
+            <div>
+              <TextField
+                onClick={handleClick}
+                value={description}
+                onChange={handDescripcion}
+                id="descripcion"
+                label="Descripción"
+              />
+            </div>
+            <div>
+              <TextField
+                onClick={handleClick}
+                value={indicadores}
+                onChange={handIndicadores}
+                label="Indicadores"
+              />
+            </div>
+            <div>
+              <TextField 
+                onClick={handleClick}
+                value={objetivos}
+                onChange={handObjetivos}
+                label="Objetivos"
+              />
+            </div>
           </div>
+         
+          <Button variant="contained" color="primary" onClick={handleClick}>Enviar</Button>
         </form>
       </div>
       <div className="part3">
@@ -123,9 +190,3 @@ export default function FormPart2() {
     </div>
   );
 }
-
-
-
-
-
-
