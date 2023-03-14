@@ -1,5 +1,4 @@
-import React from 'react'
-import newproject from '/src/assets/img//CrearProyecto.png'
+import React from 'react';
 import Box from '@mui/material/Box';
 import Decoración from '/src/assets/img//Decoración.png'
 import FormPart2 from './FormPart2/FormPart2'
@@ -18,7 +17,7 @@ export default function NewProject() {
                 <h1 style={{ padding: "10px 10px 0px 10px" }}>Crear Proyecto</h1>
                 <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
             </Box>
-            <FormPart2/>
+            <FormPart2 />
            
         </div>
     )
