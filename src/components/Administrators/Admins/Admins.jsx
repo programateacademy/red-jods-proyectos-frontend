@@ -9,9 +9,14 @@ import { esES } from '@mui/material/locale';
 import EditButton from '/src/assets/img/EditButton.svg'
 import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
-
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthContext/AuthContext';
 
 export default function Admins() {
+    //Using AuthContext information
+    const { authData }=useContext(AuthContext);
+    const { token, role }=authData;
+    
     //Variable for fecthing users
     const [usersList, setUsersList]=useState([]);
     //variables for filtering throughout search
@@ -20,8 +25,15 @@ export default function Admins() {
 
     //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
+        console.log(role);
+        console.log(token);
+
         async function fetchData() {
-            const { data }=await users.get("/Api/v1/user");
+            const { data }=await users.get("/Api/v1/user", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             setUsersList(data);
             setUsersListSearched(data);
         }

@@ -52,7 +52,7 @@ export default function SignIn() {
       email: rawFormData.get('email'),
       password: rawFormData.get('password')
     } 
-    // console.log({dataToSend});
+    console.log({dataToSend});
     let res = await api.post("/Api/v1/login", dataToSend);
     // console.log(res.data);
     const role = res.data.data.role;
