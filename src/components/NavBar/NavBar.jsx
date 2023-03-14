@@ -37,7 +37,7 @@ const pages=[
 const settings=[
     {
         name: 'Iniciar Sesión',
-        route: '/signin'
+        route: '/login'
     }
 
     // 'Perfil', 

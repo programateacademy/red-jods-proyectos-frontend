@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '/src/assets/img/logo.svg'
 import { Link as LINK } from 'react-router-dom'
 import api from "../../apis/index";
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 
 function Copyright(props) {
@@ -34,11 +36,9 @@ const theme = createTheme();
 
 export default function SignIn() {
 
-  //Variable of state to save data give by user
-  const [datos, setDatos] = useState({
-    email: "",
-    password: ""
-  });
+  //Estamos importando el contexto de AuthContext y utilizando la función useContext para acceder a la función setAuthData.
+  const { authData, setAuthData }=useContext(AuthContext);
+
 
   //This handle the submit of login
   const handleSubmit = async(event) => {
@@ -55,11 +55,10 @@ export default function SignIn() {
     // console.log({dataToSend});
     let res = await api.post("/Api/v1/login", dataToSend);
     // console.log(res.data);
-    const roleytoken = {
-      role: res.data.data.role,
-      token: res.data.tokenSession
-    }
-    console.log(roleytoken);
+    const role = res.data.data.role;
+    const token = res.data.tokenSession;
+    setAuthData({ token, role });
+    console.log(authData.role);
   };
 
   return (

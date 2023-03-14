@@ -21,7 +21,7 @@ export default function Admins() {
     //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
         async function fetchData() {
-            const { data }=await users.get("/api/v1/users");
+            const { data }=await users.get("/Api/v1/user");
             setUsersList(data);
             setUsersListSearched(data);
         }
@@ -31,19 +31,19 @@ export default function Admins() {
 
     //This interacts with API and Create one User
     const addFilm=async (user) => {
-        const { data }=await users.post("/api/v1/users", user);
+        const { data }=await users.post("/Api/v1/user", user);
         setUsersList((oldList) => [...oldList, data]);
     };
 
     //This interacts with API and Delete one User (in this case just hides it)
     const removeUser=async (id) => {
-        await users.delete(`/api/v1/users/${id}`);
+        await users.delete(`/Api/v1/user/${id}`);
         setUsersList((oldList) => oldList.filter((user) => user._id!==id));
     };
     //This interacts with API and Update one User
 
     const editFilm=async (id, user) => {
-        await users.put(`/api/v1/users/${id}`, user);
+        await users.put(`/Api/v1/user/${id}`, user);
     };
 
     //Code for search bar
