@@ -67,7 +67,7 @@ export default function Admins() {
     const filtering=(searchTerm) => {
         var searchResult=usersList.filter((element) => {
             if (element.name.toString().toLowerCase().includes(searchTerm.toLowerCase()) || 
-                element.lastname.toString().toLowerCase().includes(searchTerm.toLowerCase()
+                element.last_name.toString().toLowerCase().includes(searchTerm.toLowerCase()
             )) {
                 return element;
             }
@@ -91,10 +91,10 @@ export default function Admins() {
     //Array with the field names in the admins table
     const columns=[
         { field: 'name', headerName: 'Nombre', width: 150 },
-        { field: 'lastname', headerName: 'Apellido', width: 150 },
+        { field: 'last_name', headerName: 'Apellido', width: 150 },
         { field: 'email', headerName: 'Correo Electrónico', width: 280 },
-        { field: 'password', headerName: 'Contraseña', width: 150 },
-        { field: 'is_admin', headerName: 'SúperAdmin', width: 150 },
+        { field: 'phone', headerName: 'Teléfono', width: 200 },
+        { field: 'role', headerName: 'Rol', width: 150 },
         { 
             field: 'Acciones', 
             headerName: 'Acciones', 
@@ -251,7 +251,7 @@ export default function Admins() {
                                 {user.name}
                             </td>
                             <td>
-                                {user.lastname}
+                                {user.last_name}
                             </td>
                             <td>
                                 {user.email}
