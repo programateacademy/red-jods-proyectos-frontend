@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useState, useEffect } from "react";
 
-
 export default function FormPart2() {
   const [formState, setFormState] = useState({
     tituloProyecto: "",
@@ -21,8 +20,8 @@ export default function FormPart2() {
     indicadores: "",
     objetivos: "",
     answer: "",
-    opciones: [  ],
-    selectOption:"" // nueva propiedad para almacenar la opción seleccionada
+    opciones: [],
+    selectOption: "", // nueva propiedad para almacenar la opción seleccionada
   });
 
   const handleChange = (event) => {
@@ -51,20 +50,20 @@ export default function FormPart2() {
   return (
     <div>
       <div className="Form2Container">
-        <form >
-        
+        <form>
           <div className="part1">
             <div>
               <TextField
+                variant="outlined"
                 name="tituloProyecto"
                 value={formState.tituloProyecto}
                 onChange={handleChange}
                 label="Titulo del Proyecto"
-                
               />
             </div>
             <div>
               <TextField
+                variant="outlined"
                 name="responsable"
                 value={formState.responsable}
                 onChange={handleChange}
@@ -72,9 +71,13 @@ export default function FormPart2() {
               />
             </div>
 
-            <FormControl >
-              <InputLabel id="select-outlined-label">Ejes</InputLabel>
+            <FormControl variant="outlined">
+              <InputLabel id="demo-simple-select-outlined-label">
+                Ejes
+              </InputLabel>
               <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
                 name="selectedItems"
                 multiple
                 value={formState.selectedItems}
@@ -88,9 +91,13 @@ export default function FormPart2() {
                 <MenuItem value="alianzas">Alianzas</MenuItem>
               </Select>
             </FormControl>
-            <FormControl>
-              <InputLabel id="select-outlined-label">ODS</InputLabel>
+            <FormControl variant="outlined">
+              <InputLabel id="demo-simple-select-outlined-label">
+                ODS
+              </InputLabel>
               <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
                 name="opciones"
                 multiple
                 value={formState.opciones}
@@ -100,17 +107,26 @@ export default function FormPart2() {
                 <MenuItem value="finDeLaPobreza">Fin de la Pobreza</MenuItem>
                 <MenuItem value="hambreCero">Hambre Cero</MenuItem>
                 <MenuItem value="saludyBienestar">Salud y Bienestar</MenuItem>
-                <MenuItem value="educacionDeCalidad">Educación de Calidad</MenuItem>
+                <MenuItem value="educacionDeCalidad">
+                  Educación de Calidad
+                </MenuItem>
                 <MenuItem value="igualdadDeGenero">Igualdad de Genero</MenuItem>
-                <MenuItem value="aguaLimpiaySaneamiento">Agua Limpia y Saneamiento</MenuItem>
-                <MenuItem value="energiaAsequibleyNoContaminante">Energia Asequible y no Contaminante</MenuItem>
-                <MenuItem value="trabajo DecenteyCrecimientoEconomico">Trabajo Decente y Crecimiento Economico</MenuItem>
+                <MenuItem value="aguaLimpiaySaneamiento">
+                  Agua Limpia y Saneamiento
+                </MenuItem>
+                <MenuItem value="energiaAsequibleyNoContaminante">
+                  Energia Asequible y no Contaminante
+                </MenuItem>
+                <MenuItem value="trabajo DecenteyCrecimientoEconomico">
+                  Trabajo Decente y Crecimiento Economico
+                </MenuItem>
               </Select>
             </FormControl>
           </div>
           <div className="part2">
             <div>
               <TextField
+                variant="outlined"
                 name="description"
                 value={formState.description}
                 onChange={handleChange}
@@ -119,6 +135,7 @@ export default function FormPart2() {
             </div>
             <div>
               <TextField
+                variant="outlined"
                 name="indicadores"
                 value={formState.indicadores}
                 onChange={handleChange}
@@ -126,7 +143,8 @@ export default function FormPart2() {
               />
             </div>
             <div>
-              <TextField 
+              <TextField
+                variant="outlined"
                 name="objetivos"
                 value={formState.objetivos}
                 onChange={handleChange}
@@ -134,8 +152,10 @@ export default function FormPart2() {
               />
             </div>
           </div>
-         
-          <Button variant="contained" color="primary" onClick={handleClick}>Enviar</Button>
+
+          <Button variant="contained" color="primary" onClick={handleClick}>
+            Enviar
+          </Button>
         </form>
       </div>
       <div className="part3">
