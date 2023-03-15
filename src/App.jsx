@@ -2,7 +2,7 @@ import './App.css';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Root from './components/Root'
 import Home from './components/Home/Home'
-import SignIn from './components/SignIn/SignIn';
+import Login from './components/Login/Login';
 import Projects from './components/Projects/Projects'
 import NewProject from './components/NewProject/NewProject'
 import Admins from './components/Administrators/Admins/Admins'
@@ -16,7 +16,7 @@ function App() {
     createRoutesFromElements(
       <Route path='/' element={<Root />}>
         <Route index element={<Home />} />
-        <Route path='/signin' element={<SignIn />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/projects' element={<Projects />} />
         <Route path='/newproject' element={<NewProject />} />
         <Route path='/admins' element={<Admins />} />
