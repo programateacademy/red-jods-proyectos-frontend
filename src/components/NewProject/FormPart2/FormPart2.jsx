@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-
+/**debo mejorar esta parte */
 export default function FormPart2() {
   const [tituloProyecto, setTituloProyecto] = useState(" ");
   const [responsable, setResponsable] = useState(" ");
@@ -19,7 +19,7 @@ export default function FormPart2() {
   const [description, setDescripcion] = useState(" ");
   const [indicadores, setIndicadores] = useState(" ");
   const [objetivos, setObjetivos] = useState(" ");
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState('');   
   const [opciones, setOpciones] = useState(['finDeLaPobreza', 'hambreCero', 'saludYBienestar', 'educacionDeCalidad', 'igualdadDeGenero', 'aguaLImpiaySaneamiento', 'energiaAsequible', 'trabajoDecente', 'industriaInnovacion', 'reduccionDeLasDesigualdades', 'ciudadesyComunidades', 'producionyConsumo', 'accionPorElAgua', 'vidaSubmarina', 'vidaDeEcosistemasTerrestres', 'pazJusticia', 'alianzasParaLograrObjetivos']);
   
  
