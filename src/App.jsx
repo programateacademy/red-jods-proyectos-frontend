@@ -9,6 +9,8 @@ import Admins from './components/Administrators/Admins/Admins'
 import NewAdmin from './components/Administrators/NewAdmin/NewAdmin'
 import EditAdmin from './components/Administrators/EditAdmin/EditAdmin'
 import EditProject from './components/EditProject/EditProject'
+import { AuthProvider } from './components/AuthContext/AuthContext';
+
 
 function App() {
 //Tiene que ir en un componente distinto
@@ -30,7 +32,9 @@ function App() {
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   );
 }
