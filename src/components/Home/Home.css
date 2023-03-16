@@ -52,46 +52,51 @@
 }
 
 /*--------------------------------MEDIA QUERIES (MEDIUM DEVICES)----------------------------------*/
-@media screen and (max-width: 1024px) {
-  .container_box img{
-    margin-left: 14rem; 
+@media screen and (max-width: 1080px) {
+  .container_box img {
+    margin-left: 14.5rem;
   }
-  .cardBox{
+
+  .cardBox {
     margin: 1rem;
     padding: 1rem;
     width: var(--container-width-md);
   }
-  .MuiBox-root css-d47f85 img{
+  .MuiBox-root css-d47f85 img {
     max-width: 400px;
   }
-  h1{
+  h1 {
     font-size: 1.4rem;
     display: flex;
     justify-content: center;
   }
-  
+
   #actionsBox {
     width: 90%;
     display: flex;
-
   }
-
 }
 
 /*--------------------------------MEDIA QUERIES (SMALL DEVICES)----------------------------------*/
-@media screen and (max-width: 600px) {
-  .container_box img{
-    margin-left: 1rem; 
+@media (max-width: 920px) {
+  .container_box img {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .container_box img {
+    margin-left: 0.4rem;
   }
   .cardBox {
     margin: 1rem;
     padding: 0;
     width: var(--container-width-sm);
   }
- 
+
   #actionsBox {
     width: 90%;
-
   }
   #Btn1 {
     display: flex;

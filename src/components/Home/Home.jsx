@@ -18,9 +18,9 @@ export default function Home() {
     return (
         <div className='container_box' >
             {/* This elements are displayed when screen is medium or large */}
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                <h1 style={{ padding: "40px 40px 0px 40px" }}>¡Hola Súper Administrador!</h1>
-                <img src={Decoración} alt="" style={{ padding: "0 0 40px 40px", maxWidth: "480px" }} />
+            <Box className="container1" sx={{ display: { xs: 'none', md: 'block' } }}>
+                <h1 style={{ padding: "50px 40px 0px 0px" }}>¡Hola Súper Administrador!</h1>
+                <img src={Decoración} alt="" style={{  maxWidth: "480px" }} />
                 
             </Box>
 
@@ -28,8 +28,8 @@ export default function Home() {
 
             {/* This elements are displayed when screen is small */}
             <Box  sx={{ display: { xs: 'block', md: 'none' } }}>
-                <h1 style={{ padding: "10px 10px 0px 10px" }}>¡Hola Súper Administrador!</h1>
-                <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "320px" }} />
+                <h1 style={{ padding: "20px 10px 0px 10px" }}>¡Hola Súper Administrador!</h1>
+                <img src={Decoración} alt="" style={{  maxWidth: "330px" }} />
             </Box>
             <div className="cardBox">
                 {card.map(item => {
