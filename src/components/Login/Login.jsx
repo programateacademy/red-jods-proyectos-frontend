@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {React, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,13 +14,16 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '/src/assets/img/logo.svg'
 import { Link as LINK } from 'react-router-dom'
+import api from "../../apis/index";
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://redJODS.netlify.app">
+      <Link color="inherit" href="https://redJODS.netlify.app" style={{ fontSize: "14px" }}>
         RedJODS
       </Link>{' '}
       {new Date().getFullYear()}
@@ -32,13 +35,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+
+  //Estamos importando el contexto de AuthContext y utilizando la función useContext para acceder a la función setAuthData.
+  const { authData, setAuthData }=useContext(AuthContext);
+
+
+  //This handle the submit of login
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const rawFormData = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    const dataToSend = {
+      email: rawFormData.get('email'),
+      password: rawFormData.get('password')
+    } 
+    console.log({dataToSend});
+    let res = await api.post("/Api/v1/login", dataToSend);
+    // console.log(res.data);
+    const role = res.data.data.role;
+    const token = res.data.tokenSession;
+    setAuthData({ token, role });
+    console.log(authData.role);
   };
 
   return (
@@ -53,7 +73,7 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <img src={logo} alt=""/>
+          <img src={logo} alt="Logo RedJODS"/>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -84,21 +104,22 @@ export default function SignIn() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                style={{textTransform: "Capitalize"}}
               >
                 Ingresar
               </Button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
-              {/*<Grid item>
+              <Grid item>
                 <Link href="#" variant="body2">
                   {"¿No tienes una cuenta? Regístrate"}
                 </Link>
-              </Grid>*/}
-            </Grid>
+              </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

@@ -33,8 +33,52 @@ a:active {
 
 }
 
-
 h1 {
     font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 15px;
+}
+
+
+/*Responsive*/
+
+@media (min-width: 768px) {
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 30px;
+    }
+    
+    h2 {
+        font-size: 25px;
+    }
+    
+    p {
+        font-size: 20px;
+    }
+}
+
+
+@media (min-width: 1440px) {
+
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 40px;
+    }
+    
+    h2 {
+        font-size: 35px;
+    }
+    
+    p {
+        font-size: 20px;
+    }
+
 }
 

@@ -9,18 +9,31 @@ import { esES } from '@mui/material/locale';
 import EditButton from '/src/assets/img/EditButton.svg'
 import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
-
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthContext/AuthContext';
 
 export default function Admins() {
+    //Using AuthContext information
+    const { authData }=useContext(AuthContext);
+    const { token, role }=authData;
+    
     //Variable for fecthing users
     const [usersList, setUsersList]=useState([]);
     //variables for filtering throughout search
     const [search, setSearch]=useState([]);
     const [usersListSearched, setUsersListSearched]=useState([]);
 
+    //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
+        console.log(role);
+        console.log(token);
+
         async function fetchData() {
-            const { data }=await users.get("/api/v1/users");
+            const { data }=await users.get("/Api/v1/user", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             setUsersList(data);
             setUsersListSearched(data);
         }
@@ -28,21 +41,21 @@ export default function Admins() {
         fetchData();
     }, []);
 
+    //This interacts with API and Create one User
     const addFilm=async (user) => {
-        const { data }=await users.post("/api/v1/users", user);
+        const { data }=await users.post("/Api/v1/user", user);
         setUsersList((oldList) => [...oldList, data]);
     };
 
+    //This interacts with API and Delete one User (in this case just hides it)
     const removeUser=async (id) => {
-        await users.delete(`/api/v1/users/${id}`);
+        await users.delete(`/Api/v1/user/${id}`);
         setUsersList((oldList) => oldList.filter((user) => user._id!==id));
     };
-
-    
-
+    //This interacts with API and Update one User
 
     const editFilm=async (id, user) => {
-        await users.put(`/api/v1/users/${id}`, user);
+        await users.put(`/Api/v1/user/${id}`, user);
     };
 
     //Code for search bar
@@ -54,7 +67,7 @@ export default function Admins() {
     const filtering=(searchTerm) => {
         var searchResult=usersList.filter((element) => {
             if (element.name.toString().toLowerCase().includes(searchTerm.toLowerCase()) || 
-                element.lastname.toString().toLowerCase().includes(searchTerm.toLowerCase()
+                element.last_name.toString().toLowerCase().includes(searchTerm.toLowerCase()
             )) {
                 return element;
             }
@@ -62,6 +75,8 @@ export default function Admins() {
         setUsersListSearched(searchResult);
     }
 
+
+    //Code for handle clicks on edit and delete buttons
     const handleCellClick = (param, event) => {
         event.stopPropagation();
     };
@@ -76,10 +91,10 @@ export default function Admins() {
     //Array with the field names in the admins table
     const columns=[
         { field: 'name', headerName: 'Nombre', width: 150 },
-        { field: 'lastname', headerName: 'Apellido', width: 150 },
+        { field: 'last_name', headerName: 'Apellido', width: 150 },
         { field: 'email', headerName: 'Correo Electrónico', width: 280 },
-        { field: 'password', headerName: 'Contraseña', width: 150 },
-        { field: 'is_admin', headerName: 'SúperAdmin', width: 150 },
+        { field: 'phone', headerName: 'Teléfono', width: 200 },
+        { field: 'role', headerName: 'Rol', width: 150 },
         { 
             field: 'Acciones', 
             headerName: 'Acciones', 
@@ -150,7 +165,6 @@ export default function Admins() {
                         </Button>
                     </Link>
                 </div>
-                
 
                 {/* Table made with the DataGrid Template from MUI */}
                 <ThemeProvider theme={theme}>
@@ -219,13 +233,7 @@ export default function Admins() {
                 
             </Box>
 
-            
-            
-                
-            {/* <img src={admins} alt="" style={{ maxWidth: "100vw" }} /> */}
-
             {/* Versión sin MUI DataGrid */}
-
             {/* <table>
                 <thead>
                     <tr>
@@ -243,7 +251,7 @@ export default function Admins() {
                                 {user.name}
                             </td>
                             <td>
-                                {user.lastname}
+                                {user.last_name}
                             </td>
                             <td>
                                 {user.email}
