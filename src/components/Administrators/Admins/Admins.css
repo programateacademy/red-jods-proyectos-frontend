@@ -1,0 +1,28 @@
+.datagrid {
+        height: 600px; 
+        width: 100vw;
+
+}
+
+@media (min-width: 768px) {
+    .datagrid {
+        padding: 0 10px 0 10px;
+    }
+}
+@media (min-width: 992px) {
+    .datagrid {
+        padding: 0 10px 0 10px;
+    }
+}
+@media (min-width: 1200px) {
+        .datagrid {
+            padding: 0 10px 0 10px;
+            }
+}
+
+@media (min-width: 1440px) {
+    .datagrid {
+        padding: 0 10px 0 10px;
+    }
+}
+

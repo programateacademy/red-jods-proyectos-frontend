@@ -11,6 +11,7 @@ import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthContext/AuthContext';
+import './Admins.css'
 
 export default function Admins() {
     //Using AuthContext information
@@ -90,11 +91,11 @@ export default function Admins() {
 
     //Array with the field names in the admins table
     const columns=[
-        { field: 'name', headerName: 'Nombre' },
-        { field: 'last_name', headerName: 'Apellido'},
-        { field: 'email', headerName: 'Correo Electrónico' },
-        { field: 'phone', headerName: 'Teléfono' },
-        { field: 'role', headerName: 'Rol' },
+        { field: 'name', headerName: 'Nombre', width: 200 },
+        { field: 'last_name', headerName: 'Apellido', width: 200 },
+        { field: 'email', headerName: 'Correo Electrónico', width: 200 },
+        { field: 'phone', headerName: 'Teléfono', width: 200 },
+        { field: 'role', headerName: 'Rol', width: 200 },
         { 
             field: 'Acciones', 
             headerName: 'Acciones', 
@@ -201,7 +202,7 @@ export default function Admins() {
 
             {/* Table made with the DataGrid Template from MUI */}
             <ThemeProvider theme={theme}>
-                <div style={{ height: 600, width: '100vw' }}>
+                <div className='datagrid'>
                     <DataGrid
                         rows={usersListSearched}
                         getRowId={(row) => row._id}
