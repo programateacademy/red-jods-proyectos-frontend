@@ -1,6 +1,6 @@
 import React , {useState} from 'react'
 import TodoForm from '../TodoForm/TodoForm'
-import {RiCloseCircleLine} from 'react-icons/ri'
+import {BsFillTrashFill} from 'react-icons/bs'
 import {TiEdit} from 'react-icons/ti'
 
 
@@ -36,7 +36,7 @@ function Todo({todos, completeTodo, removeTodo, updateTodo }) {
                 {todo.text}
             </div>
             <div className="icons">
-                <RiCloseCircleLine
+                <BsFillTrashFill
                 onClick={() => removeTodo(todo.id)}
                 className='delete-icon'/>
                 <TiEdit
