@@ -53,12 +53,23 @@
 
 /*--------------------------------MEDIA QUERIES (MEDIUM DEVICES)----------------------------------*/
 @media screen and (max-width: 1024px) {
+  .container_box img{
+    margin-left: 14rem; 
+  }
   .cardBox{
     margin: 1rem;
     padding: 1rem;
     width: var(--container-width-md);
   }
-
+  .MuiBox-root css-d47f85 img{
+    max-width: 400px;
+  }
+  h1{
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+  }
+  
   #actionsBox {
     width: 90%;
     display: flex;
@@ -69,6 +80,9 @@
 
 /*--------------------------------MEDIA QUERIES (SMALL DEVICES)----------------------------------*/
 @media screen and (max-width: 600px) {
+  .container_box img{
+    margin-left: 1rem; 
+  }
   .cardBox {
     margin: 1rem;
     padding: 0;
