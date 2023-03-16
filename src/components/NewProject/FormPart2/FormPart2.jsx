@@ -9,90 +9,79 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-/**debo mejorar esta parte */
 export default function FormPart2() {
-  const [tituloProyecto, setTituloProyecto] = useState(" ");
-  const [responsable, setResponsable] = useState(" ");
-  const [selectedItems, setSelectedItems] = useState([""]);
-  const [description, setDescripcion] = useState(" ");
-  const [indicadores, setIndicadores] = useState(" ");
-  const [objetivos, setObjetivos] = useState(" ");
-  const [answer, setAnswer] = useState('');   
-  const [opciones, setOpciones] = useState(['finDeLaPobreza', 'hambreCero', 'saludYBienestar', 'educacionDeCalidad', 'igualdadDeGenero', 'aguaLImpiaySaneamiento', 'energiaAsequible', 'trabajoDecente', 'industriaInnovacion', 'reduccionDeLasDesigualdades', 'ciudadesyComunidades', 'producionyConsumo', 'accionPorElAgua', 'vidaSubmarina', 'vidaDeEcosistemasTerrestres', 'pazJusticia', 'alianzasParaLograrObjetivos']);
-  
- 
-  const handletituloProyectoChange = (event) => {
-    setTituloProyecto(event.target.value);
-  };
-
-  const handleResponsableChange = (event) => {
-    setResponsable(event.target.value);
-  };
-
-  const handleItemsChange = (event) => {
-    const { value } = event.target;
-    setSelectedItems(value);
-  };
-
-  const handleOpcionesChange = (event) =>{
-    const {value} = event.target;
-    setOpciones(value);
-  };
-
-  const handDescripcion = (event) => {
-    setDescripcion(event.target.value);
-  };
-
-  const handIndicadores = (event) => {
-    setIndicadores(event.target.value);
-  };
-
-  const handObjetivos = (event) => {
-    setObjetivos(event.target.value);
-  };
+  const [formState, setFormState] = useState({
+    tituloProyecto: "",
+    responsable: "",
+    selectedItems: [],
+    description: "",
+    indicadores: "",
+    objetivos: "",
+    answer: "",
+    opciones: [],
+    selectOption: "", // nueva propiedad para almacenar la opción seleccionada
+  });
 
   const handleChange = (event) => {
-    setAnswer(event.target.value);
+    setFormState({ ...formState, [event.target.name]: event.target.value });
+  };
+
+  const handleSelectChange = (event) => {
+    setFormState({ ...formState, selectOption: event.target.value });
   };
 
   const handleClick = () => {
-    console.log(answer);
+    console.log(formState.tituloProyecto);
+    console.log(formState.responsable);
+    console.log(formState.selectedItems);
+    console.log(formState.description);
+    console.log(formState.indicadores);
+    console.log(formState.objetivos);
+    console.log(formState.answer);
+    console.log(formState.opciones);
   };
+
+  useEffect(() => {
+    console.log(formState.selectOption);
+  }, [formState.selectOption]);
 
   return (
     <div>
       <div className="Form2Container">
-        <form type="text" value={answer} onChange={handleChange}>
-        
+        <form>
           <div className="part1">
             <div>
               <TextField
-                onClick={handleClick}
-                value={tituloProyecto}
-                onChange={handletituloProyectoChange}
+                variant="outlined"
+                name="tituloProyecto"
+                value={formState.tituloProyecto}
+                onChange={handleChange}
                 label="Titulo del Proyecto"
-                
               />
             </div>
             <div>
               <TextField
-                onClick={handleClick}
-                value={responsable}
-                onChange={handleResponsableChange}
+                variant="outlined"
+                name="responsable"
+                value={formState.responsable}
+                onChange={handleChange}
                 label="Responsable"
               />
             </div>
 
-            <FormControl >
-              <InputLabel id="select-outlined-label">Ejes</InputLabel>
+            <FormControl variant="outlined">
+              <InputLabel id="demo-simple-select-outlined-label">
+                Ejes
+              </InputLabel>
               <Select
-                
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                name="selectedItems"
                 multiple
-                value={selectedItems}
-                onClick={handleClick}
-                onChange={handleItemsChange}
+                value={formState.selectedItems}
+                onChange={handleSelectChange}
                 label="selectedItems"
               >
                 <MenuItem value="personas">Personas</MenuItem>
@@ -102,53 +91,34 @@ export default function FormPart2() {
                 <MenuItem value="alianzas">Alianzas</MenuItem>
               </Select>
             </FormControl>
-            <FormControl>
-              <InputLabel id="select-outlined-label">ODS</InputLabel>
+            <FormControl variant="outlined">
+              <InputLabel id="demo-simple-select-outlined-label">
+                ODS
+              </InputLabel>
               <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                name="opciones"
                 multiple
-                value={opciones}
-                onClick={handleClick}
-                onChange={handleOpcionesChange}
-                label="selectedItems"
+                value={formState.opciones}
+                onChange={handleSelectChange}
+                label="opciones"
               >
                 <MenuItem value="finDeLaPobreza">Fin de la Pobreza</MenuItem>
                 <MenuItem value="hambreCero">Hambre Cero</MenuItem>
-                <MenuItem value="saludYBienestar">Salud y Bienestar</MenuItem>
+                <MenuItem value="saludyBienestar">Salud y Bienestar</MenuItem>
                 <MenuItem value="educacionDeCalidad">
-                  Educacion de Calidad
+                  Educación de Calidad
                 </MenuItem>
                 <MenuItem value="igualdadDeGenero">Igualdad de Genero</MenuItem>
-                <MenuItem value="aguaLImpiaySaneamiento">
+                <MenuItem value="aguaLimpiaySaneamiento">
                   Agua Limpia y Saneamiento
                 </MenuItem>
-                <MenuItem value="energiaAsequible">
-                  Energia Asequible y No Contaminante{" "}
+                <MenuItem value="energiaAsequibleyNoContaminante">
+                  Energia Asequible y no Contaminante
                 </MenuItem>
-                <MenuItem value="trabajoDecente">
+                <MenuItem value="trabajo DecenteyCrecimientoEconomico">
                   Trabajo Decente y Crecimiento Economico
-                </MenuItem>
-                <MenuItem value="industriaInnovacion">
-                  Industria Innovacion e Infraestructura
-                </MenuItem>
-                <MenuItem value="reduccionDeLasDesigualdades">
-                  Reducción de las Desigualdades
-                </MenuItem>
-                <MenuItem value="ciudadesyComunidades">
-                  Ciudades y Comunidades Sostenibles
-                </MenuItem>
-                <MenuItem value="producionyConsumo">
-                  Producción y Consumo Responsables
-                </MenuItem>
-                <MenuItem value="accionPorElAgua">Acción por el Agua</MenuItem>
-                <MenuItem value="vidaSubmarina">Vida Submarina</MenuItem>
-                <MenuItem value="vidaDeEcosistemasTerrestres">
-                  Vida de Ecosistemas Terrestres
-                </MenuItem>
-                <MenuItem value="pazJusticia">
-                  Paz, Justicia e Instituciones Solidas
-                </MenuItem>
-                <MenuItem value="alianzasParaLograrObjetivos">
-                  Alianzas para lograr los Objetivos
                 </MenuItem>
               </Select>
             </FormControl>
@@ -156,32 +126,36 @@ export default function FormPart2() {
           <div className="part2">
             <div>
               <TextField
-                onClick={handleClick}
-                value={description}
-                onChange={handDescripcion}
-                id="descripcion"
-                label="Descripción"
+                variant="outlined"
+                name="description"
+                value={formState.description}
+                onChange={handleChange}
+                label="Descripcion del proyecto"
               />
             </div>
             <div>
               <TextField
-                onClick={handleClick}
-                value={indicadores}
-                onChange={handIndicadores}
+                variant="outlined"
+                name="indicadores"
+                value={formState.indicadores}
+                onChange={handleChange}
                 label="Indicadores"
               />
             </div>
             <div>
-              <TextField 
-                onClick={handleClick}
-                value={objetivos}
-                onChange={handObjetivos}
-                label="Objetivos"
+              <TextField
+                variant="outlined"
+                name="objetivos"
+                value={formState.objetivos}
+                onChange={handleChange}
+                label="Objetivos del proyecto"
               />
             </div>
           </div>
-         
-          <Button variant="contained" color="primary" onClick={handleClick}>Enviar</Button>
+
+          <Button variant="contained" color="primary" onClick={handleClick}>
+            Enviar
+          </Button>
         </form>
       </div>
       <div className="part3">

@@ -1,56 +1,105 @@
-
-.cardBox{
-    display: grid;
-    grid-template-columns: 
-      repeat(auto-fit, 
-      minmax(300px, 1fr)
-      );
-    place-items: center;
-    margin: 2rem 10rem 2rem 10rem;
-    width: 80%;
-    gap: 3rem;
+.cardBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  place-items: center;
+  margin: 2rem 10rem 2rem 10rem;
+  width: 80%;
+  gap: 3rem;
 }
 
-#Card:hover{
-    transform: scale(1.1);
+#Card:hover {
+  transform: scale(1.1);
 }
 
 #Btn1 {
-    background-color: var(--Btn-color);
-    border-radius: 10px;
-    color: var(--bg-color);
-    font-family: 'Poppins', sans-serif;
+  background-color: var(--Btn-color);
+  border-radius: 10px;
+  color: var(--bg-color);
+  font-family: "Poppins", sans-serif;
 }
 
-#Btn1:hover{
-    box-shadow: 4px 4px 6px 0 rgba(255,255,255,.5),
-    -4px -4px 6px 0 rgba(116, 125, 136, .5), 
-inset -4px -4px 6px 0 rgba(255,255,255,.2),
-inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+#Btn1:hover {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+    -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
 }
 
 #Btn2 {
-    border: solid 2px var(--Btn-color);
-    border-radius: 10px;
-    color: var(--Btn-color);
-    font-family: 'Poppins', sans-serif;
+  border: solid 2px var(--Btn-color);
+  border-radius: 10px;
+  color: var(--Btn-color);
+  font-family: "Poppins", sans-serif;
 }
 
 #Btn2:hover {
-    background-color: var(--Btn-color);
-    color: var(--bg-color);
+  background-color: var(--Btn-color);
+  color: var(--bg-color);
+}
+
+#Btn2:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.1);
+  outline-offset: 2px;
+}
+
+#Btn2:focus-visible {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#actionsBox {
+  backdrop-filter: blur(15px);
+}
+
+/*--------------------------------MEDIA QUERIES (MEDIUM DEVICES)----------------------------------*/
+@media screen and (max-width: 1024px) {
+  .container_box img{
+    margin-left: 14rem; 
+  }
+  .cardBox{
+    margin: 1rem;
+    padding: 1rem;
+    width: var(--container-width-md);
+  }
+  .MuiBox-root css-d47f85 img{
+    max-width: 400px;
+  }
+  h1{
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
   }
   
-  #Btn2:focus {
-    outline: 2px solid rgba(0,0,0,0.1);
-    outline-offset: 2px;
-  }
-  
-  #Btn2:focus-visible {
-    -webkit-box-shadow: none;
-    box-shadow: none;
+  #actionsBox {
+    width: 90%;
+    display: flex;
+
   }
 
-  #actionsBox{
-    backdrop-filter: blur(15px);
+}
+
+/*--------------------------------MEDIA QUERIES (SMALL DEVICES)----------------------------------*/
+@media screen and (max-width: 600px) {
+  .container_box img{
+    margin-left: 1rem; 
   }
+  .cardBox {
+    margin: 1rem;
+    padding: 0;
+    width: var(--container-width-sm);
+  }
+ 
+  #actionsBox {
+    width: 90%;
+
+  }
+  #Btn1 {
+    display: flex;
+    font-size: 0.82rem;
+  }
+  #Btn2 {
+    display: flex;
+    font-size: 0.85rem;
+  }
+  /*investigar como hacer para que se vean solo 4 proyectos en el celular*/
+}
