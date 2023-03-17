@@ -62,21 +62,13 @@ img {
 
 /*--------------------------------MEDIA QUERIES (MEDIUM DEVICES)----------------------------------*/
 
-
 @media (max-width: 1024px) {
-  
-   .container_box .container2 img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /*
-    align-content: center;
+  .container_box .container2 img {  
+    margin-left: 12rem;
     max-width: 420px;
-    padding-left:  10.8rem;
-    */
-
+    min-width: 420px;
   }
-
+ 
   .cardBox {
     margin: 1rem;
     padding: 1rem;
@@ -96,11 +88,13 @@ img {
 }
 /*----------------------MEDIA QUERIES (SMALL DEVICES )--------------------------------*/
 @media (max-width: 926px) {
-  .container2 img {
+  .container_box .container2 img {
+    padding: 0;
     min-width: 260px;
     max-width: 260px;
     padding: 0rem 4rem 2rem 0rem;
   }
+ 
 }
 
 @media (max-width: 667px) {
@@ -109,12 +103,13 @@ img {
     place-items: center;
     padding-top: 1rem;
     width: var(--container-width-sm);
+    padding-left: none;
   }
   .container2 h1 {
     font-size: 30px;
     margin-left: 2rem;
   }
-  .container2 img {
+  .container_box .container2 img {
     min-width: 260px;
     max-width: 260px;
     margin-left: 1rem;
