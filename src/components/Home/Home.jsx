@@ -19,11 +19,11 @@ export default function Home() {
         <h1 style={{ padding: "50px 40px 0px 0px" }}>
           ¡Hola Súper Administrador!
         </h1>
-        <img src={Decoración} alt="" style={{ maxWidth: "480px" }} />
+        <img src={Decoración} alt="" />
       </Box>
 
       {/* This elements are displayed when screen is small */}
-      <Box className="container2" sx={{ display: { xs: "block", md: "none" } }}>
+      <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
         <h1>¡Hola Súper Administrador!</h1>
         <img src={Decoración} alt="" />
       </Box>

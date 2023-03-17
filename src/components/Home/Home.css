@@ -1,3 +1,9 @@
+.container1 .container2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cardBox {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -5,6 +11,9 @@
   margin: 2rem 10rem 2rem 10rem;
   width: 80%;
   gap: 3rem;
+}
+img {
+  padding: 0 2rem 2rem 0;
 }
 
 #Card:hover {
@@ -52,10 +61,20 @@
 }
 
 /*--------------------------------MEDIA QUERIES (MEDIUM DEVICES)----------------------------------*/
-/*
-@media screen and (max-width: 1080px) {
-  .container_box img {
-    margin-left: 14.5rem;
+
+
+@media (max-width: 1024px) {
+  
+   .container_box .container2 img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*
+    align-content: center;
+    max-width: 420px;
+    padding-left:  10.8rem;
+    */
+
   }
 
   .cardBox {
@@ -63,9 +82,7 @@
     padding: 1rem;
     width: var(--container-width-md);
   }
-  .MuiBox-root css-d47f85 img {
-    max-width: 400px;
-  }
+
   h1 {
     font-size: 1.4rem;
     display: flex;
@@ -77,46 +94,44 @@
     display: flex;
   }
 }
-
-/*--------------------------------MEDIA QUERIES (SMALL DEVICES)----------------------------------*/
- /* @media (min-width: 920px) {
-  .container_box img {
-    display: flex;
-    align-items: center;
+/*----------------------MEDIA QUERIES (SMALL DEVICES )--------------------------------*/
+@media (max-width: 926px) {
+  .container2 img {
+    min-width: 260px;
+    max-width: 260px;
+    padding: 0rem 4rem 2rem 0rem;
   }
 }
-*/
-@media screen and (min-width: 640px) {
+
+@media (max-width: 667px) {
   .container2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    
-   /* margin-left: 0.4rem;*/
+    display: grid;
+    place-items: center;
+    padding-top: 1rem;
+    width: var(--container-width-sm);
   }
-
-
+  .container2 h1 {
+    font-size: 30px;
+    margin-left: 2rem;
   }
-  .container2 img{
-    max-width: 330px;
+  .container2 img {
+    min-width: 260px;
+    max-width: 260px;
+    margin-left: 1rem;
   }
   .cardBox {
-    margin: 1rem;
+    margin-left: 1.2rem;
     padding: 0;
     width: var(--container-width-sm);
   }
 
-  #actionsBox {
-    width: 90%;
-  }
   #Btn1 {
     display: flex;
     font-size: 0.82rem;
   }
   #Btn2 {
     display: flex;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
   /*investigar como hacer para que se vean solo 4 proyectos en el celular*/
 }
