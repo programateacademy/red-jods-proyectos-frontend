@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import Todo from '../Todo/Todo';
 import TodoForm from '../TodoForm/TodoForm'
-import '../../NewProject.css'
+import '../FormAddTask.css'
+
 
 function TodoList() {
+
   const [todos, setTodos] = useState ([]);
 
   //Agregar las tareas, todo es donde se alamcena la tarea

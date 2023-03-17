@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../../NewProject.css'
+import '../FormAddTask.css'
 import {RxUpdate} from "react-icons/rx";
 import {BsPlusCircle} from 'react-icons/bs'
 

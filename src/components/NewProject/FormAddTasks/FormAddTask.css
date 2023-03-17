@@ -105,6 +105,21 @@
     color: #fff;
   }
 
+  .BtnBox {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  #Btn {
+    width: 150px;
+    height: 50px;
+    background-color: var(--Btn-color);
+    margin-right: 1rem;
+    margin-bottom: 2rem;
+}
+
+
   /* ---------------------Responsive------------------------ */
 
   @media (min-width: 768px) {
@@ -127,7 +142,18 @@
     .icons {
       font-size: 22px;
     }
-    
+
+    #Btn {
+      width: 250px;
+      margin-right: 2.8rem;
+  }
+ 
+  }
+
+  @media (min-width: 992px) {
+    #Btn {
+      margin-right: 4rem;
+    }
   }
 
   @media (min-width: 1200px){
@@ -157,6 +183,11 @@
       border-radius: 10px;
       max-width: 100%;
     }
+
+    #Btn {
+      margin-right: 2.2rem;
+    }
+
 }
 
   @media (min-width: 1440px) {
@@ -189,6 +220,11 @@
       max-width: 70%;
       font-size: 23px;
     }
+
+    #Btn {
+      margin-right: 3.8rem;
+      margin-bottom: 2rem;
+  }
     
 
 }
