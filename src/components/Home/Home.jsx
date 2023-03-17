@@ -14,14 +14,14 @@ export default function Home() {
 
   return (
     <div className="container_box">
-      {/* This elements are displayed when screen is medium or large */}
+      {/* This elements are displayed when screen is medium or large 
       <Box className="container1" sx={{ display: { xs: "none", md: "block" } }}>
-        <h1 style={{ padding: "50px 40px 0px 0px" }}>
+        <h1 >
           ¡Hola Súper Administrador!
         </h1>
         <img src={Decoración} alt="" />
       </Box>
-
+      */}
       {/* This elements are displayed when screen is small */}
       <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
         <h1>¡Hola Súper Administrador!</h1>
