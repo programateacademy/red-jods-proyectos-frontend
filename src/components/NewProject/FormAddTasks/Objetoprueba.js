@@ -4,7 +4,7 @@ const ObjetoPrueba = {
     description: String,
     indicators: String,
     objectives: String,
-    axes: String,
+    axis: String,
     ods: [{
         nameOds: String,
         url: String
@@ -16,5 +16,6 @@ const ObjetoPrueba = {
         name: String,
         complete: Boolean
     }]
+    
 
 }
