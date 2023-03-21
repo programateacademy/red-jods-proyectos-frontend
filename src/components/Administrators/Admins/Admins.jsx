@@ -9,18 +9,32 @@ import { esES } from '@mui/material/locale';
 import EditButton from '/src/assets/img/EditButton.svg'
 import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
-
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthContext/AuthContext';
+import './Admins.css'
 
 export default function Admins() {
+    //Using AuthContext information
+    const { authData }=useContext(AuthContext);
+    const { token, role }=authData;
+    
     //Variable for fecthing users
     const [usersList, setUsersList]=useState([]);
     //variables for filtering throughout search
     const [search, setSearch]=useState([]);
     const [usersListSearched, setUsersListSearched]=useState([]);
 
+    //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
+        console.log(role);
+        console.log(token);
+
         async function fetchData() {
-            const { data }=await users.get("/api/v1/users");
+            const { data }=await users.get("/Api/v1/user", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             setUsersList(data);
             setUsersListSearched(data);
         }
@@ -28,21 +42,21 @@ export default function Admins() {
         fetchData();
     }, []);
 
+    //This interacts with API and Create one User
     const addFilm=async (user) => {
-        const { data }=await users.post("/api/v1/users", user);
+        const { data }=await users.post("/Api/v1/user", user);
         setUsersList((oldList) => [...oldList, data]);
     };
 
+    //This interacts with API and Delete one User (in this case just hides it)
     const removeUser=async (id) => {
-        await users.delete(`/api/v1/users/${id}`);
+        await users.delete(`/Api/v1/user/${id}`);
         setUsersList((oldList) => oldList.filter((user) => user._id!==id));
     };
-
-    
-
+    //This interacts with API and Update one User
 
     const editFilm=async (id, user) => {
-        await users.put(`/api/v1/users/${id}`, user);
+        await users.put(`/Api/v1/user/${id}`, user);
     };
 
     //Code for search bar
@@ -54,7 +68,7 @@ export default function Admins() {
     const filtering=(searchTerm) => {
         var searchResult=usersList.filter((element) => {
             if (element.name.toString().toLowerCase().includes(searchTerm.toLowerCase()) || 
-                element.lastname.toString().toLowerCase().includes(searchTerm.toLowerCase()
+                element.last_name.toString().toLowerCase().includes(searchTerm.toLowerCase()
             )) {
                 return element;
             }
@@ -62,6 +76,8 @@ export default function Admins() {
         setUsersListSearched(searchResult);
     }
 
+
+    //Code for handle clicks on edit and delete buttons
     const handleCellClick = (param, event) => {
         event.stopPropagation();
     };
@@ -75,11 +91,11 @@ export default function Admins() {
 
     //Array with the field names in the admins table
     const columns=[
-        { field: 'name', headerName: 'Nombre', width: 150 },
-        { field: 'lastname', headerName: 'Apellido', width: 150 },
-        { field: 'email', headerName: 'Correo Electrónico', width: 280 },
-        { field: 'password', headerName: 'Contraseña', width: 150 },
-        { field: 'is_admin', headerName: 'SúperAdmin', width: 150 },
+        { field: 'name', headerName: 'Nombre', width: 200 },
+        { field: 'last_name', headerName: 'Apellido', width: 200 },
+        { field: 'email', headerName: 'Correo Electrónico', width: 200 },
+        { field: 'phone', headerName: 'Teléfono', width: 200 },
+        { field: 'role', headerName: 'Rol', width: 200 },
         { 
             field: 'Acciones', 
             headerName: 'Acciones', 
@@ -132,6 +148,14 @@ export default function Admins() {
                     </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                    {/* Create User Button */}
+                    <Link to="/newadmin">
+                        <Button
+                            style={{ backgroundColor: "green", color: "white", margin: "40px" }}
+                        >
+                            Crear Admin
+                        </Button>
+                    </Link>
                     {/* RNF-03: it is required to have a search in the lists and to be able to search by name. */}
                     <input
                         type="text"
@@ -141,33 +165,9 @@ export default function Admins() {
                         className="ui input circular icon"
                         style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "600px", margin: "0 0 15px 40px" }}
                     />
-                    {/* Create User Button */}
-                    <Link to="/newadmin">
-                        <Button
-                            style={{ backgroundColor: "green", color: "white", margin: "40px" }}
-                        >
-                            Crear Admin
-                        </Button>
-                    </Link>
                 </div>
-                
 
                 {/* Table made with the DataGrid Template from MUI */}
-                <ThemeProvider theme={theme}>
-                    <div style={{ height: 400, width: '95vw', margin: "0 40px 40px 40px" }}>
-                        <DataGrid
-                            rows={usersListSearched}
-                            getRowId={(row) => row._id}
-                            columns={columns}
-                            initialState={{
-                                pagination: { paginationModel: { pageSize: 10 } },
-                            }}
-                            pageSizeOptions={[5, 10, 25, 50]}
-                            onCellClick={handleCellClick}
-                            onRowClick={handleRowClick}
-                        />
-                    </div>
-                </ThemeProvider>
 
             </Box>
 
@@ -175,9 +175,18 @@ export default function Admins() {
             <Box sx={{ display: { xs: 'block', md: 'none' }, justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <div>
-                        <h1 style={{ padding: "40px 10px 0px 10px" }}>Administradores</h1>
+                        <h1 style={{ padding: "20px 10px 0px 10px" }}>Administradores</h1>
                         <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
                     </div>
+                    {/* Create User Button */}
+                    <Link to="/newadmin">
+                        <Button
+                            style={{ backgroundColor: "green", color: "white", margin: "20px" }}
+                        >
+                            Crear Admin
+                        </Button>
+                    </Link>
+
                     {/* RNF-03: it is required to have a search in the lists and to be able to search by name. */}
                     <input
                         type="text"
@@ -187,45 +196,29 @@ export default function Admins() {
                         className="ui input circular icon"
                         style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", minWidth: "260px", marginBottom: "15px"}}
                     />
+                    
                 </div>
-                
-                {/* Table made with the DataGrid Template from MUI */}
-                <ThemeProvider theme={theme}>
-                    <div style={{ height: 400, width: '100vw' }}>
-                        <DataGrid
-                            rows={usersListSearched}
-                            getRowId={(row) => row._id}
-                            columns={columns}
-                            initialState={{
-                                pagination: { paginationModel: { pageSize: 10 } },
-                            }}
-                            pageSizeOptions={[5, 10, 15, 20]}
-                            onCellClick={handleCellClick}
-                            onRowClick={handleRowClick}
-                        />
-                    </div>
-                </ThemeProvider>
-
-                {/* Create User Button */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Link to="/newadmin" >
-                        <Button
-                            style={{ backgroundColor: "green", color: "white", margin: "15px 0 15px 0" }}
-                        >
-                            Crear Admin
-                        </Button>
-                    </Link>
-                </div>
-                
             </Box>
 
-            
-            
-                
-            {/* <img src={admins} alt="" style={{ maxWidth: "100vw" }} /> */}
+            {/* Table made with the DataGrid Template from MUI */}
+            <ThemeProvider theme={theme}>
+                <div className='datagrid'>
+                    <DataGrid
+                        rows={usersListSearched}
+                        getRowId={(row) => row._id}
+                        columns={columns}
+                        initialState={{
+                            pagination: { paginationModel: { pageSize: 10 } },
+                        }}
+                        pageSizeOptions={[5, 10, 15, 20]}
+                        onCellClick={handleCellClick}
+                        onRowClick={handleRowClick}
+                        AutoWidth
+                    />
+                </div>
+            </ThemeProvider>
 
             {/* Versión sin MUI DataGrid */}
-
             {/* <table>
                 <thead>
                     <tr>
@@ -243,7 +236,7 @@ export default function Admins() {
                                 {user.name}
                             </td>
                             <td>
-                                {user.lastname}
+                                {user.last_name}
                             </td>
                             <td>
                                 {user.email}

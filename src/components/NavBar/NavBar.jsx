@@ -18,7 +18,7 @@ import Decoración from '/src/assets/img/Decoración.png'
 const pages=[
     {
         name: 'Inicio |',
-        route: '/'
+        route: '/home'
     },
     {
         name: 'Proyectos |',
@@ -37,7 +37,7 @@ const pages=[
 const settings=[
     {
         name: 'Iniciar Sesión',
-        route: '/signin'
+        route: '/'
     }
 
     // 'Perfil', 
