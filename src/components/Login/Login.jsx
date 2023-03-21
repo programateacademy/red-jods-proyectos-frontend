@@ -57,7 +57,8 @@ export default function SignIn() {
     // console.log(res.data);
     const role = res.data.data.role;
     const token = res.data.tokenSession;
-    setAuthData({ token, role });
+    const email = res.data.data.email;
+    setAuthData({ token, role, email });
     console.log(authData.role);
   };
 

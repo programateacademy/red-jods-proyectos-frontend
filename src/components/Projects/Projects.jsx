@@ -12,12 +12,13 @@ import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext/AuthContext';
+import { EmailTwoTone } from '@mui/icons-material';
 
 
 export default function Projects() {
     //Using AuthContext information
     const { authData }=useContext(AuthContext);
-    const { token, role }=authData;
+    const { token, role, email }=authData;
 
     //Variable for fecthing projects
     const [usersList, setUsersList]=useState([]);
@@ -29,9 +30,10 @@ export default function Projects() {
     useEffect(() => {
         console.log(role);
         console.log(token);
+        console.log(email)
 
         async function fetchData() {
-            const { data }=await projects.get("/Api/v1/project", {
+            const { data }=await projects.get(`/Api/v1/project/${email}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
