@@ -97,7 +97,7 @@ export default function Projects() {
     //Array with the field names in the admins table
     const columns=[
         { field: 'title', headerName: 'Nombre', width: 150 },
-        { field: 'category', headerName: 'Categoría', width: 150 },
+        { field: 'axis', headerName: 'Ejes', width: 150 },
         {
             field: 'Descripción',
             headerName: 'Descripción',
@@ -118,8 +118,10 @@ export default function Projects() {
             },
             width: 100
         },
-        { field: 'axis', headerName: 'Ejes', width: 150 },
-        { field: 'nameOds', headerName: 'ODS', width: 150 },
+
+        { field: 'indicator', headerName: 'Indicador', width: 150 },
+        { field: 'objective', headerName: 'Objetivo', width: 150 },
+        { field: 'doc', headerName: 'Link Doc', width: 150 },
         {
             field: 'Acciones',
             headerName: 'Acciones',

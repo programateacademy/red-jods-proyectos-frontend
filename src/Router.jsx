@@ -8,6 +8,7 @@ import Admins from './components/Administrators/Admins/Admins'
 import NewAdmin from './components/Administrators/NewAdmin/NewAdmin'
 import EditAdmin from './components/Administrators/EditAdmin/EditAdmin'
 import EditProject from './components/EditProject/EditProject'
+import Recover from './components/Recover/Recover';
 
 function Router() {
 
@@ -16,6 +17,7 @@ function Router() {
         createRoutesFromElements(
             <Route path='/' element={<Root />}>
                 <Route index element={<Login />} />
+                <Route path='/recover' element={<Recover />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/projects' element={<Projects />} />
                 <Route path='/newproject' element={<NewProject />} />

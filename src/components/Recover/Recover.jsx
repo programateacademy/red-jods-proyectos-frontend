@@ -23,7 +23,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" to="/" style={{ fontSize: "14px" }}>
+      <Link to="/" style={{ fontSize: "14px" }}>
         RedJODS
       </Link>{' '}
       {new Date().getFullYear()}
@@ -34,7 +34,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function Recover() {
 
   //Estamos importando el contexto de AuthContext y utilizando la función useContext para acceder a la función setAuthData.
   const { authData, setAuthData }=useContext(AuthContext);
@@ -44,28 +44,28 @@ export default function SignIn() {
   //This handle the submit of login
   const handleSubmit = async(event) => {
     event.preventDefault();
-    const rawFormData = new FormData(event.currentTarget);
-    const dataToSend = {
-      email: rawFormData.get('email'),
-      password: rawFormData.get('password')
-    } 
-    console.log({dataToSend});
-    let res = await api.post("/Api/v1/login", dataToSend);
-    console.log(res.data);
-    const role = res.data.data.role;
-    const token = res.data.tokenSession;
-    const email = res.data.data.email;
-    setAuthData({ token, role, email });
-    console.log(authData.role);
-    swal({
-      title: "Inicio de Sesión",
-      text: `Has iniciado sesión correctamente! 
-      Tu rol es ${role}`,
-      icon: "success",
-      button: "aceptar"
-    });
+    // const rawFormData = new FormData(event.currentTarget);
+    // const dataToSend = {
+    //   email: rawFormData.get('email'),
+    //   password: rawFormData.get('password')
+    // } 
+    // console.log({dataToSend});
+    // let res = await api.post("/Api/v1/login", dataToSend);
+    // console.log(res.data);
+    // const role = res.data.data.role;
+    // const token = res.data.tokenSession;
+    // const email = res.data.data.email;
+    // setAuthData({ token, role, email });
+    // console.log(authData.role);
+    // swal({
+    //   title: "Inicio de Sesión",
+    //   text: `Has iniciado sesión correctamente! 
+    //   Tu rol es ${role}`,
+    //   icon: "success",
+    //   button: "aceptar"
+    // });
 
-    navigate("/home");
+    navigate("/");
 
   };
 
@@ -81,7 +81,13 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <img src={logo} alt="Logo RedJODS"/>
+          {/* <img src={logo} alt="Logo RedJODS"/> */}
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Recuperar Contraseña
+          </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -104,22 +110,6 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Grid container>
-              <Grid item xs>
-                <Link to="/recover">
-                  ¿Olvidaste tu contraseña?
-                </Link>
-              </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"¿No tienes una cuenta? Regístrate"}
-                </Link>
-              </Grid> */}
-            </Grid>
-            {/*<FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recuérdame"
-            />*/}
               <Button
                 type="submit"
                 fullWidth
@@ -127,7 +117,7 @@ export default function SignIn() {
                 sx={{ mt: 3, mb: 2 }}
                 style={{textTransform: "Capitalize"}}
               >
-                Ingresar
+                Establecer Nueva Contraseña
               </Button>
             
           </Box>
