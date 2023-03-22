@@ -12,8 +12,6 @@ import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext/AuthContext';
-import { EmailTwoTone } from '@mui/icons-material';
-
 
 export default function Projects() {
     //Using AuthContext information
