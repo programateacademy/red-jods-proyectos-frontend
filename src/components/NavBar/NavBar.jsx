@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +13,8 @@ import logo from '/src/assets/img/logo.svg'
 import { Link } from 'react-router-dom'
 import UserLogo from '/src/assets/img/User.png'
 import Decoración from '/src/assets/img/Decoración.png'
+import React, { useContext } from 'react';
+import { AuthContext } from '../../components/AuthContext/AuthContext';
 
 const pages=[
     {
@@ -65,6 +66,10 @@ function NavBar() {
         setAnchorElUser(null);
     };
 
+    //Using AuthContext information
+    const { authData }=useContext(AuthContext);
+    const { token, role }=authData;
+
     return (
         <AppBar position="static" style={{ backgroundColor: "white", justifyContent: 'space-between' }}>
             <Container maxWidth="xl">
@@ -82,6 +87,7 @@ function NavBar() {
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (
+                                        (page.name==='Admins |'&&role!=='superAdmin')? null:
                                         <Link key={page.name} to={page.route} style={{marginRight: "10px", marginLeft: "5px"}}>
                                             {page.name}
                                         </Link>
@@ -162,6 +168,7 @@ function NavBar() {
                             }}
                         >
                             {pages.map((page) => (
+                                (page.name==='Admins |'&&role!=='superAdmin')? null:
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                                     <Link to={page.route}>
                                         <Typography textAlign="center">{page.name}</Typography>
