@@ -1,0 +1,29 @@
+.Container {
+    width: var(--container-width-sm);
+    margin: 1rem;
+}
+
+#decoration {
+    max-width: 90%;
+}
+
+.Decoration{
+    padding: 0 0 0 10px;
+    max-width: 280px ;
+}
+
+@media (min-width: 768px){
+    .Container {
+        width: var(--container-width-md);
+        margin: 1rem 0 1rem 3rem;
+    }
+  }
+  
+  
+  @media (min-width: 2560px){
+    .Container {
+        width: var(--container-width-lg);
+        margin: 1rem 0 1rem 3rem;
+    }
+  
+  }

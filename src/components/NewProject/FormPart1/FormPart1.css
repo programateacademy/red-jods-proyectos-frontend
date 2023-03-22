@@ -1,32 +1,79 @@
-.Form, .multipleOptions {
+
+#inputs {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.Form {
-  margin-left: 0.5rem;
+#title-form {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 5px;
+
 }
 
-@media (min-width: 768px) {
-  .Form {
-    margin: 1rem 4rem 1rem 4rem;
+#input-form{
+  border: 2px solid var(--primary-color);
+  max-width: 100%;
+  height: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 2px;
+} 
+
+#input-form-des{
+  border: 2px solid var(--primary-color);
+  max-width: 100%;
+  height: 5rem;
+  border-radius: 0.5rem;
+  padding: 5px;
+}
+
+#error-msg {
+  color: var(--error-color);
+  font-size: 12px;
+}
+
+
+@media (min-width: 768px){
+  #title-form {
+    font-size: 1.5rem;
+    margin-top: 3px;
+  }
+
+  #input-form{
+    height: 2.5rem;
+  } 
+  
+  #input-form-des{
+    height: 6rem;
+  }
+
+  #error-msg {
+    font-size: 16px;
   }
 }
 
-@media (min-width: 992px) {
-  .Form {
-    margin: 0.5rem 0rem 0.5rem 7rem;
-  }
-}
 
-@media (min-width: 1200px){
-  .Form {
-    margin: 0.5rem 0rem 0.5rem 7rem;
+@media (min-width: 2560px){
+  #title-form {
+    font-size: 2.8rem;
+    margin-top: 3px;
   }
 
-}
+  #input-form{
+    height: 3.5rem;
+    font-size: 1.5rem;
+  } 
+  
+  #input-form-des{
+    height: 6rem;
+    font-size: 1.5rem;
+  }
 
+  #error-msg {
+    font-size: 22px;
+  }
+
+}
 
 
 
