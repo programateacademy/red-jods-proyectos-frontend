@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,7 +10,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import users from "../../../apis";
+import users from "../../../apis/index";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { AuthContext } from '../../AuthContext/AuthContext';
+import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
 
 
 function Copyright(props) {
@@ -30,84 +35,51 @@ function Copyright(props) {
 
 const theme=createTheme();
 
-export default function EditUser() {
+export default function NewUser() {
 
-    //Variable for fecthing users
-    const [usersList, setUsersList]=useState([]);
+    //Using AuthContext information
+    const { authData }=useContext(AuthContext);
+    const { token }=authData;
+    const [rol, setRol]=useState("");
+    // Hook de react router dom para navegar al darle submit
+    const navigate=useNavigate();
 
-    useEffect(() => {
-        async function fetchData() {
-            const { data }=await users.get("/api/v1/users");
-            setUsersList(data);
-        }
-
-        fetchData();
-    }, []);
-
-    const addUser=async (user) => {
-        const { data }=await users.post("/api/v1/users", user);
-        setUsersList((oldList) => [...oldList, data]);
+    const handleRolChange=(e) => {
+        setRol(e.target.value);
     };
-
-    //Variables temporales
-    const [name, setName]=useState("");
-    const [lastname, setLastName]=useState("");
-    const [email, setEmail]=useState("");
-    const [password, setPassword]=useState("");
-    const [is_admin, setIsAdmin]=useState(true);
-
-    //Handling changes in input and submission of the form.
-    const handleNameChange=(e) => {
-        setName(e.target.value);
-    };
-    const handleLastNameChange=(e) => {
-        setLastName(e.target.value);
-    };
-    const handleEmailChange=(e) => {
-        setEmail(e.target.value);
-    };
-    const handlePasswordChange=(e) => {
-        setPassword(e.target.value);
-    };
-
 
     // It is an event handler that handles the submission of the form. When the user submits the form, this event handler takes the current values of the form fields (name, lastname, duration, password, date, and country) and passes them to the addUser method to add a new element.
-    const handleSubmit=(e) => {
+    const handleSubmit= async(e) => {
         e.preventDefault();
-
-        console.log({
-            name: name,
-            lastname: lastname,
-            email: email,
-            password: password,
-            is_admin: is_admin,
+        const rawFormData=new FormData(e.currentTarget);
+        const dataToSend={
+            name: rawFormData.get('name'),
+            last_name: rawFormData.get('last_name'),
+            email: rawFormData.get('email'),
+            password: rawFormData.get('password'),
+            phone: rawFormData.get('phone'),
+            role: "admin",
+            state: true
+        }
+        console.log({ dataToSend });
+        //This tries to interacts with the API and Create One User and awaits the response
+        let res=await users.post("/Api/v1/user", dataToSend, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         });
-
-        addUser({
-            name: name,
-            lastname: lastname,
-            email: email,
-            password: password,
-            is_admin: true,
+        console.log(res.data);
+        swal({
+            title: "Creación de Usuario",
+            text: `Has creado el usuario ${res.data.data.name} un usuario correctamente!`,
+            icon: "success",
+            button: "aceptar"
         });
-        setName("");
-        setLastName("");
-        setEmail("");
-        setPassword("");
-        setIsAdmin("");
+        if (res.data.data._id){
+            navigate("/users");
+        }
+
     };
-
-    // const handleSubmit=(event) => {
-    //     event.preventDefault();
-    //     const dataForm=new FormData(event.currentTarget);
-    //     console.log({
-    //         name: name,
-    //         lastname: lastname,
-    //         email: email,
-    //         password: password,
-    //         is_admin: is_admin,
-    //     });
-    // };
 
     return (
         <ThemeProvider theme={theme}>
@@ -138,18 +110,18 @@ export default function EditUser() {
                                     id="name"
                                     label="Nombre"
                                     autoFocus
-                                    onChange={handleNameChange}
+                                    // onChange={handleNameChange}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastname"
+                                    id="last_name"
                                     label="Apellido"
-                                    name="lastname"
+                                    name="last_name"
                                     autoComplete="family-name"
-                                    onChange={handleLastNameChange}
+                                    // onChange={handleLastNameChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -160,7 +132,7 @@ export default function EditUser() {
                                     label="Correo Electrónico"
                                     name="email"
                                     autoComplete="email"
-                                    onChange={handleEmailChange}
+                                    // onChange={handleEmailChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -172,8 +144,35 @@ export default function EditUser() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
-                                    onChange={handlePasswordChange}
+                                    // onChange={handlePasswordChange}
                                 />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="phone"
+                                    label="Teléfono"
+                                    name="phone"
+                                    autoComplete="family-name"
+                                    // onChange={handlePhoneChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="rol"
+                                        value={rol}
+                                        label="Rol"
+                                        onChange={handleRolChange}
+                                    >
+                                        <MenuItem value={10}>user</MenuItem>
+                                        <MenuItem value={20}>admin</MenuItem>
+                                        <MenuItem value={30}>superAdmin</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Grid>
                         
@@ -183,17 +182,8 @@ export default function EditUser() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            <Link to="/users">
-                                Crear Usuario
-                            </Link>
+                            Crear Usuario
                         </Button>
-                        {/* <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid> */}
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 5 }} />

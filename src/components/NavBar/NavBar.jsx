@@ -87,7 +87,7 @@ function NavBar() {
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (
-                                        (page.name==='Admins |'&&role!=='superAdmin')? null:
+                                        (page.name==='Usuarios |'&&role!=='superAdmin')? null:
                                         <Link key={page.name} to={page.route} style={{marginRight: "10px", marginLeft: "5px"}}>
                                             {page.name}
                                         </Link>
@@ -168,7 +168,7 @@ function NavBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                (page.name==='Admins |'&&role!=='superAdmin')? null:
+                                (page.name==='Usuarios |'&&role!=='superAdmin')? null:
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                                     <Link to={page.route}>
                                         <Typography textAlign="center">{page.name}</Typography>
