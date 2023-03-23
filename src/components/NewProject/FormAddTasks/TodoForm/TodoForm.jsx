@@ -51,7 +51,7 @@ function TodoForm(props) {
           <input
             placeholder='Agregar tarea'
             value={input}
-            onChange={handleChange}//onChange equivale a la función que...
+            onChange={handleChange}//onChange equivale a la función que toma los cambios dentro del elemento
             name='text'
             className='todo-input'
             ref={inputRef}

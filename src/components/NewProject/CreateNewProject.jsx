@@ -1,22 +1,72 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/src/assets/img//Decoración.png'
-import TodoList from './FormAddTasks/TodoList/TodoList';
+import Todo from './FormAddTasks/Todo/Todo';
 import './FormAddTasks/FormAddTask.css'
 import './CreateNewProject.css'
 import { useForm } from 'react-hook-form'
 import Grid from '@mui/material/Grid';
+import TodoForm from '../NewProject/FormAddTasks/TodoForm/TodoForm'
+import '../NewProject/FormAddTasks/FormAddTask.css'
+import {addProject} from '../../apis/index'
 
-
-// //Conectar con el backend
-// import { AuthContext } from '../../AuthContext/AuthContext'; //Guardar las variables que los componentes vana usar
-// import { useContext } from 'react'; //hook que usa el contexto
-// //importar la direccion del backend
-// import users from "../../../apis/index";
 
 
 export default function NewProject() {
 
+    //Almecenando todas las tareas que se estan creando desde el input 
+    const [todos, setTodos] = useState([]);
+
+    //Agregar las tareas, todo es donde se alamcena la tarea
+    const addTodo = todo => {
+        //Arreglar el texto  en dado caso de que alguien deje espacios
+        if (!todo.text || /^\s*$/.test(todo.text)) {
+            return
+        }
+        //Se guardan cada una de la lista de tareas que se estan almacenando
+        setTodos([todo, ...todos])
+
+    };
+
+    const updateTodo = (todoId, newValue) => {
+        if (!newValue.text || /^\s*$/.test(newValue.text)) {
+            return
+        }
+        // Si el item del id es igual al nuevo id que se desea modificar, estara en true, pero si no el nuevo visualViewport, regresara al id antiguo
+        setTodos(prev => prev.map(item => item.id === todoId ? newValue : item))
+
+    }
+
+    const completeTodo = id => {
+        let updatedTodos = todos.map(todo => {
+            if (todo.id === id) {
+                todo.isComplete = !todo.isComplete
+            }
+            return todo
+        })
+        setTodos(updatedTodos);
+    };
+
+    const removeTodo = id => {
+        const removeArr = [...todos].filter(todo => todo.id !== id)
+
+        setTodos(removeArr)
+    };
+
+    
+    const { register, handleSubmit, formState: { errors } } = useForm({});
+
+    //onSubmit se debe consumir la api
+
+    //Donde se esta almacenando la data
+    const onSubmit = (data) => {
+        const newProject = {
+            ...data,
+            "task": todos
+        }
+        console.log(newProject) 
+        addProject (newProject)
+    }
     //Using AuthContext information
     // const { authData }=useContext(AuthContext);
     // const { token, role, email }=authData; //desestructura para guardar en variables
@@ -25,25 +75,17 @@ export default function NewProject() {
     //  const addProject=async (user) => { //user es el arr donde se alamacena la información del proyecto
     //     const { data }=await users.post("/Api/v1/project", { //envio token 
     //         headers: {
-    //             Authorization: `Bearer ${token}`
+    //             Authorization: Bearer ${token}
     //         }
     //     }, user); 
     //     //users api import users from "../../../apis/index"; dirección del backend (newproject)
 
     //     setUsersList((oldList) => [...oldList, data]);
     // };
-
-    const { register, handleSubmit, formState: { errors } } = useForm({});
-
-    //Donde se esta almacenando la data
-    const onSubmit = (data) => {
-        console.log(data);
-    }
-
-
+    
     return (
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='Container'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='Container'>
                 <div className='firstParForm'>
                     {/* This elements are displayed when screen is medium or large */}
                     <Box sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -151,7 +193,7 @@ export default function NewProject() {
                                 <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('objective', { required: true })} />
                                 {errors.objective?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                             </div>
-                            
+
                         </Grid>
                     </Grid>
                 </div>
@@ -172,16 +214,22 @@ export default function NewProject() {
                         </Box>
                     </div>
                     <div className="to-do">
-                        <TodoList />
+                        <TodoForm
+                            onSubmit={addTodo} />
+                        <Todo
+                            todos={todos}
+                            completeTodo={completeTodo}
+                            removeTodo={removeTodo}
+                            updateTodo={updateTodo} />
                     </div>
 
                     <div className="BtnBox">
                         <input id='Btn-form' type="submit" value="Enviar" />
                     </div>
                 </div>
-                </div>
+            </div>
 
-            </form>
+        </form>
     )
 }
 
