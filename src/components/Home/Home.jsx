@@ -7,10 +7,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import "./Home.css";
 import AppPagination from "./pagination/pagination";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from '../AuthContext/AuthContext';
 
 export default function Home() {
   const [card, setCard] = useState([]);
+
+  //Using AuthContext information
+  const { authData }=useContext(AuthContext);
+  const { token, role, name }=authData;
 
   return (
     <div className="container_box">
@@ -24,7 +29,7 @@ export default function Home() {
       */}
       {/* This elements are displayed when screen is small */}
       <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
-        <h1>¡Hola Súper Administrador!</h1>
+        <h1>¡Hola {name}, eres {role}!</h1>
         <img src={Decoración} alt="" />
       </Box>
       <div className="cardBox">

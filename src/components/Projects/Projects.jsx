@@ -176,7 +176,7 @@ export default function Projects() {
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     {/* Create User Button */}
-                    <Link to="/newadmin">
+                    <Link to="/newproject">
                         <Button
                             style={{ backgroundColor: "green", color: "white", margin: "40px" }}
                         >

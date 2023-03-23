@@ -55,7 +55,8 @@ export default function SignIn() {
     const role = res.data.data.role;
     const token = res.data.tokenSession;
     const email = res.data.data.email;
-    setAuthData({ token, role, email });
+    const name=res.data.data.name;
+    setAuthData({ token, role, email, name });
     console.log(authData.role);
     swal({
       title: "Inicio de Sesión",

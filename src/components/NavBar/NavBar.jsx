@@ -30,8 +30,8 @@ const pages=[
         route: '/newproject'
     },
     {
-        name: 'Admins |',
-        route: '/admins'
+        name: 'Usuarios |',
+        route: '/users'
     }
 ];
 
