@@ -3,7 +3,7 @@ import Root from './components/Root'
 import Home from './components/Home/Home'
 import Login from './components/Login/Login';
 import Projects from './components/Projects/Projects'
-import NewProject from './components/NewProject/NewProject'
+import NewProject from './components/NewProject/CreateNewProject'
 import Users from './components/Users/Users/Users'
 import NewUser from './components/Users/NewUser/NewUser'
 import EditUser from './components/Users/EditUser/EditUser'

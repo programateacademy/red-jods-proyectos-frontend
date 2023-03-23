@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useContext} from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/src/assets/img//Decoración.png'
 import Todo from './FormAddTasks/Todo/Todo';
@@ -8,7 +8,9 @@ import { useForm } from 'react-hook-form'
 import Grid from '@mui/material/Grid';
 import TodoForm from '../NewProject/FormAddTasks/TodoForm/TodoForm'
 import '../NewProject/FormAddTasks/FormAddTask.css'
-import {addProject} from '../../apis/index'
+//import { addProject } from '../../apis/index'
+import { AuthContext } from '../AuthContext/AuthContext';
+import baseURL from '../../apis/index'
 
 
 
@@ -53,36 +55,62 @@ export default function NewProject() {
         setTodos(removeArr)
     };
 
-    
+
     const { register, handleSubmit, formState: { errors } } = useForm({});
 
     //onSubmit se debe consumir la api
 
     //Donde se esta almacenando la data
-    const onSubmit = (data) => {
-        const newProject = {
-            ...data,
-            "task": todos
-        }
-        console.log(newProject) 
-        addProject (newProject)
-    }
-    //Using AuthContext information
-    // const { authData }=useContext(AuthContext);
-    // const { token, role, email }=authData; //desestructura para guardar en variables
+    const { authData } = useContext(AuthContext);
+    const { token, email } = authData;
 
-    //  //This interacts with API and Create one Project
-    //  const addProject=async (user) => { //user es el arr donde se alamacena la información del proyecto
-    //     const { data }=await users.post("/Api/v1/project", { //envio token 
-    //         headers: {
-    //             Authorization: Bearer ${token}
-    //         }
-    //     }, user); 
-    //     //users api import users from "../../../apis/index"; dirección del backend (newproject)
-
-    //     setUsersList((oldList) => [...oldList, data]);
-    // };
     
+    const onSubmit = async (data) => {
+        // const newProject = {
+        //     "emailUser": "camicardenasp@gmail.com",
+        //     "title": "Proyecto de Camilo",
+        //     "axis": "Paz",
+        //     "ods": [
+        //      {
+        //       "url": "https://sproutsocial.com/es/glossary/profile-picture/",
+        //       "nameOds": "Agua limpia y saneamiento"
+        //      }
+        //     ],
+        //     "description": "un nuevo proyecto",
+        //     "indicator": "Un indicador descriptivo",
+        //     "objective": "mision del proyecto",
+        //     "doc": "https://sproutsocial.com/es/glossary/profile-picture/",
+        //     "task": [
+        //      {
+        //       "name": "Tarea Uno",
+        //       "state": true
+        //      },
+        //      {
+        //       "name": "Tarea Dos",
+        //       "state": false
+        //      }
+        //     ],
+        //     "state": true
+        // }
+        const newProject = {
+        ...data,
+         "task": todos,
+         "emailUser": email,
+        }
+        //console.log(newProject)
+        // addProject (newProject)
+        //Using AuthContext information
+        console.log(newProject)
+        console.log(token)
+        
+        let res = await baseURL.post("/Api/v1/project/", newProject, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(res.data)
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='Container'>

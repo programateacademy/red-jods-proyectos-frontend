@@ -1,29 +1,11 @@
 import axios from "axios";
-import { useContext } from 'react';
-import { AuthContext } from '../../AuthContext/AuthContext';
+
 
 export default axios.create({
   baseURL: "https://red-jods-proyectos-backend.onrender.com/"
 });
 
-const URL = "https://red-jods-proyectos-backend.onrender.com"
 
-//Using AuthContext information
-const { authData } = useContext(AuthContext);
-const { token, role } = authData;
-
-
-export const addProject = async (data) => {
-  try {
-    return await URL.post("/Api/v1/project", data, {
-    headers: {
-      Authorization:`Bearer ${ token }`
-    }
-  });
-  } catch (e) {
-    console.log("Error while calling project Api", e);
-  }
-};
 
 export const getProjects = async (token) => {
   try {
