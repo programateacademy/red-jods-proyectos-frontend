@@ -71,7 +71,7 @@ export default function NewUser() {
         console.log(res.data);
         swal({
             title: "Creación de Usuario",
-            text: `Has creado el usuario ${res.data.data.name} un usuario correctamente!`,
+            text: `Has creado el usuario ${res.data.data.name} correctamente!`,
             icon: "success",
             button: "aceptar"
         });

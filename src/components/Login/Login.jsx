@@ -65,8 +65,9 @@ export default function SignIn() {
       icon: "success",
       button: "aceptar"
     });
-
-    navigate("/home");
+    if (res.data.tokenSession){
+      navigate("/home");
+    }
 
   };
 
