@@ -11,9 +11,9 @@ import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthContext/AuthContext';
-import './Admins.css'
+import './Users.css'
 
-export default function Admins() {
+export default function Users() {
     //Using AuthContext information
     const { authData }=useContext(AuthContext);
     const { token, role }=authData;
@@ -143,17 +143,17 @@ export default function Admins() {
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                     <div>
-                        <h1 style={{ padding: "40px 40px 0px 40px" }}>Administradores</h1>
+                        <h1 style={{ padding: "40px 40px 0px 40px" }}>Usuarios</h1>
                         <img src={Decoración} alt="" style={{ padding: "0 0 0 40px", Width:"300px", flexGrow: "50%" }} />
                     </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     {/* Create User Button */}
-                    <Link to="/newadmin">
+                    <Link to="/newuser">
                         <Button
                             style={{ backgroundColor: "green", color: "white", margin: "40px" }}
                         >
-                            Crear Admin
+                            Crear Usuario
                         </Button>
                     </Link>
                     {/* RNF-03: it is required to have a search in the lists and to be able to search by name. */}
@@ -175,7 +175,7 @@ export default function Admins() {
             <Box sx={{ display: { xs: 'block', md: 'none' }, justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <div>
-                        <h1 style={{ padding: "20px 10px 0px 10px" }}>Administradores</h1>
+                        <h1 style={{ padding: "20px 10px 0px 10px" }}>Usuarios</h1>
                         <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
                     </div>
                     {/* Create User Button */}

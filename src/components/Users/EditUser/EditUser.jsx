@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,8 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import users from "../../../apis";
-
 
 function Copyright(props) {
     return (
@@ -30,84 +28,15 @@ function Copyright(props) {
 
 const theme=createTheme();
 
-export default function EditAdmin() {
-
-    //Variable for fecthing users
-    const [usersList, setUsersList]=useState([]);
-
-    useEffect(() => {
-        async function fetchData() {
-            const { data }=await users.get("/api/v1/users");
-            setUsersList(data);
-        }
-
-        fetchData();
-    }, []);
-
-    const addUser=async (user) => {
-        const { data }=await users.post("/api/v1/users", user);
-        setUsersList((oldList) => [...oldList, data]);
-    };
-
-    //Variables temporales
-    const [name, setName]=useState("");
-    const [lastname, setLastName]=useState("");
-    const [email, setEmail]=useState("");
-    const [password, setPassword]=useState("");
-    const [is_admin, setIsAdmin]=useState(true);
-
-    //Handling changes in input and submission of the form.
-    const handleNameChange=(e) => {
-        setName(e.target.value);
-    };
-    const handleLastNameChange=(e) => {
-        setLastName(e.target.value);
-    };
-    const handleEmailChange=(e) => {
-        setEmail(e.target.value);
-    };
-    const handlePasswordChange=(e) => {
-        setPassword(e.target.value);
-    };
-
-
-    // It is an event handler that handles the submission of the form. When the user submits the form, this event handler takes the current values of the form fields (name, lastname, duration, password, date, and country) and passes them to the addUser method to add a new element.
-    const handleSubmit=(e) => {
-        e.preventDefault();
-
+export default function EditUser() {
+    const handleSubmit=(event) => {
+        event.preventDefault();
+        const data=new FormData(event.currentTarget);
         console.log({
-            name: name,
-            lastname: lastname,
-            email: email,
-            password: password,
-            is_admin: is_admin,
+            email: data.get('email'),
+            password: data.get('password'),
         });
-
-        addUser({
-            name: name,
-            lastname: lastname,
-            email: email,
-            password: password,
-            is_admin: true,
-        });
-        setName("");
-        setLastName("");
-        setEmail("");
-        setPassword("");
-        setIsAdmin("");
     };
-
-    // const handleSubmit=(event) => {
-    //     event.preventDefault();
-    //     const dataForm=new FormData(event.currentTarget);
-    //     console.log({
-    //         name: name,
-    //         lastname: lastname,
-    //         email: email,
-    //         password: password,
-    //         is_admin: is_admin,
-    //     });
-    // };
 
     return (
         <ThemeProvider theme={theme}>
@@ -125,31 +54,29 @@ export default function EditAdmin() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Crear Administrador
+                        Editar Administrador
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="name"
+                                    name="firstName"
                                     required
                                     fullWidth
-                                    id="name"
-                                    label="Nombre"
+                                    id="firstName"
+                                    label="First Name"
                                     autoFocus
-                                    onChange={handleNameChange}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastname"
-                                    label="Apellido"
-                                    name="lastname"
+                                    id="lastName"
+                                    label="Last Name"
+                                    name="lastName"
                                     autoComplete="family-name"
-                                    onChange={handleLastNameChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -157,10 +84,9 @@ export default function EditAdmin() {
                                     required
                                     fullWidth
                                     id="email"
-                                    label="Correo Electrónico"
+                                    label="Email Address"
                                     name="email"
                                     autoComplete="email"
-                                    onChange={handleEmailChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -168,32 +94,34 @@ export default function EditAdmin() {
                                     required
                                     fullWidth
                                     name="password"
-                                    label="Contraseña"
+                                    label="Password"
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
-                                    onChange={handlePasswordChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControlLabel
+                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                    label="I want to receive inspiration, marketing promotions and updates via email."
                                 />
                             </Grid>
                         </Grid>
-                        
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            <Link to="/admins">
-                                Crear Administrador
-                            </Link>
+                            Editar Administrador
                         </Button>
-                        {/* <Grid container justifyContent="flex-end">
+                        <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link href="#" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
-                        </Grid> */}
+                        </Grid>
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 5 }} />

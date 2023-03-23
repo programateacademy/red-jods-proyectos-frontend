@@ -30,7 +30,7 @@ a:active {
     /*para tablets*/
     --container-width-md:86%;
     /*small devices like a cellphone */
-    --container-width-sm:90%;
+    --container-width-sm:85%;
 
 }
 

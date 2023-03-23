@@ -13,11 +13,10 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext/AuthContext';
 
-
 export default function Projects() {
     //Using AuthContext information
     const { authData }=useContext(AuthContext);
-    const { token, role }=authData;
+    const { token, role, email }=authData;
 
     //Variable for fecthing projects
     const [usersList, setUsersList]=useState([]);
@@ -29,9 +28,10 @@ export default function Projects() {
     useEffect(() => {
         console.log(role);
         console.log(token);
+        console.log(email)
 
         async function fetchData() {
-            const { data }=await projects.get("/Api/v1/project", {
+            const { data }=await projects.get(`/Api/v1/project/${email}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -97,7 +97,7 @@ export default function Projects() {
     //Array with the field names in the admins table
     const columns=[
         { field: 'title', headerName: 'Nombre', width: 150 },
-        { field: 'category', headerName: 'Categoría', width: 150 },
+        { field: 'axis', headerName: 'Ejes', width: 150 },
         {
             field: 'Descripción',
             headerName: 'Descripción',
@@ -118,8 +118,10 @@ export default function Projects() {
             },
             width: 100
         },
-        { field: 'axis', headerName: 'Ejes', width: 150 },
-        { field: 'nameOds', headerName: 'ODS', width: 150 },
+
+        { field: 'indicator', headerName: 'Indicador', width: 150 },
+        { field: 'objective', headerName: 'Objetivo', width: 150 },
+        { field: 'doc', headerName: 'Link Doc', width: 150 },
         {
             field: 'Acciones',
             headerName: 'Acciones',
@@ -174,7 +176,7 @@ export default function Projects() {
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     {/* Create User Button */}
-                    <Link to="/newadmin">
+                    <Link to="/newproject">
                         <Button
                             style={{ backgroundColor: "green", color: "white", margin: "40px" }}
                         >

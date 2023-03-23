@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -21,11 +20,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" to="/" style={{ fontSize: "14px" }}>
+      <Link to="/" style={{ fontSize: "14px" }}>
         RedJODS
       </Link>{' '}
       {new Date().getFullYear()}
@@ -36,7 +36,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function Recover() {
 
   //Estamos importando el contexto de AuthContext y utilizando la función useContext para acceder a la función setAuthData.
   const { authData, setAuthData }=useContext(AuthContext);
@@ -44,34 +44,13 @@ export default function SignIn() {
   const navigate = useNavigate();
 
   //Handle email change
-  const [emailPreview, setEmailPreview ] = useState("");
+  const [tokenPreview, setTokenPreview]=useState("");
 
-  const handleEmailChange=(e) => {
-    setEmailPreview(e.target.value);
-    console.log(emailPreview)
+  const handleTokenChange=(e) => {
+    setTokenPreview(e.target.value);
+    console.log(tokenPreview)
   } 
 
-  //This handle the forgot password
-  const handleForgot = async (e) => {
-    e.preventDefault();
-    const dataToSend={
-      email: emailPreview
-    }
-    console.log({ dataToSend });
-    let res=await api.post("/Api/v1/login/forgot-password", dataToSend);
-    console.log(res.data);
-    swal({
-      title: "Envío Correo de Recuperación",
-      text: `${res.data}!
-
-      Revisa la bandeja de entrada de tu correo ${emailPreview} 
-      
-      Copia y pega el código que se te envió, ingresa el correo, la nueva contraseña y dale click en Establecer Nueva Contraseña.`,
-      icon: "success",
-      button: "aceptar"
-    });
-    navigate("/recover");
-  }
 
   //This handle the submit of login
   const handleSubmit = async(event) => {
@@ -82,24 +61,22 @@ export default function SignIn() {
       password: rawFormData.get('password')
     } 
     console.log({dataToSend});
-    let res = await api.post("/Api/v1/login", dataToSend);
+    let res = await api.post("/Api/v1/login/password-recovery", dataToSend, {
+      headers: {
+        Authorization: `Bearer ${tokenPreview}`
+      }
+    });
     console.log(res.data);
-    const role = res.data.data.role;
-    const token = res.data.tokenSession;
-    const email = res.data.data.email;
-    const name=res.data.data.name;
-    setAuthData({ token, role, email, name });
-    console.log(authData.role);
     swal({
-      title: "Inicio de Sesión",
-      text: `Has iniciado sesión correctamente! 
-      Tu rol es ${role}`,
+      title: "Recuperación de Contraseña",
+      text: `Has cambiado exitosamente la contraseña del correo ${res.data.email} ! 
+
+      Inicia Sesión con los nuevos datos de acceso`,
       icon: "success",
       button: "aceptar"
     });
-    if (res.data.tokenSession){
-      navigate("/home");
-    }
+
+    navigate("/");
 
   };
 
@@ -121,8 +98,26 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <img src={logo} alt="Logo RedJODS"/>
+          {/* <img src={logo} alt="Logo RedJODS"/> */}
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Recuperar Contraseña
+          </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="token"
+              label="Código Enviado al Correo Electrónico"
+              name="token"
+              autoComplete="token"
+              autoFocus
+              onChange={handleTokenChange}
+            />
+            
             <TextField
               margin="normal"
               required
@@ -132,7 +127,6 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={handleEmailChange}
             />
             
             <TextField
@@ -142,7 +136,7 @@ export default function SignIn() {
               name="password"
               label="Contraseña"
               id="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
               variant="outlined"
               type={showPassword? "text":"password"} // <-- This is where the magic happens
               InputProps={{ // <-- This is where the toggle button is added.
@@ -159,22 +153,6 @@ export default function SignIn() {
                 )
               }}
             />
-            <Grid container>
-              <Grid item xs>
-                <button onClick={handleForgot}>
-                  ¿Olvidaste tu contraseña?
-                </button>
-              </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"¿No tienes una cuenta? Regístrate"}
-                </Link>
-              </Grid> */}
-            </Grid>
-            {/*<FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recuérdame"
-            />*/}
               <Button
                 type="submit"
                 fullWidth
@@ -182,7 +160,7 @@ export default function SignIn() {
                 sx={{ mt: 3, mb: 2 }}
                 style={{textTransform: "Capitalize"}}
               >
-                Ingresar
+                Establecer Nueva Contraseña
               </Button>
             
           </Box>
