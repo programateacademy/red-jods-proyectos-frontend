@@ -4,6 +4,7 @@ import {RxUpdate} from "react-icons/rx";
 import {BsPlusCircle} from 'react-icons/bs'
 
 function TodoForm(props) {
+  //estado de solo una tarea nueva que se ingresa
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
 
   const inputRef = useRef(null);
@@ -12,16 +13,18 @@ function TodoForm(props) {
     inputRef.current.focus();
   });
 
+//Funcion de call back que se llama cada vez que hay cambios en un elemento del dom,  e= el argumento del cambio; target=input en el que se están ingresando datos; value= valor actual del input; esto se asigna dentro del setInput (Hook useState)
   const handleChange = e => {
     setInput(e.target.value);
   };
 
+//Prevenir que se recargue la página
   const handleSubmit = e => {
     e.preventDefault();
 
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: input
+    props.onSubmit({//utilizamos los props para poder pasar la propiedades y el id y la tarea (texto), es el input
+      id: Math.floor(Math.random() * 10000),//Id para cada una de las tareas
+      text: input //input del useState
     });
     setInput('');
   };
@@ -30,6 +33,7 @@ function TodoForm(props) {
     <form onSubmit={handleSubmit} className='todo-form'>
       {props.edit ? (
         <>
+
           <input
             placeholder='Actualiza tu tarea'
             value={input}
@@ -47,7 +51,7 @@ function TodoForm(props) {
           <input
             placeholder='Agregar tarea'
             value={input}
-            onChange={handleChange}
+            onChange={handleChange}//onChange equivale a la función que...
             name='text'
             className='todo-input'
             ref={inputRef}

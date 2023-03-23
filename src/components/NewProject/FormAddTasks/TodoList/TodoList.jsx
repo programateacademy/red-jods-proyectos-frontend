@@ -6,6 +6,7 @@ import '../FormAddTask.css'
 
 function TodoList() {
 
+  //Almecenando todas las tareas que se estan creando desde el input 
   const [todos, setTodos] = useState ([]);
 
   //Agregar las tareas, todo es donde se alamcena la tarea
@@ -14,10 +15,11 @@ function TodoList() {
     if (!todo.text || /^\s*$/.test(todo.text)){
         return
     }
-    //Seguarda la lista de tareas que se van agregando
+    //Se guardan cada una de la lista de tareas que se estan almacenando
     const newTodos = [todo, ...todos]
 
     setTodos(newTodos)
+    console.log(newTodos)
   };
 
   const updateTodo = (todoId, newValue) => {
@@ -48,8 +50,9 @@ function TodoList() {
 
   return (
     <div>
+      {/* asociar un evento "onSubmit" con una función de callback "addTodo" que se encarga de procesar los datos enviados por el formulario. */}
         <TodoForm
-        onSubmit={addTodo}/>
+        onSubmit={addTodo}/> 
         <Todo
         todos={todos}
         completeTodo={completeTodo}
