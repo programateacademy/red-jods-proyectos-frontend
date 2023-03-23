@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -18,6 +16,10 @@ import { useContext } from 'react';
 import { AuthContext } from '../AuthContext/AuthContext';
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function Copyright(props) {
   return (
@@ -71,6 +73,12 @@ export default function SignIn() {
 
   };
 
+  //To show password
+  // Add these variables to your component to track the state
+  const [showPassword, setShowPassword]=useState(false);
+  const handleClickShowPassword=() => setShowPassword(!showPassword);
+  const handleMouseDownPassword=() => setShowPassword(!showPassword);
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -102,9 +110,23 @@ export default function SignIn() {
               fullWidth
               name="password"
               label="Contraseña"
-              type="password"
               id="password"
               autoComplete="current-password"
+              variant="outlined"
+              type={showPassword? "text":"password"} // <-- This is where the magic happens
+              InputProps={{ // <-- This is where the toggle button is added.
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword? <Visibility />:<VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
             />
             <Grid container>
               <Grid item xs>
