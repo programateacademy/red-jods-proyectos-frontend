@@ -3,9 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -46,29 +43,38 @@ export default function Recover() {
   // Hook de react router dom para navegar al darle submit
   const navigate = useNavigate();
 
+  //Handle email change
+  const [tokenPreview, setTokenPreview]=useState("");
+
+  const handleTokenChange=(e) => {
+    setTokenPreview(e.target.value);
+    console.log(tokenPreview)
+  } 
+
+
   //This handle the submit of login
   const handleSubmit = async(event) => {
     event.preventDefault();
-    // const rawFormData = new FormData(event.currentTarget);
-    // const dataToSend = {
-    //   email: rawFormData.get('email'),
-    //   password: rawFormData.get('password')
-    // } 
-    // console.log({dataToSend});
-    // let res = await api.post("/Api/v1/login", dataToSend);
-    // console.log(res.data);
-    // const role = res.data.data.role;
-    // const token = res.data.tokenSession;
-    // const email = res.data.data.email;
-    // setAuthData({ token, role, email });
-    // console.log(authData.role);
-    // swal({
-    //   title: "Inicio de Sesión",
-    //   text: `Has iniciado sesión correctamente! 
-    //   Tu rol es ${role}`,
-    //   icon: "success",
-    //   button: "aceptar"
-    // });
+    const rawFormData = new FormData(event.currentTarget);
+    const dataToSend = {
+      email: rawFormData.get('email'),
+      password: rawFormData.get('password')
+    } 
+    console.log({dataToSend});
+    let res = await api.post("/Api/v1/login/password-recovery", dataToSend, {
+      headers: {
+        Authorization: `Bearer ${tokenPreview}`
+      }
+    });
+    console.log(res.data);
+    swal({
+      title: "Recuperación de Contraseña",
+      text: `Has cambiado exitosamente la contraseña del correo ${res.data.email} ! 
+
+      Inicia Sesión con los nuevos datos de acceso`,
+      icon: "success",
+      button: "aceptar"
+    });
 
     navigate("/");
 
@@ -100,6 +106,18 @@ export default function Recover() {
             Recuperar Contraseña
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="token"
+              label="Código Enviado al Correo Electrónico"
+              name="token"
+              autoComplete="token"
+              autoFocus
+              onChange={handleTokenChange}
+            />
+            
             <TextField
               margin="normal"
               required

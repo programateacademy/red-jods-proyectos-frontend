@@ -43,6 +43,36 @@ export default function SignIn() {
   // Hook de react router dom para navegar al darle submit
   const navigate = useNavigate();
 
+  //Handle email change
+  const [emailPreview, setEmailPreview ] = useState("");
+
+  const handleEmailChange=(e) => {
+    setEmailPreview(e.target.value);
+    console.log(emailPreview)
+  } 
+
+  //This handle the forgot password
+  const handleForgot = async (e) => {
+    e.preventDefault();
+    const dataToSend={
+      email: emailPreview
+    }
+    console.log({ dataToSend });
+    let res=await api.post("/Api/v1/login/forgot-password", dataToSend);
+    console.log(res.data);
+    swal({
+      title: "Envío Correo de Recuperación",
+      text: `${res.data}!
+
+      Revisa la bandeja de entrada de tu correo ${emailPreview} 
+      
+      Copia y pega el código que se te envió, ingresa el correo, la nueva contraseña y dale click en Establecer Nueva Contraseña.`,
+      icon: "success",
+      button: "aceptar"
+    });
+    navigate("/recover");
+  }
+
   //This handle the submit of login
   const handleSubmit = async(event) => {
     event.preventDefault();
@@ -102,6 +132,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleEmailChange}
             />
             
             <TextField
@@ -130,9 +161,9 @@ export default function SignIn() {
             />
             <Grid container>
               <Grid item xs>
-                <Link to="/recover">
+                <button onClick={handleForgot}>
                   ¿Olvidaste tu contraseña?
-                </Link>
+                </button>
               </Grid>
               {/* <Grid item>
                 <Link href="#" variant="body2">
