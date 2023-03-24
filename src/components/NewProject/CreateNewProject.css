@@ -123,3 +123,17 @@
     }
   
   }
+
+
+  #input-form option:before {
+    display: inline-block;
+    content: "";
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    background-size: cover;
+  }
+
+  #input-form option[value="Pobreza"]:before {
+    background-image: url('https://png.pngtree.com/png-clipart/20201224/ourmid/pngtree-panda-bamboo-bamboo-shoots-simple-strokes-cartoon-with-pictures-small-fresh-png-image_2625172.jpg');
+  }

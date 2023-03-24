@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import './Tabs.css'
-import Decoracion from '../../../assets/img/Decoración.png'
 
 function Tabs() {
 
   const URLdoc = 'https://www.figma.com'
+  const imageUrl = 'https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/accion.png';
 
   const [index, setIndex] = useState(0)
   return (
@@ -49,7 +49,7 @@ function Tabs() {
       </div>
       <div className="tabContent" hidden={index != 2}>
         <div className="task">
-          
+          <img src={imageUrl} alt="" />
         </div>
       </div>
     </div>

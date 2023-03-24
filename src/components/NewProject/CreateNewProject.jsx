@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react'
+import React, { useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/src/assets/img//Decoración.png'
 import Todo from './FormAddTasks/Todo/Todo';
@@ -11,7 +11,26 @@ import '../NewProject/FormAddTasks/FormAddTask.css'
 import { AuthContext } from '../AuthContext/AuthContext';
 import baseURL from '../../apis/index'
 
-
+//Imágenes del formulario opciones ODS
+const options = [
+    { imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/pobreza.png", value: "Fin de la Pobreza" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/hambre.png", value: "Hambre Cero"},
+    { value: "Salud", imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/hambre.png", value: "Salud y Bienestar"},
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/educacion.png", value: "Educación de Calidad" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/igualdad.png", value: "Igualdad de Género"},
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/agua.png", value:  "Agua Limpia y Saneamiento" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/energia.png", value:  "Energía Asequible y no Contaminante" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/trabajo.png", value:  "Trabajo Decente y Crecimiento Económico"  },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/industria.png", value:  "Industria, Innovación e Infreestructura"},
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/reduccion.png", value:  "Reducción de las desigualdades" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/ciudad.png", value:  "Ciudades y Comunidades Sostenibles" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/produccion.png", value:  "Producción y Consumo Responsables" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/accion.png", value:  "Acción por el Clima"},
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/submarina.png", value:  "Vida Submarina" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/vida.png", value:  "Vida de Ecosistemas Terrestres" },
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/paz.png", value:  "Paz, Justicia e Instituciones Sólidas"},
+    {imageURL: "https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/ODS/alianza.png", value: "Alianzas para Lograr los Objetivos"}
+]
 
 export default function NewProject() {
 
@@ -59,27 +78,73 @@ export default function NewProject() {
 
     //onSubmit se debe consumir la api
 
-    //Donde se esta almacenando la data
-    const { authData } = useContext(AuthContext);
-    const { token, email } = authData;
+     //Donde se esta almacenando la data
+     const { authData } = useContext(AuthContext);
+     const { token, email } = authData;
+ 
+     
+     const onSubmit = async (data) => {
+        //  const newProject = {
+        //  ...data,
+        //   "task": todos,
+        //   "emailUser": email,
+        //     ods: [{
+        //     url: "ejemplo",
+        //     nameOds: "Agua limpia"   
+        //  }]
 
-    
-    const onSubmit = async (data) => {
+        //  }
+
         const newProject = {
-        ...data,
-         "task": todos,
-         "emailUser": email,
-        }
-        console.log(newProject)
-        console.log(token)
-        
-        let res = await baseURL.post("/Api/v1/project/", newProject, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        console.log(res.data)
+            "emailUser": "camicardenasp@gmail.com",
+            "title": "Proyecto de Camilo",
+            "axis": "Paz",
+            "ods": [
+             {
+              "url": "https://sproutsocial.com/es/glossary/profile-picture/",
+              "nameOds": "Agua limpia y saneamiento"
+             }
+            ],
+            "description": "un nuevo proyecto",
+            "indicator": "Un indicador descriptivo",
+            "objective": "mision del proyecto",
+            "doc": "https://sproutsocial.com/es/glossary/profile-picture/",
+            "task": [
+             {
+              "name": "Tarea Uno",
+              "state": true
+             },
+             {
+              "name": "Tarea Dos",
+              "state": false
+             }
+            ],
+            "state": true
+           }
+         
+         
+         console.log(newProject)
+         console.log(token)
+         
+         let res = await baseURL.post("/Api/v1/project/", newProject, {
+             headers: {
+                 Authorization: `Bearer ${token}`
+             }
+         });
+         console.log(res.data)
+     }
+
+    //Almacenar las opciones de las ODS
+    const [selectedOptions, setSelectedOptions] = useState([])
+
+    //Se ejecuta cuando se selecciona una opción en el select. 
+    const handleOptionChange = (e) => {
+        const selectedValue = e.target.value;
+        const selectedOption = options.find((option) => option.value === selectedValue);
+        setSelectedOptions((prevSelectedOptions) => [...prevSelectedOptions, selectedOption]);
+        console.log(selectedOptions)
     }
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -129,27 +194,22 @@ export default function NewProject() {
                             </div>
 
                             <div id='inputs'>
-                                <label id='title-form' htmlFor="">ODS</label>
-                                <select id='input-form' {...register('ods', { required: true })}>
+                                <label id='title-form'>ODS</label>
+                                <select onChange={handleOptionChange} id='input-form' {...register('ods', { required: true })}>
                                     <option placeholder='Selecciona una de las opciones' />
-                                    <option value="Pobreza">Fin de la Pobreza</option>
-                                    <option value="Hambre">Hambre Cero</option>
-                                    <option value="Salud">Salud y Bienestar</option>
-                                    <option value="Educación">Educación de Calidad</option>
-                                    <option value="Igualdad">Igualdad de Género</option>
-                                    <option value="Agua">Agua Limpia y Saneamiento</option>
-                                    <option value="Energia">Energía Asequible y no Contaminante</option>
-                                    <option value="Trabajo">Trabajo Decenter y Crecimiento Económico</option>
-                                    <option value="Industria">Industria, Innovación e Infreestructura</option>
-                                    <option value="Desigualdades">Reducción de las desigualdades</option>
-                                    <option value="Comunidades">Ciudades y Comunidades Sostenibles</option>
-                                    <option value="Produccion">Producción y Consumo Responsables</option>
-                                    <option value="Clima">Acción por el Clima</option>
-                                    <option value="Submarina">Vida Submarina</option>
-                                    <option value="Ecosistemas">Vida de Ecosistemas Terrestres</option>
-                                    <option value="Paz">Paz, Justicia e Instituciones Sólidas</option>
-                                    <option value="Alianzas">Alianzas para Lograr los Objetivos</option>
+                                    {options.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.value}
+                                        </option>
+                                    ))}
+                                    {selectedOptions.map((selectedOption, index) => (
+                                    <div key={index}>
+                                        <p>{selectedOption.value}</p>
+                                        <img src={selectedOption.imageUrl} alt={selectedOption.value} />
+                                    </div>
+                                ))}
                                 </select>
+                                
                                 {errors.ods?.type === 'required' && <p id='error-msg'>El campo es reqequerido</p>}
                             </div>
                             <div id='inputs'>
