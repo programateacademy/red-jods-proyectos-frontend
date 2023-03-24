@@ -9,6 +9,7 @@ import "./Home.css";
 import AppPagination from "./pagination/pagination";
 import { useState, useContext } from "react";
 import { AuthContext } from '../AuthContext/AuthContext';
+import { Link } from 'react-router-dom'
 
 export default function Home() {
   const [card, setCard] = useState([]);
@@ -46,12 +47,16 @@ export default function Home() {
                 <h3>{item.ODS}</h3>
               </CardContent>
               <CardActions id="actionsBox">
-                <Button id="Btn1" variant="contained">
-                  Ver Proyecto
-                </Button>
-                <Button id="Btn2" variant="outlined">
-                  Editar
-                </Button>
+                <Link to='ViewProject'>
+                  <Button id="Btn1" variant="contained">
+                    Ver Proyecto
+                  </Button>
+                </Link>
+                <Link>              
+                  <Button id="Btn2" variant="outlined">
+                    Editar
+                  </Button>
+                </Link>
               </CardActions>
             </Card>
           );
