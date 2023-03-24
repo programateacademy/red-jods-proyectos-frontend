@@ -9,6 +9,7 @@ import NewUser from './components/Users/NewUser/NewUser'
 import EditUser from './components/Users/EditUser/EditUser'
 import EditProject from './components/EditProject/EditProject'
 import Recover from './components/Recover/Recover';
+import ViewProject from './components/viewProject/viewProject';
 
 function Router() {
 
@@ -25,6 +26,7 @@ function Router() {
                 <Route path='/newuser' element={<NewUser />} />
                 <Route path='/edituser' element={<EditUser />} />
                 <Route path='/editproject' element={<EditProject />} />
+                <Route path='/home/viewProject' element={<ViewProject/>} />
             </Route>
         )
     )

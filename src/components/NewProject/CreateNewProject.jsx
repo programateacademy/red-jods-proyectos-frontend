@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form'
 import Grid from '@mui/material/Grid';
 import TodoForm from '../NewProject/FormAddTasks/TodoForm/TodoForm'
 import '../NewProject/FormAddTasks/FormAddTask.css'
-//import { addProject } from '../../apis/index'
 import { AuthContext } from '../AuthContext/AuthContext';
 import baseURL from '../../apis/index'
 
@@ -66,40 +65,11 @@ export default function NewProject() {
 
     
     const onSubmit = async (data) => {
-        // const newProject = {
-        //     "emailUser": "camicardenasp@gmail.com",
-        //     "title": "Proyecto de Camilo",
-        //     "axis": "Paz",
-        //     "ods": [
-        //      {
-        //       "url": "https://sproutsocial.com/es/glossary/profile-picture/",
-        //       "nameOds": "Agua limpia y saneamiento"
-        //      }
-        //     ],
-        //     "description": "un nuevo proyecto",
-        //     "indicator": "Un indicador descriptivo",
-        //     "objective": "mision del proyecto",
-        //     "doc": "https://sproutsocial.com/es/glossary/profile-picture/",
-        //     "task": [
-        //      {
-        //       "name": "Tarea Uno",
-        //       "state": true
-        //      },
-        //      {
-        //       "name": "Tarea Dos",
-        //       "state": false
-        //      }
-        //     ],
-        //     "state": true
-        // }
         const newProject = {
         ...data,
          "task": todos,
          "emailUser": email,
         }
-        //console.log(newProject)
-        // addProject (newProject)
-        //Using AuthContext information
         console.log(newProject)
         console.log(token)
         
