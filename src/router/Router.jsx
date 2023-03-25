@@ -20,7 +20,7 @@ function Router() {
                 <Route index element={<Login />} />
                 <Route path='/recover' element={<Recover />} />
                 <Route path='/home' element={<Home />} />
-                <Route path='/projects' element={<Projects />} />
+                <Route path='/myprojects' element={<Projects />} />
                 <Route path='/createproject' element={<CreateProject />} />
                 <Route path='/users' element={<Users />} />
                 <Route path='/createuser' element={<CreateUser />} />

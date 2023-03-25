@@ -109,7 +109,7 @@ export default function NewProject() {
             button: "aceptar"
         });
         if (res.data._id) {
-            navigate("/projects");
+            navigate("/myprojects");
         }
     }
 

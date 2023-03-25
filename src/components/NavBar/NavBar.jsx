@@ -18,12 +18,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const pages=[
     {
-        name: 'Inicio |',
+        name: 'Proyectos |',
         route: '/home'
     },
     {
-        name: 'Proyectos |',
-        route: '/projects'
+        name: 'Mis Proyectos |',
+        route: '/myprojects'
     },
     {
         name: 'Crear Proyecto |',
