@@ -9,6 +9,10 @@ import Grid from '@mui/material/Grid';
 import TodoForm from '../../components/FormAddTasks/TodoForm/TodoForm'
 import { AuthContext } from '../../contexts/AuthContext';
 import baseURL from '../../services/api/index'
+import odsOptions from './ods'
+import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -20,7 +24,7 @@ export default function NewProject() {
     //Agregar las tareas, todo es donde se alamcena la tarea
     const addTodo = todo => {
         //Arreglar el texto  en dado caso de que alguien deje espacios
-        if (!todo.text || /^\s*$/.test(todo.text)) {
+        if (!todo.name || /^\s*$/.test(todo.name)) {
             return
         }
         //Se guardan cada una de la lista de tareas que se estan almacenando
@@ -29,7 +33,7 @@ export default function NewProject() {
     };
 
     const updateTodo = (todoId, newValue) => {
-        if (!newValue.text || /^\s*$/.test(newValue.text)) {
+        if (!newValue.name || /^\s*$/.test(newValue.name)) {
             return
         }
         // Si el item del id es igual al nuevo id que se desea modificar, estara en true, pero si no el nuevo visualViewport, regresara al id antiguo
@@ -54,7 +58,7 @@ export default function NewProject() {
     };
 
 
-    const { register, handleSubmit, formState: { errors } } = useForm({});
+    const { register, watch, handleSubmit, formState: { errors } } = useForm({});
 
     //onSubmit se debe consumir la api
 
@@ -62,15 +66,35 @@ export default function NewProject() {
     const { authData } = useContext(AuthContext);
     const { token, email } = authData;
 
-    
+    const [ODS, setOds]=useState([]);
+
+
+    // const handleSelectChange=(event) => {
+    //     const selectedOptions=Array.from(event.target.selectedOptions).map(option => ({
+    //         value: option.value,
+    //         url: option.url
+    //     }));
+    //     console.log(selectedOptions);
+    //     setOds(selectedOptions);
+    // }
+
+        // Hook de react router dom para navegar al darle submit
+    const navigate=useNavigate();
+
     const onSubmit = async (data) => {
+        const tareas=todos.map(({ name, state }) => ({ name, state }));
+        const selectedValues=data.ods; // Array de valores seleccionados en el campo "ods"
+        const filteredOptions=odsOptions.filter(option => selectedValues.includes(option.value)); // Filtrar opciones que coinciden con los valores seleccionados
+        const selectedOptions=filteredOptions.map(option => ({ nameOds: option.nameOds, url: option.url })); // Crear nuevo arreglo solo con los valores de "nameOds" y "url" de las opciones seleccionadas
         const newProject = {
         ...data,
-        "task": todos,
+        "task": tareas,
         "emailUser": email,
+        "state": true,
+        "ods": selectedOptions,
         }
         console.log(newProject)
-        console.log(token)
+        // console.log(token)
         
         let res = await baseURL.post("/Api/v1/project/", newProject, {
             headers: {
@@ -78,6 +102,15 @@ export default function NewProject() {
             }
         });
         console.log(res.data)
+        swal({
+            title: "Creación de Proyecto",
+            text: `Has creado el proyecto ${res.data.title} correctamente!`,
+            icon: "success",
+            button: "aceptar"
+        });
+        if (res.data._id) {
+            navigate("/projects");
+        }
     }
 
     return (
@@ -89,13 +122,13 @@ export default function NewProject() {
                         <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                             <h1>Crear Proyecto</h1>
                             <img src={Decoración} alt="" />
-                            <p> Diligencia los campos principales para agregar un nuevo proyecto</p>
+                            <p> Diligencia todos los campos principales (SIN TILDES) y con una url válida para agregar un nuevo proyecto</p>
                         </Box>
                         {/* This elements are displayed when screen is small */}
                         <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                             <h1>Crear Proyecto</h1>
                             <img id='decoration' src={Decoración} alt="" style={{ padding: "0 0 10px 0" }} />
-                            <p> Diligencia los campos principales para agregar un nuevo proyecto</p>
+                            <p> Diligencia todos los campos principales (SIN TILDES) y con una url válida para agregar un nuevo proyecto</p>
                         </Box>
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={6}>
@@ -107,16 +140,16 @@ export default function NewProject() {
                                     {errors.title?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
 
-                                <div id='inputs'>
+                                {/* <div id='inputs'>
                                     <label id='title-form' htmlFor="">Responsable</label>
                                     <input id='input-form' placeholder='Diligencia tu respuesta' type="text" {...register('userName', {
                                         required: true,
                                     })} />
                                     {errors.userName?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
-                                </div>
+                                </div> */}
 
                                 <div id='inputs'>
-                                    <label id='title-form' htmlFor="">Ejes</label>
+                                    <label id='title-form' htmlFor="">Eje Principal</label>
                                     <select id='input-form' {...register('axis', { required: true, })}>
                                         <option placeholder='Selecciona una de las opciones' />
                                         <option value="Personas">Personas</option>
@@ -130,8 +163,7 @@ export default function NewProject() {
 
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">ODS</label>
-                                    <select id='input-form' {...register('ods', { required: true })}>
-                                        <option placeholder='Selecciona una de las opciones' />
+                                    <select id='input-form' {...register('ods', { required: true })} multiple>
                                         <option value="Pobreza">Fin de la Pobreza</option>
                                         <option value="Hambre">Hambre Cero</option>
                                         <option value="Salud">Salud y Bienestar</option>
@@ -139,7 +171,7 @@ export default function NewProject() {
                                         <option value="Igualdad">Igualdad de Género</option>
                                         <option value="Agua">Agua Limpia y Saneamiento</option>
                                         <option value="Energia">Energía Asequible y no Contaminante</option>
-                                        <option value="Trabajo">Trabajo Decenter y Crecimiento Económico</option>
+                                        <option value="Trabajo">Trabajo Decente y Crecimiento Económico</option>
                                         <option value="Industria">Industria, Innovación e Infreestructura</option>
                                         <option value="Desigualdades">Reducción de las desigualdades</option>
                                         <option value="Comunidades">Ciudades y Comunidades Sostenibles</option>
@@ -152,6 +184,8 @@ export default function NewProject() {
                                     </select>
                                     {errors.ods?.type==='required'&&<p id='error-msg'>El campo es reqequerido</p>}
                                 </div>
+
+
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="PartnerUrl"> Documento (URL) </label>
                                     <input id='input-form' name='PartnerUrl'
@@ -162,7 +196,7 @@ export default function NewProject() {
 
                                                 },
                                                 pattern: {
-                                                    value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                                                    value: /^(http(s)?:\/\/)?[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
                                                     message: 'Ingrese una URL válida',
                                                 }
                                             })}
@@ -195,27 +229,27 @@ export default function NewProject() {
                             </Grid>
                         </Grid>
                     </div>
-
-
-                    <div className="thirdPartForm">
-                        <div className="Task-title">
-                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                                <h2>Tareas</h2>
-                                <img id='decoration' src={Decoración} alt="" />
-                                <p> Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
-                            </Box>
-                            {/* This elements are displayed when screen is small */}
-                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                                <h2>Tareas</h2>
-                                <img id='decoration' src={Decoración} alt="" style={{ padding: "0 0 10px 0" }} />
-                                <p>Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
-                            </Box>
-                        </div>
-                        
+                    <div className="BtnBox">
+                        <input id='Btn-form' type="submit" value="Enviar" />
                     </div>
                 </div>
             </form>
 
+            <div className="thirdPartForm">
+                <div className="Task-title">
+                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                        <h2>Tareas</h2>
+                        <img id='decoration' src={Decoración} alt="" />
+                        <p> Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
+                    </Box>
+                    {/* This elements are displayed when screen is small */}
+                    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                        <h2>Tareas</h2>
+                        <img id='decoration' src={Decoración} alt="" style={{ padding: "0 0 10px 0" }} />
+                        <p>Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
+                    </Box>
+                </div>
+            </div>
             <div className="to-do">
                 <TodoForm
                     onSubmit={addTodo} />
@@ -225,9 +259,7 @@ export default function NewProject() {
                     removeTodo={removeTodo}
                     updateTodo={updateTodo} />
             </div>
-            <div className="BtnBox">
-                <input id='Btn-form' type="submit" value="Enviar" />
-            </div>
+            
     </>
     )
 }

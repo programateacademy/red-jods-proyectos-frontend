@@ -206,7 +206,7 @@ export default function Projects() {
                         <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
                     </div>
                     {/* Create User Button */}
-                    <Link to="/newadmin">
+                    <Link to="/createproject">
                         <Button
                             style={{ backgroundColor: "green", color: "white", margin: "20px" }}
                         >

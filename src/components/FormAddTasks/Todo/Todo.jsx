@@ -33,14 +33,14 @@ function Todo({todos, completeTodo, removeTodo, updateTodo }) {
         >
         {/* //texto donde aparece la tarea */}
             <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-                {todo.text}
+                {todo.name}
             </div>
             <div className="icons">
                 <BsFillTrashFill
                 onClick={() => removeTodo(todo.id)}
                 className='delete-icon'/>
                 <TiEdit
-                onClick={() => setEdit({id: todo.id, value: todo.text})}
+                onClick={() => setEdit({id: todo.id, value: todo.name})}
                 className='edit-icon'/>
             </div>
             

@@ -24,7 +24,8 @@ function TodoForm(props) {
 
     props.onSubmit({//utilizamos los props para poder pasar la propiedades y el id y la tarea (texto), es el input
       id: Math.floor(Math.random() * 10000),//Id para cada una de las tareas
-      text: input //input del useState
+      name: input, //input del useState,
+      state: false
     });
     setInput('');
   };
@@ -38,7 +39,7 @@ function TodoForm(props) {
             placeholder='Actualiza tu tarea'
             value={input}
             onChange={handleChange}
-            name='text' 
+            name='name' 
             ref={inputRef}
             className='todo-input edit'
           />
@@ -52,7 +53,7 @@ function TodoForm(props) {
             placeholder='Agregar tarea'
             value={input}
             onChange={handleChange}//onChange equivale a la función que toma los cambios dentro del elemento
-            name='text'
+            name='name'
             className='todo-input'
             ref={inputRef}
           />
