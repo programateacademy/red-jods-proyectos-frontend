@@ -10,19 +10,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import users from "../../../apis/index";
+import users from "../../../services/api/index";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { AuthContext } from '../../AuthContext/AuthContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 
 function Copyright(props) {
     return (
@@ -142,7 +141,6 @@ export default function NewUser() {
                                     label="Correo Electrónico"
                                     name="email"
                                     autoComplete="email"
-                                    // onChange={handleEmailChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -193,7 +191,6 @@ export default function NewUser() {
                                     >
                                         <MenuItem value={10}>user</MenuItem>
                                         <MenuItem value={20}>admin</MenuItem>
-                                        <MenuItem value={30}>superAdmin</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>

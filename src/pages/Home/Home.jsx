@@ -5,10 +5,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import "./Home.css";
-import AppPagination from "./pagination/pagination";
+import "../../styles/Home.css";
+import AppPagination from "../../components/pagination/pagination";
 import { useState, useContext } from "react";
-import { AuthContext } from '../AuthContext/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom'
 
 export default function Home() {

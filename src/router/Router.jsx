@@ -1,15 +1,15 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
-import Root from './components/Root'
-import Home from './components/Home/Home'
-import Login from './components/Login/Login';
-import Projects from './components/Projects/Projects'
-import NewProject from './components/NewProject/CreateNewProject'
-import Users from './components/Users/Users/Users'
-import NewUser from './components/Users/NewUser/NewUser'
-import EditUser from './components/Users/EditUser/EditUser'
-import EditProject from './components/EditProject/EditProject'
-import Recover from './components/Recover/Recover';
-import ViewProject from './components/viewProject/viewProject';
+import Root from './Root'
+import Home from '../pages/Home/Home'
+import Login from '../pages/Login/Login';
+import Projects from '../pages/Projects/Projects'
+import CreateProject from '../pages/CreateProject/CreateProject'
+import Users from '../pages/Users/Users/Users'
+import CreateUser from '../pages/Users/CreateUser/CreateUser'
+import EditUser from '../pages/Users/EditUser/EditUser'
+import EditProject from '../pages/EditProject/EditProject'
+import Recover from '../pages/Recover/Recover';
+import ViewProject from '../components/viewProject/viewProject';
 
 function Router() {
 
@@ -21,9 +21,9 @@ function Router() {
                 <Route path='/recover' element={<Recover />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/projects' element={<Projects />} />
-                <Route path='/newproject' element={<NewProject />} />
+                <Route path='/createproject' element={<CreateProject />} />
                 <Route path='/users' element={<Users />} />
-                <Route path='/newuser' element={<NewUser />} />
+                <Route path='/createuser' element={<CreateUser />} />
                 <Route path='/edituser' element={<EditUser />} />
                 <Route path='/editproject' element={<EditProject />} />
                 <Route path='/home/viewProject' element={<ViewProject/>} />

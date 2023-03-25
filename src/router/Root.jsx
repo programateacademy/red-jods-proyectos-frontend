@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar/NavBar'
 import {Outlet} from 'react-router-dom'
 import Footer from '/src/assets/img/Footer.png'
 import { useContext } from 'react';
-import { AuthContext } from './AuthContext/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 const Root = () => {

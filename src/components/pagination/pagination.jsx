@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import service from "../services/services";
+import service from "../../services/services/services";
 
 const pageSize = 6; //How many cards it going to show
 

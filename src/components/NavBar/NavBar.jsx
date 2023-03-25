@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 import UserLogo from '/src/assets/img/User.png'
 import Decoración from '/src/assets/img/Decoración.png'
 import React, { useContext } from 'react';
-import { AuthContext } from '../../components/AuthContext/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const pages=[
     {
@@ -27,7 +27,7 @@ const pages=[
     },
     {
         name: 'Crear Proyecto |',
-        route: '/newproject'
+        route: '/createproject'
     },
     {
         name: 'Usuarios |',
@@ -40,10 +40,6 @@ const settings=[
         name: 'Iniciar Sesión',
         route: '/'
     }
-
-    // 'Perfil', 
-    // 'Cuenta', 
-    // 'Dashboard', 
     // 'Logout'
 ];
 
@@ -83,7 +79,7 @@ function NavBar() {
 
                     </Box>
                     
-                        {/* This is the box corresponding to pages menu when the screen is large enough*/}
+                    {/* This is the box corresponding to pages menu when the screen is large enough*/}
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (

@@ -10,9 +10,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '/src/assets/img/logo.svg'
 import { Link } from 'react-router-dom'
-import api from "../../apis/index";
+import api from "../../services/api/index";
 import { useContext } from 'react';
-import { AuthContext } from '../AuthContext/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
