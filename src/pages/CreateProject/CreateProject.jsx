@@ -122,13 +122,13 @@ export default function NewProject() {
                         <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                             <h1>Crear Proyecto</h1>
                             <img src={Decoración} alt="" />
-                            <p> Diligencia todos los campos principales (SIN TILDES) y con una url válida para agregar un nuevo proyecto</p>
+                            <p> Diligencia todos los campos principales <b>(SIN TILDES)</b> y con una url válida para agregar un nuevo proyecto. Puedes agregar varias tareas específicas para el proyecto antes de darle enviar o puedes agregarlas más adelante.</p>
                         </Box>
                         {/* This elements are displayed when screen is small */}
                         <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                             <h1>Crear Proyecto</h1>
                             <img id='decoration' src={Decoración} alt="" style={{ padding: "0 0 10px 0" }} />
-                            <p> Diligencia todos los campos principales (SIN TILDES) y con una url válida para agregar un nuevo proyecto</p>
+                            <p> Diligencia todos los campos principales <b>(SIN TILDES)</b> y con una url válida para agregar un nuevo proyecto. Puedes agregar varias tareas específicas para el proyecto antes de darle enviar o puedes agregarlas más adelante.</p>
                         </Box>
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={6}>
@@ -162,8 +162,8 @@ export default function NewProject() {
                                 </div>
 
                                 <div id='inputs'>
-                                    <label id='title-form' htmlFor="">ODS</label>
-                                    <select id='input-form' {...register('ods', { required: true })} multiple>
+                                    <label id='title-form' htmlFor="">ODS (Utiliza ctrl / cmd para seleccionar varios)</label>
+                                    <select className='ods' id='input-form' {...register('ods', { required: true })} multiple>
                                         <option value="Pobreza">Fin de la Pobreza</option>
                                         <option value="Hambre">Hambre Cero</option>
                                         <option value="Salud">Salud y Bienestar</option>

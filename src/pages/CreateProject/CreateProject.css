@@ -28,7 +28,7 @@
     }
   
   }
-/* ---------------Styles firts part form ------------------------*/
+/* ---------------Styles first part form ------------------------*/
 
 #inputs {
     display: flex;
@@ -80,7 +80,7 @@
       inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
   }
   
-  /* ----------------------Responsive firts part form----------------------------------------------- */
+  /* ----------------------Responsive first part form----------------------------------------------- */
   
   @media (min-width: 768px){
     #title-form {
@@ -122,4 +122,8 @@
       font-size: 22px;
     }
   
+  }
+
+.ods {
+    height: 7rem !important;
   }
