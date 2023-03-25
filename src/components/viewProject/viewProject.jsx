@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../styles/viewProject.css'
+import '../../styles/ViewProject.css'
 import imagenCard from '../../assets/img/Imagen-card.png'
 import Tabs from './Tabs/Tabs'
 import Decoracion from '../../assets/img/Decoración.png'

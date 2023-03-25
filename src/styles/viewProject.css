@@ -1,6 +1,6 @@
 #imgProject{
     width: 80%;
-  }
+}
 
 .InfoProject{
     width: var(--container-width-sm);
@@ -13,7 +13,7 @@
 
 @media (min-width: 425px) {
     
- 
+
 }
 @media (min-width: 768px) {
     .InfoProject{
@@ -22,19 +22,16 @@
     }
     #imgProject{
         width: 60%;
-      }
- 
-  }
+    }
 
-  @media (min-width: 1536px) {
+}
+
+@media (min-width: 1536px) {
     .InfoProject{
         width: var(--container-width-lg);
         margin: 1rem 0 1rem 2rem;
     }
     #imgProject{
         width: 30%;
-      }
-   
-  }
-
- 
+    }
+}
