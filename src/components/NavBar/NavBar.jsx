@@ -196,7 +196,6 @@ function NavBar() {
                             </Box>
                         </Menu>
                     </Box>
-
                 </Toolbar>
             </Container>
         </AppBar>
