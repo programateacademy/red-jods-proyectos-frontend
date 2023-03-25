@@ -2,8 +2,8 @@ import React, { useState, useContext} from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/src/assets/img//Decoración.png'
 import Todo from '../../components/FormAddTasks/Todo/Todo';
-import '../../styles/FormAddTask.css'
-import '../../styles/CreateProject.css'
+import '../../components/FormAddTasks/FormAddTask.css'
+import './CreateProject.css'
 import { useForm } from 'react-hook-form'
 import Grid from '@mui/material/Grid';
 import TodoForm from '../../components/FormAddTasks/TodoForm/TodoForm'

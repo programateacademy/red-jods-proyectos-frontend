@@ -11,7 +11,7 @@ import DeleteButton from '/src/assets/img/DeleteButton.svg'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
-import '../../../styles/Users.css'
+import './Users.css'
 
 export default function Users() {
     //Using AuthContext information

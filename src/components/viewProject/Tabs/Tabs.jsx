@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../../../styles/Tabs.css'
+import './Tabs.css'
 import Decoracion from '../../../assets/img/Decoración.png'
 
 function Tabs() {
