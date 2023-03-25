@@ -23,8 +23,7 @@ Pasos para instalar el proyecto demo
 ```bash
   git clone https://github.com/programateacademy red-jods-proyectos-frontend.git
   cd red-jods-proyectos-frontend
-  git checkout -b dev
-  git pull origin dev
+  git pull origin main
   npm install
   npm run dev 
 ```
