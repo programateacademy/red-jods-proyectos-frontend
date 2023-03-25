@@ -60,10 +60,8 @@ Pasos para instalar el proyecto demo
 <p align="center"><a href="https://github.com/valentinapuentesgarzon"><img src="https://raw.githubusercontent.com/valentinapuentesgarzon/Personal_Portfolio/main/src/assets/Header/logo.png" width="100"></a><p>
 
 ##Realizado para
-
 Esta página demo fue diseñada y programada para:
-
-- RedJODS 
+<h2>RedJODS<h2> 
 <img src"https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/img/LOGO-RED-JODS.png" width="300">
 
 
