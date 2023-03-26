@@ -106,6 +106,17 @@ export default function Projects() {
         navigate("/editproject");
     };
 
+    const handleViewClick=(param) => {
+        setAuthData({ ...authData, id: param.row });
+        // swal({
+        //     title: "información del Proyecto",
+        //     text: `Vas a ver el proyecto ${param.row.title}`,
+        //     icon: "info",
+        //     button: "Aceptar"
+        // });
+        navigate("/viewproject");
+    };
+
     //Array with the field names in the admins table
     const columns=[
         { field: 'title', headerName: 'Nombre', width: 150 },
@@ -119,7 +130,7 @@ export default function Projects() {
                         <Button
                             variant="contained"
                             onClick={(event) => {
-                                handleEditClick(cellValues)
+                                handleViewClick(cellValues)
                             }}
                             style={{ backgroundColor: "transparent" }}
                         >

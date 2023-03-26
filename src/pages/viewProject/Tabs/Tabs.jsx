@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import './Tabs.css'
 import Decoracion from '../../../assets/img/Decoración.png'
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 function Tabs() {
 
   const URLdoc = 'https://www.figma.com'
 
   const [index, setIndex] = useState(0)
+  //Donde se esta almacenando la data
+  const { authData }=useContext(AuthContext);
+  const { token, email, id }=authData;
+
   return (
     <div className="Tabs">
       <div className="tabsList">
@@ -23,28 +29,26 @@ function Tabs() {
       <div className="tabContent" hidden={index != 0}>
         <div className="work">
           <h3 id='Tl-Tab'>Línea de trabajo</h3>
-          <p id='p-Tab'>Lorem Ipsum</p>
+          <p id='p-Tab'>{id.axis}</p>
         </div>
         <div className="objectives">
           <h3 id='Tl-Tab'>Objetivos</h3>
-          <p id='p-Tab'>Lorem ipsum dolor sit amet, consectetur adipiscing elit <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          <p id='p-Tab'>{id.objective}</p>
         </div>
         <div className="axis">
           <h3 id='Tl-Tab'>Indicadores</h3>
-          <p id='p-Tab'>Lorem ipsum dolor sit amet, consectetur adipiscing elit <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+          <p id='p-Tab'>{id.indicator}</p>
         </div>
       </div>
 
       <div className="tabContent" hidden={index != 1}>
         <div className="axis">
           <h3 id='Tl-Tab'>Descripción</h3>
-          <p id='p-Tab'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p id='p-Tab'>{id.description}</p>
         </div>
         <div className="doc">
           <h3 id='Tl-Tab'>URL</h3>
-          <p id='URL'>{URLdoc}</p>
+          <p id='URL'>{id.doc}</p>
         </div>
       </div>
       <div className="tabContent" hidden={index != 2}>

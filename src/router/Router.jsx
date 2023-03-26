@@ -9,7 +9,7 @@ import CreateUser from '../pages/Users/CreateUser/CreateUser'
 import EditUser from '../pages/Users/EditUser/EditUser'
 import EditProject from '../pages/EditProject/EditProject'
 import Recover from '../pages/Recover/Recover';
-import ViewProject from '../components/viewProject/viewProject';
+import ViewProject from '../pages/viewProject/viewProject';
 
 function Router() {
 
@@ -26,7 +26,7 @@ function Router() {
                 <Route path='/createuser' element={<CreateUser />} />
                 <Route path='/edituser' element={<EditUser />} />
                 <Route path='/editproject' element={<EditProject />} />
-                <Route path='/home/viewProject' element={<ViewProject/>} />
+                <Route path='/viewProject' element={<ViewProject/>} />
             </Route>
         )
     )
