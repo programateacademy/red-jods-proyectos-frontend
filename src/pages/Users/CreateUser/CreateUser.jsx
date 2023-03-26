@@ -43,7 +43,7 @@ export default function NewUser() {
     //Using AuthContext information
     const { authData }=useContext(AuthContext);
     const { token }=authData;
-    const [rol, setRol]=useState("");
+    const [role, setRole]=useState('');
     // Hook de react router dom para navegar al darle submit
     const navigate=useNavigate();
 
@@ -61,7 +61,7 @@ export default function NewUser() {
             email: rawFormData.get('email'),
             password: rawFormData.get('password'),
             phone: rawFormData.get('phone'),
-            role: "admin",
+            role: role,
             state: true
         }
         console.log({ dataToSend });
@@ -184,13 +184,12 @@ export default function NewUser() {
                                     <InputLabel id="demo-simple-select-label">Rol</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
-                                        id="rol"
-                                        value={rol}
-                                        label="Rol"
-                                        onChange={handleRolChange}
+                                        id="role"
+                                        label="Role"
+                                        value={role} onChange={e => setRole(e.target.value)}
                                     >
-                                        <MenuItem value={10}>user</MenuItem>
-                                        <MenuItem value={20}>admin</MenuItem>
+                                        <MenuItem value="user">Usuario</MenuItem>
+                                        <MenuItem value="admin">Administrador</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>

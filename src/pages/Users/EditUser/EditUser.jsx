@@ -17,7 +17,6 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../../../contexts/AuthContext';
-import api from "../../../services/api/index";
 import users from "../../../services/api/index";
 import { useNavigate } from 'react-router-dom'
 
@@ -85,32 +84,129 @@ export default function EditUser() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="name">Nombre:</label>
-                <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="last_name">Apellido:</label>
-                <input type="text" id="last_name" value={lastName} onChange={e => setLastName(e.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="phone">Teléfono:</label>
-                <input type="tel" id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
-            </div>
-            <div>
-                <label htmlFor="role">Rol:</label>
-                <select id="role" value={role} onChange={e => setRole(e.target.value)}>
-                    <option value="">Seleccionar un rol...</option>
-                    <option value="admin">Administrador</option>
-                    <option value="user">Usuario</option>
-                </select>
-            </div>
-            <button type="submit">Enviar</button>
-        </form>
+        <>
+            {/* <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="name">Nombre:</label>
+                    <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="last_name">Apellido:</label>
+                    <input type="text" id="last_name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="phone">Teléfono:</label>
+                    <input type="tel" id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="role">Rol:</label>
+                    <select id="role" value={role} onChange={e => setRole(e.target.value)}>
+                        <option value="">Seleccionar un rol...</option>
+                        <option value="admin">Administrador</option>
+                        <option value="user">Usuario</option>
+                    </select>
+                </div>
+                <button type="submit">Enviar</button>
+            </form> */}
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Editar Usuario
+                    </Typography>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="name"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Nombre"
+                                    autoFocus
+                                    value={name} onChange={e => setName(e.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="last_name"
+                                    label="Apellido"
+                                    name="last_name"
+                                    autoComplete="family-name"
+                                        value={lastName} onChange={e => setLastName(e.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Correo Electrónico"
+                                    name="email"
+                                    autoComplete="email"
+                                    value={email} onChange={e => setEmail(e.target.value)}
+                                />
+                            </Grid>
+                            
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="phone"
+                                    label="Teléfono"
+                                    name="phone"
+                                    autoComplete="family-name"
+                                    value={phone} onChange={e => setPhone(e.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="role"
+                                        label="Role"
+                                        value={role} onChange={e => setRole(e.target.value)}
+                                    >
+                                        <MenuItem value="user">Usuario</MenuItem>
+                                        <MenuItem value="admin">Administrador</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                        
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Editar Usuario
+                        </Button>
+                    </Box>
+                </Box>
+                <Copyright sx={{ mt: 5 }} />
+            </Container>
+        </ThemeProvider>
+        </>
+        
     );
 }
