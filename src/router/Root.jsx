@@ -5,13 +5,10 @@ import Footer from '/src/assets/img/Footer.png'
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
-
 const Root = () => {
-
     //Using AuthContext information
     const { authData }=useContext(AuthContext);
     const { token, role }=authData;
-
     if (token) {
         return (
             <>
@@ -32,5 +29,4 @@ const Root = () => {
         );
     }
 }
-
 export default Root;

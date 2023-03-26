@@ -11,7 +11,6 @@ function viewProject() {
   const { authData }=useContext(AuthContext);
   const { token, email, id }=authData;
 
-  
   return (
     <div className="InfoProject">
       <div className="title">
@@ -22,12 +21,10 @@ function viewProject() {
         <h2>Información </h2>
         <img id='decoration'src={Decoracion} alt=""/>
       </div>
-
       <div className="Tabs">
         <Tabs/>
       </div>
     </div>
   )
 }
-
 export default viewProject

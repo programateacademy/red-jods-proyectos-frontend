@@ -37,19 +37,15 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-
   //Estamos importando el contexto de AuthContext y utilizando la función useContext para acceder a la función setAuthData.
   const { authData, setAuthData }=useContext(AuthContext);
   // Hook de react router dom para navegar al darle submit
   const navigate = useNavigate();
-
   //Handle email change
   const [emailPreview, setEmailPreview ] = useState("");
-
   const handleEmailChange=(e) => {
     setEmailPreview(e.target.value);
   } 
-
   //This handle the forgot password
   const handleForgot = async (e) => {
     e.preventDefault();
@@ -96,9 +92,7 @@ export default function SignIn() {
     if (res.data.tokenSession){
       navigate("/home");
     }
-
   };
-
   //To show password
   // Add these variables to your component to track the state
   const [showPassword, setShowPassword]=useState(false);
@@ -161,16 +155,7 @@ export default function SignIn() {
                   ¿Olvidaste tu contraseña?
                 </button>
               </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"¿No tienes una cuenta? Regístrate"}
-                </Link>
-              </Grid> */}
             </Grid>
-            {/*<FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recuérdame"
-            />*/}
               <Button
                 type="submit"
                 fullWidth
@@ -180,7 +165,6 @@ export default function SignIn() {
               >
                 Ingresar
               </Button>
-            
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

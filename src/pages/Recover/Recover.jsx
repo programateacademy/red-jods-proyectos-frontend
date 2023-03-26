@@ -37,20 +37,16 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Recover() {
-
   //Estamos importando el contexto de AuthContext y utilizando la función useContext para acceder a la función setAuthData.
   const { authData, setAuthData }=useContext(AuthContext);
   // Hook de react router dom para navegar al darle submit
   const navigate = useNavigate();
-
   //Handle email change
   const [tokenPreview, setTokenPreview]=useState("");
-
   const handleTokenChange=(e) => {
     setTokenPreview(e.target.value);
     console.log(tokenPreview)
   } 
-
 
   //This handle the submit of login
   const handleSubmit = async(event) => {
@@ -75,9 +71,7 @@ export default function Recover() {
       icon: "success",
       button: "aceptar"
     });
-
     navigate("/");
-
   };
 
   //To show password

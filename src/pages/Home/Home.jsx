@@ -13,21 +13,12 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
   const [card, setCard] = useState([]);
-
   //Using AuthContext information
   const { authData }=useContext(AuthContext);
   const { token, role, name }=authData;
 
   return (
     <div className="container_box">
-      {/* This elements are displayed when screen is medium or large 
-      <Box className="container1" sx={{ display: { xs: "none", md: "block" } }}>
-        <h1 >
-          ¡Hola Súper Administrador!
-        </h1>
-        <img src={Decoración} alt="" />
-      </Box>
-      */}
       {/* This elements are displayed when screen is small */}
       <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
         <h1>¡Hola {name}, eres {role}!</h1>
@@ -62,7 +53,6 @@ export default function Home() {
           );
         })}
       </div>
-
       <AppPagination setCard={(p) => setCard(p)} />
     </div>
   );

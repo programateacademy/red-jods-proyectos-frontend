@@ -14,18 +14,15 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import swal from 'sweetalert';
 
-
 export default function Projects() {
     //Using AuthContext information
     const { authData,setAuthData }=useContext(AuthContext);
     const { token, role, email, id }=authData;
-
     //Variable for fecthing projects
     const [usersList, setUsersList]=useState([]);
     //variables for filtering throughout search
     const [search, setSearch]=useState([]);
     const [usersListSearched, setUsersListSearched]=useState([]);
-
     //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
         async function fetchData() {
@@ -37,26 +34,8 @@ export default function Projects() {
             setUsersList(data);
             setUsersListSearched(data);
         }
-
         fetchData();
     }, []);
-
-    //This interacts with API and Create one User
-    const addUser=async (project) => {
-        const { data }=await projects.post("/Api/v1/project", project);
-        setUsersList((oldList) => [...oldList, data]);
-    };
-
-    //This interacts with API and Delete one User (in this case just hides it)
-    const removeUser=async (id) => {
-        await projects.delete(`/Api/v1/project/${id}`);
-        setUsersList((oldList) => oldList.filter((project) => project._id!==id));
-    };
-    //This interacts with API and Update one User
-
-    const editUser=async (id, project) => {
-        await projects.put(`/Api/v1/project/${id}`, project);
-    };
 
     //Code for search bar
     const handleChangeSearch=e => {
@@ -69,9 +48,6 @@ export default function Projects() {
             if (element.title.toString().toLowerCase().includes(searchTerm.toLowerCase())
             ||
                 element.axis.toString().toLowerCase().includes(searchTerm.toLowerCase())
-            // ||
-            //     element.category.toString().toLowerCase().includes(searchTerm.toLowerCase()
-            //     )
             ) {
                 return element;
             }
@@ -79,6 +55,8 @@ export default function Projects() {
         setUsersListSearched(searchResult);
     }
 
+    // Hook de react router dom para navegar al darle submit
+    const navigate=useNavigate();
 
     //Code for handle clicks on edit and delete buttons
     const handleCellClick=(param, event) => {
@@ -92,28 +70,13 @@ export default function Projects() {
         removeUser(param._id)
     };
 
-    // Hook de react router dom para navegar al darle submit
-    const navigate=useNavigate();
-
     const handleEditClick =(param) => {
         setAuthData({ ...authData, id: param.row });
-        swal({
-            title: "Edición de Proyecto",
-            text: `Vas a editar el proyecto ${param.row.title}`,
-            icon: "info",
-            button: "Aceptar"
-        });
         navigate("/editproject");
     };
 
     const handleViewClick=(param) => {
         setAuthData({ ...authData, id: param.row });
-        // swal({
-        //     title: "información del Proyecto",
-        //     text: `Vas a ver el proyecto ${param.row.title}`,
-        //     icon: "info",
-        //     button: "Aceptar"
-        // });
         navigate("/viewproject");
     };
 
@@ -141,7 +104,6 @@ export default function Projects() {
             },
             width: 100
         },
-
         { field: 'indicator', headerName: 'Indicador', width: 150 },
         { field: 'objective', headerName: 'Objetivo', width: 150 },
         { field: 'doc', headerName: 'Link Doc', width: 150 },
@@ -216,11 +178,7 @@ export default function Projects() {
                         style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "600px", margin: "0 0 15px 40px" }}
                     />
                 </div>
-
-                {/* Table made with the DataGrid Template from MUI */}
-
             </Box>
-
             {/* This elements are displayed when screen is small */}
             <Box sx={{ display: { xs: 'block', sm: 'none' }, justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -236,7 +194,6 @@ export default function Projects() {
                             Crear Proyecto
                         </Button>
                     </Link>
-
                     {/* RNF-03: it is required to have a search in the lists and to be able to search by name. */}
                     <input
                         type="text"
@@ -246,10 +203,8 @@ export default function Projects() {
                         className="ui input circular icon"
                         style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", minWidth: "260px", marginBottom: "15px" }}
                     />
-
                 </div>
             </Box>
-
             {/* Table made with the DataGrid Template from MUI */}
             <ThemeProvider theme={theme}>
                 <div className='datagrid'>
@@ -267,38 +222,6 @@ export default function Projects() {
                     />
                 </div>
             </ThemeProvider>
-
-            {/* Versión sin MUI DataGrid */}
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Contraseña</th>
-                        <th>¿Es Admin?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {usersListSearched.map((project) => (
-                        <tr key={project._id}>
-                            <td>
-                                {project.name}
-                            </td>
-                            <td>
-                                {project.last_name}
-                            </td>
-                            <td>
-                                {project.email}
-                            </td>
-                            <td>
-                                {project.password}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table> */}
-
         </div>
     )
 }

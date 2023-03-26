@@ -5,9 +5,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 
 function Tabs() {
-
   const URLdoc = 'https://www.figma.com'
-
   const [index, setIndex] = useState(0)
   //Donde se esta almacenando la data
   const { authData }=useContext(AuthContext);
@@ -40,7 +38,6 @@ function Tabs() {
           <p id='p-Tab'>{id.indicator}</p>
         </div>
       </div>
-
       <div className="tabContent" hidden={index != 1}>
         <div className="axis">
           <h3 id='Tl-Tab'>Descripción</h3>
@@ -59,5 +56,4 @@ function Tabs() {
     </div>
   )
 }
-
 export default Tabs

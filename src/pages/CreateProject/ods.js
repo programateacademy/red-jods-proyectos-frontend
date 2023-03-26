@@ -37,7 +37,7 @@ export const ODS =
     }, 
     { 
         value: "Trabajo", 
-        nameOds: 'Trabajo Decendente y crecimiento ecnómico', 
+        nameOds: 'Trabajo Descendente y crecimiento económico', 
         url: "https://github.com/programateacademy/red-jods-proyectos-frontend/blob/3074ea4e5d3b3329a58e0bc72494abd20b8b1af4/src/assets/img/ODS/trabajo.png" 
     }, 
     { 

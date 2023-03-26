@@ -18,18 +18,13 @@ export default function Users() {
     //Using AuthContext information
     const { authData, setAuthData }=useContext(AuthContext);
     const { token, id }=authData;
-    
     //Variable for fecthing users
     const [usersList, setUsersList]=useState([]);
     //variables for filtering throughout search
     const [search, setSearch]=useState([]);
     const [usersListSearched, setUsersListSearched]=useState([]);
-
-
-
     //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
-
         async function fetchData() {
             const { data }=await users.get("/Api/v1/user", {
                 headers: {
@@ -39,26 +34,8 @@ export default function Users() {
             setUsersList(data);
             setUsersListSearched(data);
         }
-
         fetchData();
     }, []);
-
-    //This interacts with API and Create one User
-    const addUser=async (user) => {
-        const { data }=await users.post("/Api/v1/user", user);
-        setUsersList((oldList) => [...oldList, data]);
-    };
-
-    //This interacts with API and Delete one User (in this case just hides it)
-    const removeUser=async (id) => {
-        await users.delete(`/Api/v1/user/${id}`);
-        setUsersList((oldList) => oldList.filter((user) => user._id!==id));
-    };
-    //This interacts with API and Update one User
-
-    const editUser=async (id, user) => {
-        await users.put(`/Api/v1/user/${id}`, user);
-    };
 
     //Code for search bar
     const handleChangeSearch = e => {
@@ -77,31 +54,24 @@ export default function Users() {
         setUsersListSearched(searchResult);
     }
 
-
-    //Code for handle clicks on edit and delete buttons
-    const handleCellClick = (param, event) => {
-        event.stopPropagation();
-    };
-
-    const handleRowClick= (param, event) => {
-        event.stopPropagation();
-    };
-    const handleDeleteClick = (param, event) => {
-        removeUser(param._id)
-    };
-
     // Hook de react router dom para navegar al darle submit
     const navigate=useNavigate();
+
+    //Code for handle clicks on edit and delete buttons
+    const handleCellClick=(param, event) => {
+        event.stopPropagation();
+    };
+
+    const handleRowClick=(param, event) => {
+        event.stopPropagation();
+    };
+    const handleDeleteClick=(param, event) => {
+        removeUser(param._id)
+    };
 
     const handleEditClick =(param) => {
         console.log(param.row);
         setAuthData({ ...authData, id: param.row });
-        swal({
-            title: "Edición de Usuario",
-            text: `Vas a editar el usuario de ${param.row.name}`,
-            icon: "info",
-            button: "Aceptar"
-        });
         navigate("/edituser");
     };
 
@@ -182,11 +152,7 @@ export default function Users() {
                         style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "600px", margin: "0 0 15px 40px" }}
                     />
                 </div>
-
-                {/* Table made with the DataGrid Template from MUI */}
-
             </Box>
-
             {/* This elements are displayed when screen is small */}
             <Box sx={{ display: { xs: 'block', md: 'none' }, justifyContent: 'center', alignItems: 'center'}}>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
@@ -202,7 +168,6 @@ export default function Users() {
                             Crear Admin
                         </Button>
                     </Link>
-
                     {/* RNF-03: it is required to have a search in the lists and to be able to search by name. */}
                     <input
                         type="text"
@@ -212,10 +177,8 @@ export default function Users() {
                         className="ui input circular icon"
                         style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", minWidth: "260px", marginBottom: "15px"}}
                     />
-                    
                 </div>
             </Box>
-
             {/* Table made with the DataGrid Template from MUI */}
             <ThemeProvider theme={theme}>
                 <div className='datagrid'>
@@ -233,38 +196,6 @@ export default function Users() {
                     />
                 </div>
             </ThemeProvider>
-
-            {/* Versión sin MUI DataGrid */}
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Contraseña</th>
-                        <th>¿Es Admin?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {usersListSearched.map((user) => (
-                        <tr key={user._id}>
-                            <td>
-                                {user.name}
-                            </td>
-                            <td>
-                                {user.last_name}
-                            </td>
-                            <td>
-                                {user.email}
-                            </td>
-                            <td>
-                                {user.password}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table> */}
-
         </div>
     )
 }

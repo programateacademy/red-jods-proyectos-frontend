@@ -13,70 +13,39 @@ import odsOptions from './ods'
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 
-
-
-
 export default function NewProject() {
-
     //Almecenando todas las tareas que se estan creando desde el input 
     const [todos, setTodos] = useState([]);
-
     //Agregar las tareas, todo es donde se alamcena la tarea
     const addTodo = todo => {
         //Arreglar el texto  en dado caso de que alguien deje espacios
-        if (!todo.name || /^\s*$/.test(todo.name)) {
-            return
-        }
+        if (!todo.name || /^\s*$/.test(todo.name)) {return}
         //Se guardan cada una de la lista de tareas que se estan almacenando
-        setTodos([todo, ...todos])
-
-    };
+        setTodos([todo, ...todos])};
 
     const updateTodo = (todoId, newValue) => {
-        if (!newValue.name || /^\s*$/.test(newValue.name)) {
-            return
-        }
+        if (!newValue.name || /^\s*$/.test(newValue.name)) {return}
         // Si el item del id es igual al nuevo id que se desea modificar, estara en true, pero si no el nuevo visualViewport, regresara al id antiguo
-        setTodos(prev => prev.map(item => item.id === todoId ? newValue : item))
-
-    }
+        setTodos(prev => prev.map(item => item.id === todoId ? newValue : item))}
 
     const completeTodo = id => {
         let updatedTodos = todos.map(todo => {
             if (todo.id === id) {
                 todo.isComplete = !todo.isComplete
-            }
-            return todo
-        })
+            }return todo})
         setTodos(updatedTodos);
     };
 
     const removeTodo = id => {
         const removeArr = [...todos].filter(todo => todo.id !== id)
-
         setTodos(removeArr)
     };
 
-
-    const { register, watch, handleSubmit, formState: { errors } } = useForm({});
-
-    //onSubmit se debe consumir la api
+    const { register, handleSubmit, formState: { errors } } = useForm({});
 
     //Donde se esta almacenando la data
     const { authData } = useContext(AuthContext);
     const { token, email } = authData;
-
-    const [ODS, setOds]=useState([]);
-
-
-    // const handleSelectChange=(event) => {
-    //     const selectedOptions=Array.from(event.target.selectedOptions).map(option => ({
-    //         value: option.value,
-    //         url: option.url
-    //     }));
-    //     console.log(selectedOptions);
-    //     setOds(selectedOptions);
-    // }
 
         // Hook de react router dom para navegar al darle submit
     const navigate=useNavigate();
@@ -93,15 +62,11 @@ export default function NewProject() {
         "state": true,
         "ods": selectedOptions,
         }
-        console.log(newProject)
-        // console.log(token)
-        
         let res = await baseURL.post("/Api/v1/project/", newProject, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(res.data)
         swal({
             title: "Creación de Proyecto",
             text: `Has creado el proyecto ${res.data.title} correctamente!`,
@@ -112,7 +77,7 @@ export default function NewProject() {
             navigate("/myprojects");
         }
     }
-
+    
     return (
     <>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -139,15 +104,6 @@ export default function NewProject() {
                                     })} />
                                     {errors.title?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
-                                {/* <div id='inputs'>
-                                    <label id='title-form' htmlFor="">Responsable</label>
-                                    <input id='input-form' placeholder='Diligencia tu respuesta' type="text" {...register('userName', {
-                                        required: true,
-                                    })} />
-                                    {errors.userName?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
-                                </div> */}
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Eje Principal</label>
                                     <select id='input-form' {...register('axis', { required: true, })}>
@@ -160,7 +116,6 @@ export default function NewProject() {
                                     </select>
                                     {errors.axis?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">ODS (Utiliza ctrl / cmd para seleccionar varios)</label>
                                     <select className='ods' id='input-form' {...register('ods', { required: true })} multiple>
@@ -184,8 +139,6 @@ export default function NewProject() {
                                     </select>
                                     {errors.ods?.type==='required'&&<p id='error-msg'>El campo es reqequerido</p>}
                                 </div>
-
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="PartnerUrl"> Documento (URL) </label>
                                     <input id='input-form' name='PartnerUrl'
@@ -193,7 +146,6 @@ export default function NewProject() {
                                             {
                                                 required: {
                                                     value: true
-
                                                 },
                                                 pattern: {
                                                     value: /^(http(s)?:\/\/)?[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
@@ -203,29 +155,23 @@ export default function NewProject() {
                                     />
                                     {errors.doc?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                             </Grid>
                             <Grid item xs={12} md={6}>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Descripción</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('description', { required: true, })} />
                                     {errors.description?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Indicadores</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="textarea" {...register('indicator', { required: true, })} />
                                     {errors.indicator?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
-
                                 </div>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Objetivos</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('objective', { required: true })} />
                                     {errors.objective?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                             </Grid>
                         </Grid>
                     </div>
@@ -234,7 +180,6 @@ export default function NewProject() {
                     </div>
                 </div>
             </form>
-
             <div className="thirdPartForm">
                 <div className="Task-title">
                     <Box sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -259,9 +204,6 @@ export default function NewProject() {
                     removeTodo={removeTodo}
                     updateTodo={updateTodo} />
             </div>
-            
     </>
     )
 }
-
-

@@ -10,7 +10,7 @@ import TodoForm from '../../components/FormAddTasks/TodoForm/TodoForm'
 import baseURL from '../../services/api/index'
 import odsOptions from '../CreateProject/ods'
 import swal from 'sweetalert';
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function EditProject() {
@@ -18,8 +18,6 @@ export default function EditProject() {
     //Donde se esta almacenando la data
     const { authData }=useContext(AuthContext);
     const { token, email, id } = authData;
-
-    const [ODS, setOds]=useState([]);
 
     const [proyectoData, setProyectoData]=useState(id);
 
@@ -34,7 +32,6 @@ export default function EditProject() {
         }
         //Se guardan cada una de la lista de tareas que se estan almacenando
         setTodos([todo, ...todos])
-
     };
 
     const updateTodo = (todoId, newValue) => {
@@ -43,7 +40,6 @@ export default function EditProject() {
         }
         // Si el item del id es igual al nuevo id que se desea modificar, estara en true, pero si no el nuevo visualViewport, regresara al id antiguo
         setTodos(prev => prev.map(item => item.id === todoId ? newValue : item))
-
     }
 
     const completeTodo = id => {
@@ -62,19 +58,7 @@ export default function EditProject() {
         setTodos(removeArr)
     };
 
-
     const { register, watch, handleSubmit, formState: { errors } } = useForm({});
-
-    //onSubmit se debe consumir la api
-
-    // const handleSelectChange=(event) => {
-    //     const selectedOptions=Array.from(event.target.selectedOptions).map(option => ({
-    //         value: option.value,
-    //         url: option.url
-    //     }));
-    //     console.log(selectedOptions);
-    //     setOds(selectedOptions);
-    // }
 
         // Hook de react router dom para navegar al darle submit
     const navigate=useNavigate();
@@ -133,15 +117,6 @@ export default function EditProject() {
                                     />
                                     {errors.title?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
-                                {/* <div id='inputs'>
-                                    <label id='title-form' htmlFor="">Responsable</label>
-                                    <input id='input-form' placeholder='Diligencia tu respuesta' type="text" {...register('userName', {
-                                        required: true,
-                                    })} />
-                                    {errors.userName?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
-                                </div> */}
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Eje Principal</label>
                                     <select id='input-form' {...register('axis', { required: true, })}
@@ -156,7 +131,6 @@ export default function EditProject() {
                                     </select>
                                     {errors.axis?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">ODS (Utiliza ctrl / cmd para seleccionar varios)</label>
                                     <select className='ods' id='input-form' {...register('ods', { required: true })} multiple>
@@ -180,8 +154,6 @@ export default function EditProject() {
                                     </select>
                                     {errors.ods?.type==='required'&&<p id='error-msg'>El campo es reqequerido</p>}
                                 </div>
-
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="PartnerUrl"> Documento (URL) </label>
                                     <input id='input-form' name='PartnerUrl'
@@ -191,7 +163,6 @@ export default function EditProject() {
                                             {
                                                 required: {
                                                     value: true
-
                                                 },
                                                 pattern: {
                                                     value: /^(http(s)?:\/\/)?[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/,
@@ -201,10 +172,8 @@ export default function EditProject() {
                                     />
                                     {errors.doc?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                             </Grid>
                             <Grid item xs={12} md={6}>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Descripción</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('description', { required: true, })} 
@@ -213,7 +182,6 @@ export default function EditProject() {
                                     />
                                     {errors.description?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Indicadores</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="textarea" {...register('indicator', { required: true, })} 
@@ -221,9 +189,7 @@ export default function EditProject() {
                                         onChange={e => setProyectoData({ ...proyectoData, indicator: e.target.value })}
                                     />
                                     {errors.indicator?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
-
                                 </div>
-
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Objetivos</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('objective', { required: true })} 
@@ -231,7 +197,6 @@ export default function EditProject() {
                                         onChange={e => setProyectoData({ ...proyectoData, objective: e.target.value })}/>
                                     {errors.objective?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
                                 </div>
-
                             </Grid>
                         </Grid>
                     </div>
@@ -244,5 +209,3 @@ export default function EditProject() {
     </>
     )
 }
-
-

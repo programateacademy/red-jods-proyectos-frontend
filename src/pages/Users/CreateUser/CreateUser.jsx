@@ -79,7 +79,6 @@ export default function NewUser() {
         if (res.data.data._id){
             navigate("/users");
         }
-
     };
 
     //To show password

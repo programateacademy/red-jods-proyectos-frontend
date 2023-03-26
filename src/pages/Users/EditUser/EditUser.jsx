@@ -58,7 +58,6 @@ export default function EditUser() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const data={
             name: name,
             last_name: lastName,
@@ -67,7 +66,6 @@ export default function EditUser() {
             role: role,
             state: true
         };
-
         let res=await users.put(`/Api/v1/user/${id._id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -83,8 +81,7 @@ export default function EditUser() {
     }
 
     return (
-        <>
-
+    <>
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -138,7 +135,6 @@ export default function EditUser() {
                                     value={email} onChange={e => setEmail(e.target.value)}
                                 />
                             </Grid>
-                            
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -165,7 +161,6 @@ export default function EditUser() {
                                 </FormControl>
                             </Grid>
                         </Grid>
-                        
                         <Button
                             type="submit"
                             fullWidth
@@ -179,7 +174,6 @@ export default function EditUser() {
                 <Copyright sx={{ mt: 5 }} />
             </Container>
         </ThemeProvider>
-        </>
-        
+    </>
     );
 }

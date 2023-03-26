@@ -12,7 +12,6 @@ import Recover from '../pages/Recover/Recover';
 import ViewProject from '../pages/viewProject/viewProject';
 
 function Router() {
-
     //En un componente distinto
     const router=createBrowserRouter(
         createRoutesFromElements(
