@@ -44,7 +44,7 @@ export default function Projects() {
     }, []);
 
     //This interacts with API and Create one User
-    const addFilm=async (project) => {
+    const addUser=async (project) => {
         const { data }=await projects.post("/Api/v1/project", project);
         setUsersList((oldList) => [...oldList, data]);
     };
@@ -56,7 +56,7 @@ export default function Projects() {
     };
     //This interacts with API and Update one User
 
-    const editFilm=async (id, project) => {
+    const editUser=async (id, project) => {
         await projects.put(`/Api/v1/project/${id}`, project);
     };
 
@@ -90,6 +90,9 @@ export default function Projects() {
     const handleRowClick=(param, event) => {
         event.stopPropagation();
     };
+    const handleEditClick=(param, event) => {
+        removeUser(param._id)
+    };
     const handleDeleteClick=(param, event) => {
         removeUser(param._id)
     };
@@ -99,7 +102,7 @@ export default function Projects() {
         { field: 'title', headerName: 'Nombre', width: 150 },
         { field: 'axis', headerName: 'Ejes', width: 150 },
         {
-            field: 'Descripción',
+            field: '_id',
             headerName: 'Descripción',
             renderCell: (cellValues, row) => {
                 return (
@@ -170,13 +173,13 @@ export default function Projects() {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                     <div>
-                        <h1 style={{ padding: "40px 40px 0px 40px" }}>Proyectos</h1>
+                        <h1 style={{ padding: "40px 40px 0px 40px" }}>Mis Proyectos</h1>
                         <img src={Decoración} alt="" style={{ padding: "0 0 0 40px", Width: "300px", flexGrow: "50%" }} />
                     </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     {/* Create User Button */}
-                    <Link to="/newproject">
+                    <Link to="/createproject">
                         <Button
                             style={{ backgroundColor: "green", color: "white", margin: "40px" }}
                         >
@@ -202,7 +205,7 @@ export default function Projects() {
             <Box sx={{ display: { xs: 'block', sm: 'none' }, justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <h1 style={{ padding: "20px 10px 0px 10px" }}>Proyectos</h1>
+                        <h1 style={{ padding: "20px 10px 0px 10px" }}>Mis Proyectos</h1>
                         <img src={Decoración} alt="" style={{ padding: "0 0 10px 10px", maxWidth: "280px" }} />
                     </div>
                     {/* Create User Button */}

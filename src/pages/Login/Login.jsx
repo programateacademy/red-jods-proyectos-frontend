@@ -68,7 +68,7 @@ export default function SignIn() {
       
       Copia y pega el código que se te envió, ingresa el correo, la nueva contraseña y dale click en Establecer Nueva Contraseña.`,
       icon: "success",
-      button: "aceptar"
+      button: "Aceptar"
     });
     navigate("/recover");
   }

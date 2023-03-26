@@ -8,15 +8,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { esES } from '@mui/material/locale';
 import EditButton from '/src/assets/img/EditButton.svg'
 import DeleteButton from '/src/assets/img/DeleteButton.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import './Users.css'
+import swal from 'sweetalert';
 
 export default function Users() {
     //Using AuthContext information
-    const { authData }=useContext(AuthContext);
-    const { token, role }=authData;
+    const { authData, setAuthData }=useContext(AuthContext);
+    const { token, id }=authData;
     
     //Variable for fecthing users
     const [usersList, setUsersList]=useState([]);
@@ -24,10 +25,10 @@ export default function Users() {
     const [search, setSearch]=useState([]);
     const [usersListSearched, setUsersListSearched]=useState([]);
 
+
+
     //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
-        console.log(role);
-        console.log(token);
 
         async function fetchData() {
             const { data }=await users.get("/Api/v1/user", {
@@ -43,7 +44,7 @@ export default function Users() {
     }, []);
 
     //This interacts with API and Create one User
-    const addFilm=async (user) => {
+    const addUser=async (user) => {
         const { data }=await users.post("/Api/v1/user", user);
         setUsersList((oldList) => [...oldList, data]);
     };
@@ -55,7 +56,7 @@ export default function Users() {
     };
     //This interacts with API and Update one User
 
-    const editFilm=async (id, user) => {
+    const editUser=async (id, user) => {
         await users.put(`/Api/v1/user/${id}`, user);
     };
 
@@ -89,6 +90,21 @@ export default function Users() {
         removeUser(param._id)
     };
 
+    // Hook de react router dom para navegar al darle submit
+    const navigate=useNavigate();
+
+    const handleEditClick =(param) => {
+        console.log(param.row);
+        setAuthData({ ...authData, id: param.row });
+        swal({
+            title: "Edición de Usuario",
+            text: `Vas a editar el usuario de ${param.row.name}`,
+            icon: "info",
+            button: "Aceptar"
+        });
+        navigate("/edituser");
+    };
+
     //Array with the field names in the admins table
     const columns=[
         { field: 'name', headerName: 'Nombre', width: 200 },
@@ -105,7 +121,7 @@ export default function Users() {
                         <Button
                             variant="contained"
                             onClick={(event) => {
-                                handleEditClick(event, cellValues)
+                                handleEditClick(cellValues)
                             }}
                             style={{ backgroundColor: "transparent" }}
                         >
@@ -114,7 +130,7 @@ export default function Users() {
                         <Button
                             variant="contained"
                             onClick={(event) => {
-                                handleDeleteClick(cellValues._id)
+                                handleDeleteClick(cellValues)
                             }}
                             style={{ backgroundColor: "transparent" }}
                         >

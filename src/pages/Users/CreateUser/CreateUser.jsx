@@ -76,7 +76,7 @@ export default function NewUser() {
             title: "Creación de Usuario",
             text: `Has creado el usuario ${res.data.data.name} correctamente!`,
             icon: "success",
-            button: "aceptar"
+            button: "Aceptar"
         });
         if (res.data.data._id){
             navigate("/users");
