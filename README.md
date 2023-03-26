@@ -8,7 +8,11 @@ En presente aplicativo se presentara el depliegue del proyecto piloto de una pá
 - Creación del formulario y editables de los proyectos 
 - Realización de  "to do a list" con las funcionalidades del CRUD
 
-Puedes ver el demo del proyecto en el siguiente link de despliegue: https://redjods.netlify.app/
+Puedes ver el demo del proyecto en el siguiente link de despliegue: 
+ - https://redjods.netlify.app/
+
+o también en:
+- https://redjods-proyectos.vercel.app/
 
 ## Documentación
 
@@ -40,7 +44,7 @@ Pasos para instalar el proyecto demo
 
 ## Autores
 
-<h3 align="center"> Camilo Cárdenas - Product Owner / Front end <img src="https://camo.githubusercontent.com/ac28190b3bdb446d46b2760854ecec42927bd2ae802d0729c6b0e72449b56082/68747470733a2f2f6769746875622e6769746875626173736574732e636f6d2f696d616765732f6d6f64756c65732f6c6f676f735f706167652f4769744875622d4d61726b2e706e67" width="30"/>  @Camicardenasp <h3>
+<h3 align="center"> Camilo Cárdenas - Líder Técnico / Product Owner / Frontend <img src="https://camo.githubusercontent.com/ac28190b3bdb446d46b2760854ecec42927bd2ae802d0729c6b0e72449b56082/68747470733a2f2f6769746875622e6769746875626173736574732e636f6d2f696d616765732f6d6f64756c65732f6c6f676f735f706167652f4769744875622d4d61726b2e706e67" width="30"/>  @Camicardenasp <h3>
 <p align="center"><a href="https://github.com/Camicardenasp"><img src="https://raw.githubusercontent.com/Camicardenasp/NEW_Portfolio/1c56150226537938bc4cc3d001210e073de5d7bc/src/assets/img/logo.svg" width="150"></a><p>
 
 <h3 align="center"> Ruth Yibeth Lizcano- Líder back end <img src="https://camo.githubusercontent.com/ac28190b3bdb446d46b2760854ecec42927bd2ae802d0729c6b0e72449b56082/68747470733a2f2f6769746875622e6769746875626173736574732e636f6d2f696d616765732f6d6f64756c65732f6c6f676f735f706167652f4769744875622d4d61726b2e706e67" width="30"/>  @ruthyi <h3>
@@ -62,10 +66,4 @@ Pasos para instalar el proyecto demo
 <p>Esta página demo fue diseñada y programada para:</p>
  <h4><a href="https://www.instagram.com/red.jods/">RedJODS</a></h4> 
  
-![Logo](https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/img/LOGO-RED-JODS.png)
-
-
-
-
-
-
+![Logo](https://raw.githubusercontent.com/programateacademy/red-jods-proyectos-frontend/main/src/assets/img/logo.svg)
