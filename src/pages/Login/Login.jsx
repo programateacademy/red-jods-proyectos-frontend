@@ -20,6 +20,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import './Login.css'
 
 function Copyright(props) {
   return (
@@ -151,7 +152,7 @@ export default function SignIn() {
             />
             <Grid container>
               <Grid item xs>
-                <button onClick={handleForgot}>
+                <button id='btn-ps' onClick={handleForgot}>
                   ¿Olvidaste tu contraseña?
                 </button>
               </Grid>
@@ -162,6 +163,7 @@ export default function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style={{textTransform: "Capitalize"}}
+                id='Btn-into'
               >
                 Ingresar
               </Button>

@@ -153,6 +153,7 @@ export default function Recover() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style={{textTransform: "Capitalize"}}
+                id='Btn-into'
               >
                 Establecer Nueva Contraseña
               </Button>

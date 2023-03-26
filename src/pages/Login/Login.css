@@ -1,0 +1,27 @@
+#btn-ps {
+    border: solid 2px var(--Btn-color);
+    border-radius: 10px;
+    color: var(--Btn-color);
+    font-family: "Poppins", sans-serif;
+    background-color: transparent;
+    margin-top: 10px;
+  }
+  
+  #btn-ps:hover {
+    background-color: var(--Btn-color);
+    color: var(--bg-color);
+  }
+
+  #Btn-into {
+    background-color: var(--Btn-color);
+    border-radius: 10px;
+    color: var(--bg-color);
+    font-family: "Poppins", sans-serif;
+  }
+  
+  #Btn-into:hover {
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+      -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+  }

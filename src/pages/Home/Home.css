@@ -41,6 +41,7 @@
   border: solid 2px var(--Btn-color);
   border-radius: 10px;
   color: var(--Btn-color);
+  background-color: transparent;
   font-family: "Poppins", sans-serif;
 }
 
