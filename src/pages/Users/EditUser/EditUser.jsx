@@ -73,11 +73,10 @@ export default function EditUser() {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(res.data);
         swal({
             title: "Edición de Usuario",
             text: `El usuario ${id.name} fue modificado exitosamente`,
-            icon: "sucess",
+            icon: "success",
             button: "Aceptar"
         });
         navigate("/users");
@@ -85,33 +84,7 @@ export default function EditUser() {
 
     return (
         <>
-            {/* <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Nombre:</label>
-                    <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="last_name">Apellido:</label>
-                    <input type="text" id="last_name" value={lastName} onChange={e => setLastName(e.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="phone">Teléfono:</label>
-                    <input type="tel" id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="role">Rol:</label>
-                    <select id="role" value={role} onChange={e => setRole(e.target.value)}>
-                        <option value="">Seleccionar un rol...</option>
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuario</option>
-                    </select>
-                </div>
-                <button type="submit">Enviar</button>
-            </form> */}
+
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />

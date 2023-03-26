@@ -48,7 +48,6 @@ export default function SignIn() {
 
   const handleEmailChange=(e) => {
     setEmailPreview(e.target.value);
-    console.log(emailPreview)
   } 
 
   //This handle the forgot password
@@ -81,21 +80,18 @@ export default function SignIn() {
       email: rawFormData.get('email'),
       password: rawFormData.get('password')
     } 
-    console.log({dataToSend});
     let res = await api.post("/Api/v1/login", dataToSend);
-    console.log(res.data);
     const role = res.data.data.role;
     const token = res.data.tokenSession;
     const email = res.data.data.email;
     const name=res.data.data.name;
     setAuthData({ token, role, email, name });
-    console.log(authData.role);
     swal({
       title: "Inicio de Sesión",
       text: `Has iniciado sesión correctamente! 
       Tu rol es ${role}`,
       icon: "success",
-      button: "aceptar"
+      button: "Aceptar"
     });
     if (res.data.tokenSession){
       navigate("/home");

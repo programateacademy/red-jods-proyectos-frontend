@@ -9,14 +9,16 @@ import { esES } from '@mui/material/locale';
 import DescriptionButton from '/src/assets/img/DescriptionButton.svg'
 import EditButton from '/src/assets/img/EditButton.svg'
 import DeleteButton from '/src/assets/img/DeleteButton.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import swal from 'sweetalert';
+
 
 export default function Projects() {
     //Using AuthContext information
-    const { authData }=useContext(AuthContext);
-    const { token, role, email }=authData;
+    const { authData,setAuthData }=useContext(AuthContext);
+    const { token, role, email, id }=authData;
 
     //Variable for fecthing projects
     const [usersList, setUsersList]=useState([]);
@@ -26,10 +28,6 @@ export default function Projects() {
 
     //With this we fetch the data (READ) from the API and it is saved in an array called "data"
     useEffect(() => {
-        console.log(role);
-        console.log(token);
-        console.log(email)
-
         async function fetchData() {
             const { data }=await projects.get(`/Api/v1/project/${email}`, {
                 headers: {
@@ -90,11 +88,22 @@ export default function Projects() {
     const handleRowClick=(param, event) => {
         event.stopPropagation();
     };
-    const handleEditClick=(param, event) => {
-        removeUser(param._id)
-    };
     const handleDeleteClick=(param, event) => {
         removeUser(param._id)
+    };
+
+    // Hook de react router dom para navegar al darle submit
+    const navigate=useNavigate();
+
+    const handleEditClick =(param) => {
+        setAuthData({ ...authData, id: param.row });
+        swal({
+            title: "Edición de Proyecto",
+            text: `Vas a editar el proyecto ${param.row.title}`,
+            icon: "info",
+            button: "Aceptar"
+        });
+        navigate("/editproject");
     };
 
     //Array with the field names in the admins table
@@ -110,7 +119,7 @@ export default function Projects() {
                         <Button
                             variant="contained"
                             onClick={(event) => {
-                                handleEditClick(event, cellValues)
+                                handleEditClick(cellValues)
                             }}
                             style={{ backgroundColor: "transparent" }}
                         >
@@ -134,7 +143,7 @@ export default function Projects() {
                         <Button
                             variant="contained"
                             onClick={(event) => {
-                                handleEditClick(event, cellValues)
+                                handleEditClick(cellValues)
                             }}
                             style={{ backgroundColor: "transparent" }}
                         >

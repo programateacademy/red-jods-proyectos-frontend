@@ -64,14 +64,12 @@ export default function NewUser() {
             role: role,
             state: true
         }
-        console.log({ dataToSend });
         //This tries to interacts with the API and Create One User and awaits the response
         let res=await users.post("/Api/v1/user", dataToSend, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(res.data);
         swal({
             title: "Creación de Usuario",
             text: `Has creado el usuario ${res.data.data.name} correctamente!`,
