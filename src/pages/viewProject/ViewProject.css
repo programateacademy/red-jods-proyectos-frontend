@@ -1,0 +1,37 @@
+#imgProject{
+    width: 80%;
+}
+
+.InfoProject{
+    width: var(--container-width-sm);
+    margin: 1rem 0 1rem 2rem;
+}
+
+#decoration {
+    max-width: 90%;
+}
+
+@media (min-width: 425px) {
+    
+
+}
+@media (min-width: 768px) {
+    .InfoProject{
+        width: var(--container-width-md);
+        margin: 1rem 0 1rem 2rem;
+    }
+    #imgProject{
+        width: 60%;
+    }
+
+}
+
+@media (min-width: 1536px) {
+    .InfoProject{
+        width: var(--container-width-lg);
+        margin: 1rem 0 1rem 2rem;
+    }
+    #imgProject{
+        width: 30%;
+    }
+}

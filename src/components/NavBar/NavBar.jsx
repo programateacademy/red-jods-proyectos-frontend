@@ -14,20 +14,20 @@ import { Link } from 'react-router-dom'
 import UserLogo from '/src/assets/img/User.png'
 import Decoración from '/src/assets/img/Decoración.png'
 import React, { useContext } from 'react';
-import { AuthContext } from '../../components/AuthContext/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const pages=[
     {
-        name: 'Inicio |',
+        name: 'Proyectos |',
         route: '/home'
     },
     {
-        name: 'Proyectos |',
-        route: '/projects'
+        name: 'Mis Proyectos |',
+        route: '/myprojects'
     },
     {
         name: 'Crear Proyecto |',
-        route: '/newproject'
+        route: '/createproject'
     },
     {
         name: 'Usuarios |',
@@ -37,13 +37,9 @@ const pages=[
 
 const settings=[
     {
-        name: 'Iniciar Sesión',
+        name: 'Cerrar Sesión',
         route: '/'
     }
-
-    // 'Perfil', 
-    // 'Cuenta', 
-    // 'Dashboard', 
     // 'Logout'
 ];
 
@@ -67,8 +63,16 @@ function NavBar() {
     };
 
     //Using AuthContext information
-    const { authData }=useContext(AuthContext);
+    const { authData, setAuthData }=useContext(AuthContext);
     const { token, role }=authData;
+
+    const handleCloseSession = () => {
+        const rolenull=null;
+        const tokennull=null;
+        const emailnull=null;
+        const namenull=null;
+        setAuthData({ tokennull, rolenull, emailnull, namenull });
+    }
 
     return (
         <AppBar position="static" style={{ backgroundColor: "white", justifyContent: 'space-between' }}>
@@ -83,7 +87,7 @@ function NavBar() {
 
                     </Box>
                     
-                        {/* This is the box corresponding to pages menu when the screen is large enough*/}
+                    {/* This is the box corresponding to pages menu when the screen is large enough*/}
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (
@@ -122,9 +126,12 @@ function NavBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                                    <Link to={setting.route}>
-                                        <Typography textAlign="center">{setting.name}</Typography>
-                                    </Link>
+                                    <button onClick={handleCloseSession}>
+                                        <Link to={setting.route}>
+                                            <Typography textAlign="center">{setting.name}</Typography>
+                                        </Link>
+                                    </button>
+                                    
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -179,15 +186,16 @@ function NavBar() {
                             <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
                                 {settings.map((setting) => (
                                     <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                                        <Link to={setting.route}>
-                                            <Typography textAlign="center">{setting.name}</Typography>
-                                        </Link>
+                                        <button onClick={handleCloseSession}>
+                                            <Link to={setting.route}>
+                                                <Typography textAlign="center">{setting.name}</Typography>
+                                            </Link>
+                                        </button>
                                     </MenuItem>
                                 ))}
                             </Box>
                         </Menu>
                     </Box>
-
                 </Toolbar>
             </Container>
         </AppBar>
