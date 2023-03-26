@@ -5,7 +5,7 @@ En presente aplicativo se presentara el depliegue del proyecto piloto de una pá
 
 - Creación y autenticación del Login
 - Cración del dashboard del administrador para la genenración de usuarios
-- Creación del formualrio y editables de los proyectos 
+- Creación del formulario y editables de los proyectos 
 - Realización de  "to do a list" con las funcionalidades del CRUD
 
 Puedes ver el demo del proyecto en el siguiente link de despliegue: https://redjods.netlify.app/
