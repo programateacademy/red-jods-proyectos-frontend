@@ -52,9 +52,7 @@ export default function SignIn() {
     const dataToSend={
       email: emailPreview
     }
-    console.log({ dataToSend });
     let res=await api.post("/Api/v1/login/forgot-password", dataToSend);
-    console.log(res.data);
     swal({
       title: "Envío Correo de Recuperación",
       text: `${res.data}!

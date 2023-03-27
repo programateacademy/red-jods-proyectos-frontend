@@ -7,15 +7,66 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import "./Home.css";
 import AppPagination from "../../components/pagination/pagination";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from '../../contexts/AuthContext';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import projects from "../../services/api/index";
+import { getItem } from "localforage";
+
 
 export default function Home() {
   const [card, setCard] = useState([]);
   //Using AuthContext information
-  const { authData }=useContext(AuthContext);
-  const { token, role, name }=authData;
+  const { authData, setAuthData }=useContext(AuthContext);
+  const { token, role, name, id }=authData;
+
+  //Variable for fecthing projects
+  const [usersList, setUsersList]=useState([]);
+  //variables for filtering throughout search
+  const [search, setSearch]=useState([]);
+  const [usersListSearched, setUsersListSearched]=useState([]);
+  //With this we fetch the data (READ) from the API and it is saved in an array called "data"
+  useEffect(() => {
+    async function fetchData() {
+      const { data }=await projects.get(`/Api/v1/project`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUsersList(data);
+      setUsersListSearched(data);
+    }
+    fetchData();
+  }, []);
+
+  //Code for search bar
+  const handleChangeSearch=e => {
+    setSearch(e.target.value);
+    filtering(e.target.value);
+  }
+
+  const filtering=(searchTerm) => {
+    var searchResult=usersList.filter((element) => {
+      if (element.title.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        ||
+        element.axis.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        ||
+        element.ods[0].nameOds.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return element;
+      }
+    });
+    setUsersListSearched(searchResult);
+  }
+
+  // Hook de react router dom para navegar al darle submit
+  const navigate=useNavigate();
+
+  const handleViewClick=(item) => {
+    const project=item;
+    setAuthData({ ...authData, id: project });
+    navigate('/viewproject');
+    };
 
   return (
     <div className="container_box">
@@ -23,37 +74,40 @@ export default function Home() {
       <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
         <h1>¡Hola {name}, eres {role}!</h1>
         <img src={Decoración} alt="" />
+        <input
+          type="text"
+          value={search}
+          placeholder="¿Qué proyecto deseas buscar?"
+          onChange={handleChangeSearch}
+          className="ui input circular icon"
+          style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "600px", margin: "40px 40px 15px 40px" }}
+        />
       </Box>
       <div className="cardBox">
-        {card.map((item) => {
+
+
+        {usersListSearched.map((item) => {
           return (
-            <Card key={item.id} id="Card" sx={{ maxWidth: 280 }}>
+            <Card key={item._id} id="Card" sx={{ width:280 }}>
               <CardMedia
                 sx={{ height: 280 }}
-                image={item.img}
-                title={item.Name}
+                image={item.ods[0].url}
+                title={item.title}
               />
               <CardContent>
-                <h2>{item.Name}</h2>
-                <h3>{item.ODS}</h3>
+                <h2>{item.title}</h2>
+                <h3>{item.ods[0].nameOds}</h3>
               </CardContent>
               <CardActions id="actionsBox">
-                <Link to='ViewProject'>
-                  <Button id="Btn1" variant="contained">
+                  <Button id="Btn1" variant="contained" onClick={() => handleViewClick(item)}>
                     Ver Proyecto
                   </Button>
-                </Link>
-                <Link>              
-                  <Button id="Btn2" variant="outlined">
-                    Editar
-                  </Button>
-                </Link>
               </CardActions>
             </Card>
           );
         })}
       </div>
-      <AppPagination setCard={(p) => setCard(p)} />
+      {/* <AppPagination setCard={(p) => setCard(p)} /> */}
     </div>
   );
 }

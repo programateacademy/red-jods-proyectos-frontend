@@ -15,7 +15,7 @@ function viewProject() {
     <div className="InfoProject">
       <div className="title">
         <h1>{id.title}</h1>
-        <img id='imgProject' src={imagenCard} alt="" />
+        <img id='imgProject' src={id.ods[0].url} alt="" style={{maxHeight:"200px", maxWidth: "200px"}}/>
       </div>
       <div className="sub-title">
         <h2>Información </h2>

@@ -70,7 +70,6 @@ export default function Users() {
     };
 
     const handleEditClick =(param) => {
-        console.log(param.row);
         setAuthData({ ...authData, id: param.row });
         navigate("/edituser");
     };

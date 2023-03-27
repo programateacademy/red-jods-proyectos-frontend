@@ -48,6 +48,8 @@ export default function Projects() {
             if (element.title.toString().toLowerCase().includes(searchTerm.toLowerCase())
             ||
                 element.axis.toString().toLowerCase().includes(searchTerm.toLowerCase())
+            ||
+                element.ods[0].nameOds.toString().toLowerCase().includes(searchTerm.toLowerCase())
             ) {
                 return element;
             }
@@ -215,7 +217,7 @@ export default function Projects() {
                         initialState={{
                             pagination: { paginationModel: { pageSize: 10 } },
                         }}
-                        pageSizeOptions={[5, 10, 15, 20]}
+                        pageSizeOptions={[5, 10, 20, 50]}
                         onCellClick={handleCellClick}
                         onRowClick={handleRowClick}
                         AutoWidth

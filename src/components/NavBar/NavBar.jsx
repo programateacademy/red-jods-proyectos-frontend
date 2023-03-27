@@ -78,15 +78,12 @@ function NavBar() {
         <AppBar position="static" style={{ backgroundColor: "white", justifyContent: 'space-between' }}>
             <Container maxWidth="xl">
                 <Toolbar sx={{ display: "flex", justifyContent: 'space-between' }}>
-
                     {/* This elements are displayed when screen is medium or large */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-                        <Link to="/">                        
+                        <Link to="/home">                        
                             <img src={logo} alt="" style={{ maxHeight: "90px" }} />
                         </Link>
-
                     </Box>
-                    
                     {/* This is the box corresponding to pages menu when the screen is large enough*/}
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -98,9 +95,7 @@ function NavBar() {
                                 ))}
                             </div>
                             <img src={Decoración} alt="" style={{ maxWidth: "460px", maxHeight: "5px" }} />
-
                         </Box>
-
                     {/* This is the box corresponding to users menu in large screen size */}
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                         <Tooltip title="Open settings">
@@ -136,14 +131,12 @@ function NavBar() {
                             ))}
                         </Menu>
                     </Box>
-
                     {/* This elements are displayed when screen is small */}
                     <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
                         <Link to="/">   
                             <img src={logo} alt="" style={{ maxHeight: "53px" }} />
                         </Link>
                     </Box>
-
                     {/* This is the box corresponding to pages menu in small screens */}
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
