@@ -67,7 +67,7 @@ function Tabs() {
             );
           })}
           {role!=='user'&&(
-            <button onClick={handleEditTask}>Editar tarea</button>
+            <button onClick={handleEditTask} className="styled-button">Editar Tareas</button>
           )}
         </div>
       </div>

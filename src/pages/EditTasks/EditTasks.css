@@ -1,0 +1,74 @@
+/* Estilos para los botones */
+.styled-button {
+    background-color: #4CAF50;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    padding: 8px 16px;
+    /* Espacio alrededor del contenido */
+    border: none;
+    /* Borde */
+    cursor: pointer;
+    /* Cursor al pasar sobre el botón */
+    border-radius: 4px;
+    /* Borde redondeado */
+
+    margin: 10px;
+}
+
+/* Estilos para los checkboxes */
+.styled-checkbox {
+    height: 18px;
+    /* Altura */
+    width: 18px;
+    /* Ancho */
+    background-color: white;
+    /* Color de fondo */
+    border-radius: 4px;
+    /* Borde redondeado */
+    border: 1px solid #ccc;
+    /* Borde */
+}
+
+/* Estilos para cuando el checkbox está seleccionado */
+.styled-checkbox:checked {
+    background-color: #4CAF50;
+    /* Color de fondo */
+}
+
+/* Estilos para el texto al lado del checkbox */
+.styled-input {
+    margin-left: 8px;
+    /* Margen a la izquierda */
+    padding: 8px;
+    /* Espacio alrededor del contenido */
+    border-radius: 4px;
+    /* Borde redondeado */
+    border: 1px solid #ccc;
+    /* Borde */
+}
+
+
+/* Estilos para los botones */
+.styled-delete-button {
+    background-color: transparent;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    padding: 8px 16px;
+    /* Espacio alrededor del contenido */
+    border: none;
+    /* Borde */
+    cursor: pointer;
+    /* Cursor al pasar sobre el botón */
+    border-radius: 4px;
+    /* Borde redondeado */
+}
+
+.tasks {
+    padding-left: 40px;
+}
+
+.buttons {
+    padding: 40px;
+}

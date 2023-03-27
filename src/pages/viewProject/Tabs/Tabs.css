@@ -80,6 +80,22 @@
 
 }
 
+/* Estilos para los botones */
+.styled-button {
+    background-color: #4CAF50;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    padding: 8px 16px;
+    /* Espacio alrededor del contenido */
+    border: none;
+    /* Borde */
+    cursor: pointer;
+    /* Cursor al pasar sobre el botón */
+    border-radius: 4px;
+    /* Borde redondeado */
+}
+
 
 
 

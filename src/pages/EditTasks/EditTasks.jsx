@@ -3,6 +3,10 @@ import BaseURL from '../../services/api/index';
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext';
 import swal from 'sweetalert';
+import './EditTasks.css'
+import Decoracion from '../../assets/img/Decoración.png'
+import DeleteButton from '/src/assets/img/DeleteButton.svg'
+
 
 
 function EditTasks() {
@@ -58,29 +62,51 @@ function EditTasks() {
     };
 
     return (
-        <div>
-            {tasks.map((task, index) => (
-                <div key={index}>
-                    <input
-                        type="checkbox"
-                        checked={task.state}
-                        onChange={() => handleToggle(index)}
-                    />
-                    <input
-                        type="text"
-                        value={task.name}
-                        onChange={(e) => {
-                            const newTasks=[...tasks];
-                            newTasks[index].name=e.target.value;
-                            setTasks(newTasks);
-                        }}
-                    />
-                    <button onClick={() => handleRemoveTask(index)}>Eliminar</button>
-                </div>
-            ))}
-            <button onClick={handleAddTask}>Agregar tarea</button>
-            <button onClick={handleSave}>Guardar</button>
+        <>
+        <div className="InfoProject">
+        <div className="title">
+            <h1>{id.title}</h1>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+            <img id='imgProject' src={id.ods[0].url} alt="" style={{ maxHeight: "200px", maxWidth: "200px" }} />
+            <div style={{ margin: "40px" }}>
+            </div>
+            </div>
         </div>
+        <div className="sub-title">
+            <h2 style={{ marginTop: "30px" }}>Información </h2>
+            <img id='decoration'src={Decoracion} alt=""/>
+        </div>
+    </div>
+            <div>
+                {tasks.map((task, index) => (
+                    <div key={index} className="tasks">
+                        <input
+                            type="checkbox"
+                            checked={task.state}
+                            onChange={() => handleToggle(index)}
+                            className="styled-checkbox"
+                        />
+                        <input
+                            type="text"
+                            value={task.name}
+                            onChange={(e) => {
+                                const newTasks=[...tasks];
+                                newTasks[index].name=e.target.value;
+                                setTasks(newTasks);
+                            }}
+                            className="styled-input"
+                        />
+                        <button onClick={() => handleRemoveTask(index)} className="styled-delete-button"><img src={DeleteButton} alt="" /></button>
+                    </div>
+                ))}
+                <div className='buttons'>
+                    <button onClick={handleAddTask} className="styled-button">Agregar tarea</button>
+                    <button onClick={handleSave} className="styled-button">Guardar</button>
+                </div>
+                
+            </div>
+        </>
+        
     );
 }
 
