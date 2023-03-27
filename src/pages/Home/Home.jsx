@@ -83,7 +83,7 @@ export default function Home() {
           placeholder="¿Qué proyecto deseas buscar?"
           onChange={handleChangeSearch}
           className="ui input circular icon"
-          style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "600px", margin: "40px 40px 15px 40px" }}
+          style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "70%", margin: "40px 40px 15px 40px" }}
         />
       </Box>
       <div className="cardBox">

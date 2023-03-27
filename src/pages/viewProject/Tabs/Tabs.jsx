@@ -4,13 +4,21 @@ import Decoracion from '../../../assets/img/Decoración.png'
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
 import ListApp from '../../../components/ListApp/ListApp'
+import { useNavigate } from "react-router-dom";
+
 
 function Tabs() {
   const URLdoc = 'https://www.figma.com'
   const [index, setIndex] = useState(0)
   //Donde se esta almacenando la data
   const { authData }=useContext(AuthContext);
-  const { token, email, id }=authData;
+  const { token, role, email, id }=authData;
+  // Hook de react router dom para navegar al darle submit
+  const navigate=useNavigate();
+
+  const handleEditTask=() => {
+    navigate('/edittasks');
+  };
 
   return (
     <div className="Tabs">
@@ -58,6 +66,9 @@ function Tabs() {
               </div>
             );
           })}
+          {role!=='user'&&(
+            <button onClick={handleEditTask}>Editar tarea</button>
+          )}
         </div>
       </div>
     </div>
