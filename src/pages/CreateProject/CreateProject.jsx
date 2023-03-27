@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react'
+import React, { useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Decoración from '/src/assets/img//Decoración.png'
 import Todo from '../../components/FormAddTasks/Todo/Todo';
@@ -19,20 +19,23 @@ export default function NewProject() {
     //Agregar las tareas, todo es donde se alamcena la tarea
     const addTodo = todo => {
         //Arreglar el texto  en dado caso de que alguien deje espacios
-        if (!todo.name || /^\s*$/.test(todo.name)) {return}
+        if (!todo.name || /^\s*$/.test(todo.name)) { return }
         //Se guardan cada una de la lista de tareas que se estan almacenando
-        setTodos([todo, ...todos])};
+        setTodos([todo, ...todos])
+    };
 
     const updateTodo = (todoId, newValue) => {
-        if (!newValue.name || /^\s*$/.test(newValue.name)) {return}
+        if (!newValue.name || /^\s*$/.test(newValue.name)) { return }
         // Si el item del id es igual al nuevo id que se desea modificar, estara en true, pero si no el nuevo visualViewport, regresara al id antiguo
-        setTodos(prev => prev.map(item => item.id === todoId ? newValue : item))}
+        setTodos(prev => prev.map(item => item.id === todoId ? newValue : item))
+    }
 
     const completeTodo = id => {
         let updatedTodos = todos.map(todo => {
             if (todo.id === id) {
                 todo.isComplete = !todo.isComplete
-            }return todo})
+            } return todo
+        })
         setTodos(updatedTodos);
     };
 
@@ -47,20 +50,20 @@ export default function NewProject() {
     const { authData } = useContext(AuthContext);
     const { token, email } = authData;
 
-        // Hook de react router dom para navegar al darle submit
-    const navigate=useNavigate();
+    // Hook de react router dom para navegar al darle submit
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        const tareas=todos.map(({ name, state }) => ({ name, state }));
-        const selectedValues=data.ods; // Array de valores seleccionados en el campo "ods"
-        const filteredOptions=odsOptions.filter(option => selectedValues.includes(option.value)); // Filtrar opciones que coinciden con los valores seleccionados
-        const selectedOptions=filteredOptions.map(option => ({ nameOds: option.nameOds, url: option.url })); // Crear nuevo arreglo solo con los valores de "nameOds" y "url" de las opciones seleccionadas
+        const tareas = todos.map(({ name, state }) => ({ name, state }));
+        const selectedValues = data.ods; // Array de valores seleccionados en el campo "ods"
+        const filteredOptions = odsOptions.filter(option => selectedValues.includes(option.value)); // Filtrar opciones que coinciden con los valores seleccionados
+        const selectedOptions = filteredOptions.map(option => ({ nameOds: option.nameOds, url: option.url })); // Crear nuevo arreglo solo con los valores de "nameOds" y "url" de las opciones seleccionadas
         const newProject = {
-        ...data,
-        "task": tareas,
-        "emailUser": email,
-        "state": true,
-        "ods": selectedOptions,
+            ...data,
+            "task": tareas,
+            "emailUser": email,
+            "state": true,
+            "ods": selectedOptions,
         }
         let res = await baseURL.post("/Api/v1/project/", newProject, {
             headers: {
@@ -77,9 +80,9 @@ export default function NewProject() {
             navigate("/myprojects");
         }
     }
-    
+
     return (
-    <>
+        <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='Container'>
                     <div className='firstParForm'>
@@ -102,7 +105,7 @@ export default function NewProject() {
                                     <input placeholder='Diligencia tu respuesta' id='input-form' type="text" {...register('title', {
                                         required: true,
                                     })} />
-                                    {errors.title?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
+                                    {errors.title?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                                 </div>
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Eje Principal</label>
@@ -114,7 +117,7 @@ export default function NewProject() {
                                         <option value="Paz">Paz</option>
                                         <option value="Alianzas">Alianzas</option>
                                     </select>
-                                    {errors.axis?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
+                                    {errors.axis?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                                 </div>
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">ODS (Utiliza ctrl / cmd para seleccionar varios)</label>
@@ -137,7 +140,7 @@ export default function NewProject() {
                                         <option value="Paz">Paz, Justicia e Instituciones Sólidas</option>
                                         <option value="Alianzas">Alianzas para Lograr los Objetivos</option>
                                     </select>
-                                    {errors.ods?.type==='required'&&<p id='error-msg'>El campo es reqequerido</p>}
+                                    {errors.ods?.type === 'required' && <p id='error-msg'>El campo es reqequerido</p>}
                                 </div>
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="PartnerUrl"> Documento (URL) </label>
@@ -153,57 +156,58 @@ export default function NewProject() {
                                                 }
                                             })}
                                     />
-                                    {errors.doc?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
+                                    {errors.doc?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                                 </div>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Descripción</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('description', { required: true, })} />
-                                    {errors.description?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
+                                    {errors.description?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                                 </div>
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Indicadores</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="textarea" {...register('indicator', { required: true, })} />
-                                    {errors.indicator?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
+                                    {errors.indicator?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                                 </div>
                                 <div id='inputs'>
                                     <label id='title-form' htmlFor="">Objetivos</label>
                                     <textarea id='input-form-des' placeholder='Diligencia tu respuesta' type="text" {...register('objective', { required: true })} />
-                                    {errors.objective?.type==='required'&&<p id='error-msg'>El campo es requerido</p>}
+                                    {errors.objective?.type === 'required' && <p id='error-msg'>El campo es requerido</p>}
                                 </div>
                             </Grid>
                         </Grid>
+                    </div>
+                    <div className="thirdPartForm">
+                        <div className="Task-title">
+                            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                                <h2>Tareas</h2>
+                                <img id='decoration' src={Decoración} alt="" />
+                                <p> Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
+                            </Box>
+                            {/* This elements are displayed when screen is small */}
+                            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                                <h2>Tareas</h2>
+                                <img id='decoration' src={Decoración} alt="" style={{ padding: "0 0 10px 0" }} />
+                                <p>Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
+                            </Box>
+                        </div>
+                    </div>
+                    <div className="to-do">
+                        <TodoForm
+                            onSubmit={addTodo} />
+                        <Todo
+                            todos={todos}
+                            completeTodo={completeTodo}
+                            removeTodo={removeTodo}
+                            updateTodo={updateTodo} />
                     </div>
                     <div className="BtnBox">
                         <input id='Btn-form' type="submit" value="Enviar" />
                     </div>
                 </div>
             </form>
-            <div className="thirdPartForm">
-                <div className="Task-title">
-                    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                        <h2>Tareas</h2>
-                        <img id='decoration' src={Decoración} alt="" />
-                        <p> Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
-                    </Box>
-                    {/* This elements are displayed when screen is small */}
-                    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                        <h2>Tareas</h2>
-                        <img id='decoration' src={Decoración} alt="" style={{ padding: "0 0 10px 0" }} />
-                        <p>Escribe las tareas respectivas del plan de trabajo dentro del recuadro, puedes eliminarlas o editarlas</p>
-                    </Box>
-                </div>
-            </div>
-            <div className="to-do">
-                <TodoForm
-                    onSubmit={addTodo} />
-                <Todo
-                    todos={todos}
-                    completeTodo={completeTodo}
-                    removeTodo={removeTodo}
-                    updateTodo={updateTodo} />
-            </div>
-    </>
+
+        </>
     )
 }
