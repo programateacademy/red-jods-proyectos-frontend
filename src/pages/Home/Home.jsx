@@ -12,6 +12,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom'
 import projects from "../../services/api/index";
 import { getItem } from "localforage";
+import Percentage from '../../components/Percentage/Percentage'
 
 
 export default function Home() {
@@ -86,8 +87,6 @@ export default function Home() {
         />
       </Box>
       <div className="cardBox">
-
-
         {usersListSearched.map((item) => {
           return (
             <Card key={item._id} id="Card" sx={{ width:280 }}>
@@ -98,7 +97,12 @@ export default function Home() {
               />
               <CardContent>
                 <h2>{item.title}</h2>
-                <h3>{item.ods[0].nameOds}</h3>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <h3>{item.ods[0].nameOds}</h3>
+                  <div style={{ marginLeft: "20px" }}>
+                    <Percentage task={item.task} />
+                  </div>
+                </div>
               </CardContent>
               <CardActions id="actionsBox">
                   <Button id="Btn1" variant="contained" onClick={() => handleViewClick(item)}>

@@ -3,6 +3,7 @@ import './Tabs.css'
 import Decoracion from '../../../assets/img/Decoración.png'
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthContext';
+import ListApp from '../../../components/ListApp/ListApp'
 
 function Tabs() {
   const URLdoc = 'https://www.figma.com'
@@ -50,7 +51,13 @@ function Tabs() {
       </div>
       <div className="tabContent" hidden={index != 2}>
         <div className="task">
-          
+          {id.task.map((tarea) => {
+            return (
+              <div className="axis">
+                  <h3 key={tarea._id} id='Tl-Tab'>{tarea.name} - {tarea.state? 'Completada':'Incompleta'}</h3>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
