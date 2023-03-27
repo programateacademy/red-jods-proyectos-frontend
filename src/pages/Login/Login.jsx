@@ -97,6 +97,32 @@ export default function SignIn() {
   const handleClickShowPassword=() => setShowPassword(!showPassword);
   const handleMouseDownPassword=() => setShowPassword(!showPassword);
 
+  const handleUnRegister=async (event) => {
+    event.preventDefault();
+    const dataToSend={
+      email: "usuario.noregistrado@gmail.com",
+      password: "NoRegistrado1234"
+    }
+    let res=await api.post("/Api/v1/login", dataToSend);
+    const role=res.data.data.role;
+    const token=res.data.tokenSession;
+    const email=res.data.data.email;
+    const name=res.data.data.name;
+    setAuthData({ token, role, email, name });
+    swal({
+      title: "Bienvenido",
+      text: `Has ingresado como Invitado! 
+      Para salir dale al ícono de la parte superior y haz click en Cerrar Sesión.
+
+      ¡Gracias por tu visita!`,
+      icon: "success",
+      button: "Aceptar"
+    });
+    if (res.data.tokenSession) {
+      navigate("/home");
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -149,7 +175,7 @@ export default function SignIn() {
             />
             <Grid container>
               <Grid item xs>
-                <button onClick={handleForgot}>
+                <button onClick={handleForgot} style={{ background: 'transparent', border: 'none', color: "#5584F2", cursor: 'pointer' }}>
                   ¿Olvidaste tu contraseña?
                 </button>
               </Grid>
@@ -163,6 +189,17 @@ export default function SignIn() {
               >
                 Ingresar
               </Button>
+          </Box>
+          <Box>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              style={{ textTransform: "Capitalize", backgroundColor: "darkviolet" }}
+              onClick={handleUnRegister}
+            >
+              Ingresar Sin Registrar
+            </Button>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

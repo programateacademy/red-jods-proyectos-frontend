@@ -89,6 +89,7 @@ function NavBar() {
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (
                                         (page.name==='Usuarios |'&&role!=='superAdmin')? null:
+                                        ((page.name==='Mis Proyectos |'||page.name==='Crear Proyecto |')&&role==='user')? null:
                                         <Link key={page.name} to={page.route} style={{marginRight: "10px", marginLeft: "5px"}}>
                                             {page.name}
                                         </Link>
@@ -121,7 +122,7 @@ function NavBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                                    <button onClick={handleCloseSession}>
+                                    <button onClick={handleCloseSession} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
                                         <Link to={setting.route}>
                                             <Typography textAlign="center">{setting.name}</Typography>
                                         </Link>
@@ -169,17 +170,18 @@ function NavBar() {
                         >
                             {pages.map((page) => (
                                 (page.name==='Usuarios |'&&role!=='superAdmin')? null:
-                                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                    <Link to={page.route}>
-                                        <Typography textAlign="center">{page.name}</Typography>
-                                    </Link>
-                                </MenuItem>
+                                    ((page.name==='Mis Proyectos |'||page.name==='Crear Proyecto |')&&role==='user')? null:
+                                        <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                                            <Link to={page.route}>
+                                                <Typography textAlign="center">{page.name}</Typography>
+                                            </Link>
+                                        </MenuItem>
                             ))}
                             {/* This is the box corresponding to users menu in any screen size */}
                             <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
                                 {settings.map((setting) => (
                                     <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                                        <button onClick={handleCloseSession}>
+                                        <button onClick={handleCloseSession} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
                                             <Link to={setting.route}>
                                                 <Typography textAlign="center">{setting.name}</Typography>
                                             </Link>

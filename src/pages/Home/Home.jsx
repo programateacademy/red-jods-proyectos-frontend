@@ -18,7 +18,7 @@ export default function Home() {
   const [card, setCard] = useState([]);
   //Using AuthContext information
   const { authData, setAuthData }=useContext(AuthContext);
-  const { token, role, name, id }=authData;
+  const { token, role, name, email, id }=authData;
 
   //Variable for fecthing projects
   const [usersList, setUsersList]=useState([]);
@@ -72,7 +72,9 @@ export default function Home() {
     <div className="container_box">
       {/* This elements are displayed when screen is small */}
       <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
+        {(email==='usuario.noregistrado@gmail.com')? null:
         <h1>¡Hola {name}, eres {role}!</h1>
+        }
         <img src={Decoración} alt="" />
         <input
           type="text"
@@ -107,7 +109,6 @@ export default function Home() {
           );
         })}
       </div>
-      {/* <AppPagination setCard={(p) => setCard(p)} /> */}
     </div>
   );
 }
