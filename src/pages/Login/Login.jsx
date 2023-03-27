@@ -82,8 +82,7 @@ export default function SignIn() {
     setAuthData({ token, role, email, name });
     swal({
       title: "Inicio de Sesión",
-      text: `Has iniciado sesión correctamente! 
-      Tu rol es ${role}`,
+      text: `Has iniciado sesión correctamente ${name}!`,
       icon: "success",
       button: "Aceptar"
     });
@@ -112,7 +111,8 @@ export default function SignIn() {
     swal({
       title: "Bienvenido",
       text: `Has ingresado como Invitado! 
-      Para salir dale al ícono de la parte superior y haz click en Cerrar Sesión.
+
+      Para salir dale al ícono de la parte superior derecha y haz click en Salir.
 
       ¡Gracias por tu visita!`,
       icon: "success",

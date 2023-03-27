@@ -64,7 +64,7 @@ function NavBar() {
 
     //Using AuthContext information
     const { authData, setAuthData }=useContext(AuthContext);
-    const { token, role }=authData;
+    const { token, role, email }=authData;
 
     const handleCloseSession = () => {
         const rolenull=null;
@@ -89,13 +89,15 @@ function NavBar() {
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (
                                         (page.name==='Usuarios |'&&role!=='superAdmin')? null:
-                                        ((page.name==='Mis Proyectos |'||page.name==='Crear Proyecto |')&&role==='user')? null:
+                                        ((page.name==='Mis Proyectos |'||page.name==='Crear Proyecto |'||page.name==='Proyectos |')&&role==='user')? null:
                                         <Link key={page.name} to={page.route} style={{marginRight: "10px", marginLeft: "5px"}}>
                                             {page.name}
                                         </Link>
                                 ))}
-                            </div>
+                        </div>
+                        {(role==='user')? null:
                             <img src={Decoración} alt="" style={{ maxWidth: "460px", maxHeight: "5px" }} />
+                        }
                         </Box>
                     {/* This is the box corresponding to users menu in large screen size */}
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
@@ -124,7 +126,9 @@ function NavBar() {
                                 <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                                     <button onClick={handleCloseSession} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
                                         <Link to={setting.route}>
-                                            <Typography textAlign="center">{setting.name}</Typography>
+                                            <Typography textAlign="center">
+                                                {(email==='usuario.noregistrado@gmail.com')? "Salir":setting.name}
+                                            </Typography>
                                         </Link>
                                     </button>
                                     
@@ -183,7 +187,9 @@ function NavBar() {
                                     <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                                         <button onClick={handleCloseSession} style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
                                             <Link to={setting.route}>
-                                                <Typography textAlign="center">{setting.name}</Typography>
+                                                <Typography textAlign="center">
+                                                    {(email==='usuario.noregistrado@gmail.com')?"Salir":setting.name}
+                                                </Typography>
                                             </Link>
                                         </button>
                                     </MenuItem>
