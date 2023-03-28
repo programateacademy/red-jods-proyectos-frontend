@@ -30,7 +30,7 @@ function Percentage({task}) {
                     transform="rotate(90 50 50)"
                 />
                 <text x="52%" y="53%" textAnchor="middle">
-                    {tareasTerminadas}%
+                    {tareasTerminadas.toFixed(1)}%
                 </text>
             </svg>
         </div>
