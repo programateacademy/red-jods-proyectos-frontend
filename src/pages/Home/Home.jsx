@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import projects from "../../services/api/index";
 import { getItem } from "localforage";
 import Percentage from '../../components/Percentage/Percentage'
+import ReactPaginate from 'react-paginate';
 
 
 export default function Home() {
@@ -69,50 +70,80 @@ export default function Home() {
     navigate('/viewproject');
     };
 
+  // Code por pagination
+  const [pageNumber, setPageNumber]=useState(0);
+  const elementsPerPage=6;
+
+  const handlePageChange=({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  const displayedElements=usersListSearched.slice(
+    pageNumber*elementsPerPage,
+    (pageNumber+1)*elementsPerPage
+  );
+
   return (
-    <div className="container_box">
-      {/* This elements are displayed when screen is small */}
-      <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
-        {(email==='usuario.noregistrado@gmail.com')? null:
-        <h1>¡Hola {name}, eres {role}!</h1>
-        }
-        <img src={Decoración} alt="" />
-        <input
-          type="text"
-          value={search}
-          placeholder="¿Qué proyecto deseas buscar?"
-          onChange={handleChangeSearch}
-          className="ui input circular icon"
-          style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "70%", margin: "40px 40px 15px 40px" }}
-        />
-      </Box>
-      <div className="cardBox">
-        {usersListSearched.map((item) => {
-          return (
-            <Card key={item._id} id="Card" sx={{ width:280 }}>
-              <CardMedia
-                sx={{ height: 280 }}
-                image={item.ods[0].url}
-                title={item.title}
-              />
-              <CardContent>
-                <h2>{item.title}</h2>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <h3>{item.ods[0].nameOds}</h3>
-                  <div style={{ marginLeft: "20px" }}>
-                    <Percentage task={item.task} />
+    <>
+      <div className="container_box">
+        {/* This elements are displayed when screen is small */}
+        <Box className="container2" sx={{ display: { xs: "grid", md: "none" } }}>
+          {(email==='usuario.noregistrado@gmail.com')? null:
+            <h1>¡Hola {name}, eres {role}!</h1>
+          }
+          <img src={Decoración} alt="" />
+          <input
+            type="text"
+            value={search}
+            placeholder="¿Qué proyecto deseas buscar?"
+            onChange={handleChangeSearch}
+            className="ui input circular icon"
+            style={{ backgroundColor: "transparent", border: "2px solid #558AF2", color: "#558AF2", textAlign: "center", padding: "15px", borderRadius: "30px", width: "70%", margin: "40px 40px 15px 40px" }}
+          />
+        </Box>
+        <div className="cardBox">
+          {displayedElements.map((item) => {
+            return (
+              <Card key={item._id} id="Card" sx={{ width: 280 }}>
+                <CardMedia
+                  sx={{ height: 280 }}
+                  image={item.ods[0].url}
+                  title={item.title}
+                />
+                <CardContent>
+                  <h2>{item.title}</h2>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <h3>{item.ods[0].nameOds}</h3>
+                    <div style={{ marginLeft: "20px" }}>
+                      <Percentage task={item.task} />
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-              <CardActions id="actionsBox">
+                </CardContent>
+                <CardActions id="actionsBox">
                   <Button id="Btn1" variant="contained" onClick={() => handleViewClick(item)}>
                     Ver Proyecto
                   </Button>
-              </CardActions>
-            </Card>
-          );
-        })}
+                </CardActions>
+              </Card>
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <div className="container_pagination">
+        <ReactPaginate
+          previousLabel={'<'}
+          nextLabel={'>'}
+          pageCount={Math.ceil(usersListSearched.length/elementsPerPage)}
+          onPageChange={handlePageChange}
+          containerClassName={'pagination'}
+          previousLinkClassName={'pagination__link'}
+          nextLinkClassName={'pagination__link'}
+          disabledClassName={'pagination__link--disabled'}
+          activeClassName={'pagination__link--active'}
+          pageLinkClassName={'pagination__item'}
+        />
+      </div>
+    </>
+    
   );
 }
