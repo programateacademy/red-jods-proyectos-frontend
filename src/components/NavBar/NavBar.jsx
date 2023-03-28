@@ -18,19 +18,19 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const pages=[
     {
-        name: 'Proyectos |',
+        name: 'Proyectos',
         route: '/home'
     },
     {
-        name: 'Mis Proyectos |',
+        name: 'Mis Proyectos',
         route: '/myprojects'
     },
     {
-        name: 'Crear Proyecto |',
+        name: 'Crear Proyecto',
         route: '/createproject'
     },
     {
-        name: 'Usuarios |',
+        name: 'Usuarios',
         route: '/users'
     }
 ];
@@ -88,8 +88,8 @@ function NavBar() {
                     <Box sx={{ display: { xs: 'none', md: 'flex', flexDirection: 'column' } }}>
                             <div style={{ display: "flex", flexDirection: "row" }}>
                                 {pages.map((page) => (
-                                        (page.name==='Usuarios |'&&role!=='superAdmin')? null:
-                                        ((page.name==='Mis Proyectos |'||page.name==='Crear Proyecto |'||page.name==='Proyectos |')&&role==='user')? null:
+                                        (page.name==='Usuarios'&&role!=='superAdmin')? null:
+                                        ((page.name==='Mis Proyectos'||page.name==='Crear Proyecto'||page.name==='Proyectos')&&role==='user')? null:
                                         <Link key={page.name} to={page.route} style={{marginRight: "10px", marginLeft: "5px"}}>
                                             {page.name}
                                         </Link>
@@ -138,7 +138,7 @@ function NavBar() {
                     </Box>
                     {/* This elements are displayed when screen is small */}
                     <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-                        <Link to="/">   
+                        <Link to="/home">   
                             <img src={logo} alt="" style={{ maxHeight: "53px" }} />
                         </Link>
                     </Box>
@@ -173,8 +173,8 @@ function NavBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                (page.name==='Usuarios |'&&role!=='superAdmin')? null:
-                                    ((page.name==='Mis Proyectos |'||page.name==='Crear Proyecto |')&&role==='user')? null:
+                                (page.name==='Usuarios'&&role!=='superAdmin')? null:
+                                    ((page.name==='Mis Proyectos'||page.name==='Crear Proyecto')&&role==='user')? null:
                                         <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                                             <Link to={page.route}>
                                                 <Typography textAlign="center">{page.name}</Typography>

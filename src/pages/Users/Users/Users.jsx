@@ -96,7 +96,9 @@ export default function Users() {
                         >
                             <img src={EditButton} alt="" />
                         </Button>
-                        <Button
+                        {/* 
+                            //Comentado mientras no se habilite la funcion de ocultar o cambiar el estado a inactivo
+                            <Button
                             variant="contained"
                             onClick={(event) => {
                                 handleDeleteClick(cellValues)
@@ -104,7 +106,8 @@ export default function Users() {
                             style={{ backgroundColor: "transparent" }}
                         >
                             <img src={DeleteButton} alt="" />
-                        </Button>
+                        </Button> 
+                        */}
                     </div>             
                 )
             },

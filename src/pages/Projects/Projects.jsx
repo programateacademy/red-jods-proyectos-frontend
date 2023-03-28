@@ -124,6 +124,8 @@ export default function Projects() {
                         >
                             <img src={EditButton} alt="" />
                         </Button>
+                        {/*   
+                        //Comentado mientras no se habilite la funcion de ocultar o cambiar el estado a inactivo                      
                         <Button
                             variant="contained"
                             onClick={(event) => {
@@ -132,7 +134,9 @@ export default function Projects() {
                             style={{ backgroundColor: "transparent" }}
                         >
                             <img src={DeleteButton} alt="" />
-                        </Button>
+                        </Button> 
+                        */}
+
                     </div>
                 )
             },
